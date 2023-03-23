@@ -1,8 +1,8 @@
 .sidebar{
     flex: 1;
-    border-right: 0.5px solid rgb(230,227,227);
+    border-right: 0.5px solid rgb(24, 109, 16);
     min-height: 100vh;
-    background-color: white;
+    background-color: rgb(162, 247, 170);
 
     .top{
         height: 50px;
@@ -14,14 +14,14 @@
     .logo{
         font-size: 20px;
         font-weight: bold;
-        color: #ff3d57;
+        color: #0a0a0a;
     }
 
     }
 
         hr{
             height: 0;
-            border: 0.5px solid rgb(230,227,227);
+            border: 0.5px solid rgb(9, 88, 9);
         }
 
         .center{
@@ -35,7 +35,7 @@
                 .title{
                     font-size: 10px;
                     font-weight: bold;
-                    color: #999;
+                    color: rgb(8, 8, 8);
                     margin-top: 15px;
                     margin-bottom: 5px;
                 }
@@ -47,19 +47,19 @@
                     cursor: pointer;
 
                     &:hover{
-                        background-color: #ece8ff;
+                        background-color: #187a0b;
                     }
 
                     .icon{
                         font-size: 18px;
-                        color: #ffca00;
+                        color: #050505;
                        // color: #7451f8;
                     }
 
                     span{
                         font-size: 13px;
                         font-weight: bold;
-                        color: #888;
+                        color: rgb(15, 15, 15);
                         margin-left: 10px;
                     }
                 }

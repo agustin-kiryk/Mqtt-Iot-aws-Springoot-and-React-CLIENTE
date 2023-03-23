@@ -24,7 +24,7 @@ const Sidebar = () => {
     <div className="top">
       <Link to="/" style={{textDecoration: "none"}}>
 
-     <span className="logo">Zykar Admin</span>
+     <span className="logo">Madre Tierra</span>
      </Link>
     </div>
     <hr />
@@ -39,23 +39,20 @@ const Sidebar = () => {
             <Link to="/users" style={{textDecoration: "none"}}>
             <li>
               <PersonOutlineOutlinedIcon className="icon" />
-            <span>Users</span>
+            <span>Franquiciados</span>
             </li>
             </Link>
             <Link to="/products" style={{textDecoration: "none"}}>
             <li>
               <StoreIcon className="icon" />
-            <span>Products</span>
+            <span>Agentes de Ventas</span>
             </li>
             </Link>
             <li>
               <CreditCardIcon className="icon" />
-            <span>Orders</span>
+            <span>Maquinas</span>
             </li>
-            <li>
-              <LocalShippingIcon className="icon" />
-            <span>Delivery</span>
-            </li>
+           
             <p className="title">USEFUL LINKS</p>
             <li>
               <AnalyticsIcon className="icon" />

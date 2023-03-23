@@ -1,10 +1,11 @@
 .navbar{
     height: 50px;
-    border-bottom: 0.5px solid rgb(231, 228 , 228);
+    background-color: rgb(162, 247, 170);
+    border-bottom: 0.5px solid rgb(9, 170, 58);
     display: flex;
     align-items: center;
     font-size: 14px;
-    color: #555;
+    color: rgb(22, 22, 22);
 
     .wrapper{
         width: 100%;
@@ -16,7 +17,7 @@
         .search {
         display: flex;
         align-items: center;
-        border: 0.5px solid lightgray;
+        border: 0.5px solid rgb(22, 22, 22);
         padding: 3px;
 
         input {
@@ -50,7 +51,7 @@
                 .counter{
                     width: 15px;
                     height: 15px;
-                    background-color: #00d748;
+                    background-color: #d70e00;
                     border-radius: 50%;
                     color: white;
                     display: flex;

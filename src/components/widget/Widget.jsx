@@ -16,7 +16,7 @@ const diff = 20;
 switch (type) {
     case "user":
         data = {
-            title: "USERS",
+            title: "FFRANQUICIADOS",
             isMoney: false,
             link: "See all users",
             icon: (
@@ -32,7 +32,7 @@ switch (type) {
         break;
         case "order":
             data = {
-                title: "ORDERS",
+                title: "AGENTES DE VENTA",
                 isMoney: false,
                 link: "View all orders",
                 icon: (
@@ -47,8 +47,8 @@ switch (type) {
             break;
             case "earning":
                 data = {
-                    title: "EARNINGS",
-                    isMoney: true,
+                    title: "MAQUINAS",
+                    isMoney: false,
                     link: "View net earnings",
                     icon: (
                         <MonetizationOnOutlined className="icon" 
@@ -62,8 +62,8 @@ switch (type) {
                 break;
                 case "balance":
                     data = {
-                        title: "BALANCE",
-                        isMoney: true,
+                        title: "DISPONIBLE",
+                        isMoney: false,
                         link: "See details",
                         icon: (
                             <AccountBalanceWalletOutLinedIcon className="icon" 
