@@ -14,18 +14,20 @@ import "react-circular-progressbar/dist/styles.css";
 const Home = () => {
   return (
     <div className="home">
-      
       <div className="homeContainer">
         <Navbar />
         <div className="botondrop"><Dropbox></Dropbox></div>
-        
+        <div className="ingreso"> 
+        <Widget type="order" />
+        </div>
         <div className="widgets">
           <Widget type="user" />
-          <Widget type="order" />
           <Widget type="earning" />
+          </div>
+          <div className="widgets2">
           <Widget type="balance" />
           <Widget type="comisiones" />
-        </div>
+          </div>
       
         <div className="charts">
           <Featured />

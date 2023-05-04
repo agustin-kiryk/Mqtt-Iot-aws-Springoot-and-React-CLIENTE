@@ -1,31 +1,116 @@
+@media only screen and (max-width: 600px) {
+  /* Estilos para dispositivos móviles */
+  .homeContainer {
+    padding: 10px;
+  }
+
+  .ingreso{
+    .counter{
+      margin-left: 25% !important;
+    }
+    .title{
+      margin-left: 130px !important;
+    }
+  }
+
+
+ 
+  .widgets {
+    padding: 0;
+    display: flex;
+    font-size: 14px;
+    flex-direction: column ; /* Cambiar a column wrap */
+  }
+
+  .charts {
+    display: flex;
+    font-size: 14px;
+    margin-top: 10px;
+    flex-direction: column;
+  }
+  
+
+  .listContainer {
+    font-size: 14px;
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+   .listTitle {
+    font-size: 18px;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  table {
+    font-size: 12px;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.botondrop {
+  padding-left: .2%;
+  margin-top: 1%;
+  width: 20%;
+}
+
+.featuredChart2 {
+  width: 170px;
+  height: 170px;
+  padding-left: 20px;
+}
+
+
 .home {
   display: flex;
   background-color: rgb(240, 255, 251);
 
-  .botondrop{
-    padding-left: .2%;
-    margin-top: 1%;
-    width: 20%;
-  }
-
-  .featuredChart2 {
-    width: 170px;
-    height: 170px;
-    padding-left: 20px;
+ 
+  .widget.order {
+    .left .title {
+      font-size: 24px;
+      text-align: center; /* Alinear el texto al centro horizontalmente */
+      line-height: 1.2; /* Ajustar el espaciado vertical del número */
+    }
+    .left .counter {
+      font-size: 35px;
+      left: 40px;
+      line-height: 1.2; /* Ajustar el espaciado vertical del número */
+    }
   }
 
   .homeContainer {
     flex: 6;
 
-    .widgets,
-    .charts {
+    .ingreso {
+      width: 50%;
+      margin-left: 27%;
+      text-align: center; /* Alinear el texto al centro horizontalmente */
       display: flex;
       padding: 20px;
       gap: 20px;
+      .counter{
+        margin-left: 55%;
+      }
+      .title{
+        margin-left: 330px;
+      }
+    }
+
+    .widgets,
+    .widgets2 {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      padding: 20px;
+      gap: 10px;
     }
 
     .charts {
-      padding: 5px 20px;
+      gap: 10px;
+      display: flex;
     }
 
     .listContainer {

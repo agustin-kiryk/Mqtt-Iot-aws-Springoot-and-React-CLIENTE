@@ -10,7 +10,7 @@ const Widget = ({ type }) => {
   let data;
 
   //temporary
-  const amount = 100;
+  const amount = 10000;
   const diff = 20;
 
   switch (type) {
@@ -30,21 +30,22 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "order":
-      data = {
-        title: "INGRESO DINERO",
-        isMoney: false,
-        link: "View all orders",
-        icon: (
-          <ShoppingCartOutlinedIcon
-            className="icon"
-            style={{
-              backgroundColor: "rgba(218, 165, 32, 0.2)",
-              color: "goldenrod",
-            }}
-          />
-        ),
-      };
+      case "order":
+        data = {
+          
+          title: "INGRESO DINERO",
+          isMoney: true,
+          link: "",
+          icon: (
+            <ShoppingCartOutlinedIcon
+              className="icon"
+              style={{
+                backgroundColor: "rgba(218, 165, 32, 0.2)",
+                color: "goldenrod",
+              }}
+            />
+          ),
+        };
       break;
     case "earning":
       data = {
@@ -96,24 +97,22 @@ const Widget = ({ type }) => {
   }
 
   return (
-    <div className="widget">
+    <div className={`widget ${type}`}>
       <div className="left">
         <span className="title">{data.title}</span>
-        <span className="counter">
-          {data.isMoney && "$"} {amount}
-        </span>
+        <span className="counter">{data.isMoney && "$"} {amount}</span>
         <span className="link">{data.link}</span>
       </div>
       <div className="right">
-        <div className="percentage positive">
+        <div className={`percentage ${diff > 0 ? "positive" : "negative"}`}>
           <KeyboardArrowUpIcon />
           {diff} %
         </div>
         {data.icon}
       </div>
-   
     </div>
   );
+  
 };
 
 export default Widget;
