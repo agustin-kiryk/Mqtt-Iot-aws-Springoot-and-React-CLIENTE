@@ -50,7 +50,7 @@ const Widget = ({ type }) => {
     case "earning":
       data = {
         title: "LITROS VENDIDOS",
-        isMoney: true,
+        isMoney: false,
         link: "View net earnings",
         icon: (
           <MonetizationOnOutlinedIcon
@@ -78,7 +78,7 @@ const Widget = ({ type }) => {
       break;
     case "comisiones":
       data = {
-        title: "COMISIONES",
+        title: "DERECHO DE MARCA",
         isMoney: true,
         link: "View commission details",
         icon: (

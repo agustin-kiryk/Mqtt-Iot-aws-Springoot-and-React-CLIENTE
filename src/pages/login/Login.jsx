@@ -1,64 +1,58 @@
-import "./login1.scss"
 import React from 'react';
 import {
   MDBBtn,
   MDBContainer,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
   MDBRow,
   MDBCol,
+  MDBIcon,
   MDBInput
 }
 from 'mdb-react-ui-kit';
 
-function login() {
+function App() {
   return (
-    <MDBContainer className="gradient-form">
-      <MDBRow>
-        <MDBCol col='6' className="mb-5">
-          <div className="d-flex flex-column ms-5">
+    <MDBContainer className="my-5">
 
-            <div className="text-center">
-              <img src="https://cdn.discordapp.com/attachments/744349867559747615/1096549977364369459/18067b8c-fc00-4ca3-9c02-eaea4b3c7f21.jpg"
-                style={{width: '185px'}} alt="logo" />
-              <h4 className="mt-1 mb-5 pb-1">Somos MadreTierra</h4>
-            </div>
+      <MDBCard>
+        <MDBRow className='g-0'>
 
-            <p>Por favor Ingrese su cuenta</p>
+          <MDBCol md='6'>
+            <MDBCardImage src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp' alt="login form" className='rounded-start w-100'/>
+          </MDBCol>
 
+          <MDBCol md='6'>
+            <MDBCardBody className='d-flex flex-column'>
 
-            <MDBInput wrapperClass='mb-4' label='Email' id='form1' type='email'/>
-            <MDBInput wrapperClass='mb-4' label='Contraseña' id='form2' type='password'/>
+              <div className='d-flex flex-row mt-2'>
+                <MDBIcon fas icon="cubes fa-3x me-3" style={{ color: '#ff6219' }}/>
+                <span className="h1 fw-bold mb-0">Logo</span>
+              </div>
 
+              <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Sign into your account</h5>
 
-            <div className="text-center pt-1 mb-5 pb-1">
-              <MDBBtn className="mb-4 w-100 gradient-custom-2">Entrar</MDBBtn>
-            </div>
+                <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg"/>
+                <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"/>
 
-         
+              <MDBBtn className="mb-4 px-5" color='dark' size='lg'>Login</MDBBtn>
+              <a className="small text-muted" href="#!">Forgot password?</a>
+              <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Don't have an account? <a href="#!" style={{color: '#393f81'}}>Register here</a></p>
 
-          </div>
+              <div className='d-flex flex-row justify-content-start'>
+                <a href="#!" className="small text-muted me-1">Terms of use.</a>
+                <a href="#!" className="small text-muted">Privacy policy</a>
+              </div>
 
-        </MDBCol>
+            </MDBCardBody>
+          </MDBCol>
 
-        <MDBCol col='6' className="mb-5">
-          <div className="d-flex flex-column  justify-content-center gradient-custom-2 h-100 mb-4">
-
-            <div className="text-white px-3 py-4 p-md-5 mx-md-4">
-              <h4 class="mb-4">We are more than just a company</h4>
-              <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </p>
-            </div>
-
-          </div>
-
-        </MDBCol>
-
-      </MDBRow>
+        </MDBRow>
+      </MDBCard>
 
     </MDBContainer>
-
   );
 }
 
-export default login;
+export default App;

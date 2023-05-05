@@ -30,6 +30,9 @@
         }
       }
     }
+    .login{
+      padding-left: 1800px;
+    }
 
     .items {
       display: flex;
@@ -72,3 +75,11 @@
     }
   }
 }
+
+
+@media only screen and (max-width: 900px) {
+  .login{
+    padding-left: 500px !important;
+  }
+}
+

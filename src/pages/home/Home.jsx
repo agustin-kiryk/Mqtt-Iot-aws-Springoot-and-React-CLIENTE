@@ -23,8 +23,6 @@ const Home = () => {
         <div className="widgets">
           <Widget type="user" />
           <Widget type="earning" />
-          </div>
-          <div className="widgets2">
           <Widget type="balance" />
           <Widget type="comisiones" />
           </div>

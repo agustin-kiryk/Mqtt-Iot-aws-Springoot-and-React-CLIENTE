@@ -14,7 +14,11 @@ const Featured = () => {
       </div>
       <div className="bottom">
         <div className="featuredChart">
-          <CircularProgressbar value={70} text={"70%"} strokeWidth={5} />
+        <CircularProgressbar   styles={buildStyles({
+          textColor: "black",
+          pathColor: "turquoise",
+          trailColor: "lightgreen"
+        })} value={70} text={"70%"} strokeWidth={8} />
          
         </div>
         <p className="title">Dias para finalizar el ciclo de facturacion</p>

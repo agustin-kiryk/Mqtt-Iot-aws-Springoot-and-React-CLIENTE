@@ -1,54 +1,3 @@
-@media only screen and (max-width: 600px) {
-  /* Estilos para dispositivos móviles */
-  .homeContainer {
-    padding: 10px;
-  }
-
-  .ingreso{
-    .counter{
-      margin-left: 25% !important;
-    }
-    .title{
-      margin-left: 130px !important;
-    }
-  }
-
-
- 
-  .widgets {
-    padding: 0;
-    display: flex;
-    font-size: 14px;
-    flex-direction: column ; /* Cambiar a column wrap */
-  }
-
-  .charts {
-    display: flex;
-    font-size: 14px;
-    margin-top: 10px;
-    flex-direction: column;
-  }
-  
-
-  .listContainer {
-    font-size: 14px;
-    margin-top: 10px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-   .listTitle {
-    font-size: 18px;
-    flex-direction: column;
-    margin-bottom: 10px;
-  }
-
-  table {
-    font-size: 12px;
-    flex-direction: column;
-    width: 100%;
-  }
-}
 
 .botondrop {
   padding-left: .2%;
@@ -65,7 +14,7 @@
 
 .home {
   display: flex;
-  background-color: rgb(240, 255, 251);
+  background-color: #f0fffb;
 
  
   .widget.order {
@@ -103,9 +52,10 @@
     .widgets2 {
       display: flex;
       flex-direction: row;
-      width: 100%;
-      padding: 20px;
-      gap: 10px;
+      margin-left: 200px;
+      width: 80%;
+      padding: 40px;
+      gap: 60px;
     }
 
     .charts {
@@ -127,3 +77,28 @@
     }
   }
 }
+
+@media only screen and (max-width: 900px) {
+  .ingreso {
+    width: 50%;
+    margin-left: 27%;
+    text-align: center; /* Alinear el texto al centro horizontalmente */
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    .counter{
+      margin-left: 20% !important;
+    }
+    .title{
+      margin-left: 30px ;
+    }
+  }
+
+  .charts {
+    display: flex;
+    font-size: 14px;
+    margin-top: 10px;
+    flex-direction: column;
+  }
+}
+

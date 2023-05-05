@@ -3,6 +3,7 @@ import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
+import Perfil from "./pages/perfil/Perfil";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
@@ -30,6 +31,9 @@ function App() {
             </Route>
             <Route>
             <Route path="login" element={<Login />} />
+            </Route>
+            <Route>
+            <Route path="perfil" element={<Perfil />} />
             </Route>
             <Route path="products">
               <Route index element={<List />} />
