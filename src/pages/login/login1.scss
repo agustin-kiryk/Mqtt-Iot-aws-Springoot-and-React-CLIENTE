@@ -1,23 +1,43 @@
+.app{
+  background-color: #000000;
+}
 
 .gradient-custom-2 {
-  /* fallback for old browsers */
-  background: #fccb90 ;
+  background: #fccb90;
+  background: -webkit-linear-gradient(to right, #f6fafa, #f9fdfc, #f4f8f6, #eef1f1);
+  background: linear-gradient(to right, #5bd9e2c9, #47e3eec9, #53eccbc9, rgba(30, 245, 198, 0.714));
+  }
 
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+.col-lg-6{
+  background-color: rgb(10,10,10);
 
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+}
+.text1{color:white;
+}
+.mt-1{
+  color: white;
+}
+.form-outline{
+  color: white;
+}
+.white-bg {
+  background-color: #ffffff; 
+  border-radius:5px;
 }
 
-@media (min-width: 768px) {
+.white-text {
+  color: #080808; 
+}
+
+
+  @media (min-width: 768px) {
   .gradient-form {
-    height: 100vh !important;
+  height: 100vh !important;
   }
-}
-@media (min-width: 769px) {
+  }
+  @media (min-width: 769px) {
   .gradient-custom-2 {
-    border-top-right-radius: .3rem;
-    border-bottom-right-radius: .3rem;
+  border-top-right-radius: .3rem;
+  border-bottom-right-radius: .3rem;
   }
-}
+  }
