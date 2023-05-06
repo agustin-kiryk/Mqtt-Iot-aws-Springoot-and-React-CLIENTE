@@ -5,6 +5,10 @@
   width: 20%;
 }
 
+.drop{
+margin-left: 40%;
+}
+
 .featuredChart2 {
   width: 170px;
   height: 170px;
@@ -41,10 +45,10 @@
       padding: 20px;
       gap: 20px;
       .counter{
-        margin-left: 55%;
+        margin-left: 400px;
       }
       .title{
-        margin-left: 330px;
+        margin-left: 400px;
       }
     }
 
@@ -59,6 +63,7 @@
     }
 
     .charts {
+      padding: 15px;
       gap: 10px;
       display: flex;
     }
@@ -78,7 +83,7 @@
   }
 }
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1370px) {
   .ingreso {
     width: 50%;
     margin-left: 27%;
@@ -87,11 +92,48 @@
     padding: 20px;
     gap: 20px;
     .counter{
-      margin-left: 190px !important;
+      width: 250px; /* ajusta el ancho según tus necesidades */
+
+    }
+    
+    .title{
+      width: 250px; /* ajusta el ancho según tus necesidades */
+     margin: 0 auto  !important;
+    }
+    
+  }
+
+  .charts {
+    padding: 15px;
+    gap: 10px;
+    display: flex;
+  }
+
+  .login{
+    padding-left: 515%  !important;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .ingreso {
+    width: 50%;
+    margin-left: 27%;
+    text-align: center; /* Alinear el texto al centro horizontalmente */
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    .counter{
+      margin-left: 100px !important;
     }
     .title{
-      margin-left: 220px !important;
+      margin-left: 2px !important;
     }
+  }
+
+  .charts {
+    padding: 15px;
+    gap: 10px;
+    display: flex;
   }
 
   .login{
