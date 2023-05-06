@@ -31,7 +31,7 @@
       }
     }
     .login{
-      padding-left: 1800px;
+      padding-left: 960%;
     }
 
     .items {
@@ -73,6 +73,18 @@
         }
       }
     }
+  }
+}
+
+@media only screen and (max-width: 1700px) {
+  .login{
+    padding-left: 600%  !important;
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .login{
+    padding-left: 515%  !important;
   }
 }
 

@@ -78,7 +78,7 @@
   }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1400px) {
   .ingreso {
     width: 50%;
     margin-left: 27%;
@@ -87,11 +87,41 @@
     padding: 20px;
     gap: 20px;
     .counter{
+      margin-left: 190px !important;
+    }
+    .title{
+      margin-left: 220px !important;
+    }
+  }
+
+  .login{
+    padding-left: 515%  !important;
+  }
+}
+
+
+@media only screen and (max-width: 900px) {
+  .ingreso {
+    width: 50% !important;
+    padding-right: 2% !important;
+    padding: 20px!important;
+    gap: 20px;
+    .counter{
       margin-left: 20% !important;
     }
     .title{
       margin-left: 30px ;
     }
+  }
+
+  .widgets,
+  .widgets2 {
+    display: flex;
+    flex-direction: column !important;
+    margin-left: 100px  !important;
+    width: 80%;
+    padding: 10px  !important;
+    gap: 10px!important;
   }
 
   .charts {

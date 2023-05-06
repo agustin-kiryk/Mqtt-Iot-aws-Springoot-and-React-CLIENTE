@@ -19,8 +19,6 @@ const Navbar = () => {
       <div className="wrapper">
         <div className="items">
           <div className="item">
-          </div>
-          <div className="item">
             <ShowChartIcon></ShowChartIcon>
           </div>
           <div className="item">
