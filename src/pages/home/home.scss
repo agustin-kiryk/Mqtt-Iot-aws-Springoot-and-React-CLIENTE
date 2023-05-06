@@ -102,27 +102,37 @@
 
 @media only screen and (max-width: 900px) {
   .ingreso {
-    width: 50% !important;
-    padding-right: 2% !important;
+    width: 101% !important;
+    margin-left: .5px !important;
     padding: 20px!important;
     gap: 20px;
     .counter{
-      margin-left: 20% !important;
+      margin-left: 60% !important;
     }
     .title{
-      margin-left: 30px ;
+      margin-left: 300px !important ;
     }
   }
 
-  .widgets,
-  .widgets2 {
+  .widgets{
     display: flex;
     flex-direction: column !important;
     margin-left: 100px  !important;
     width: 80%;
+    height: 740px;
     padding: 10px  !important;
-    gap: 10px!important;
+    gap: 20px!important;
+    .counter{
+      margin-left: 270px !important;
+      font-size: 40px !important;
+      width: 320px!important ;
+    }
+    .title{
+      margin-left: 260px !important ;
+      font-size: 20px !important;
+    }
   }
+
 
   .charts {
     display: flex;
