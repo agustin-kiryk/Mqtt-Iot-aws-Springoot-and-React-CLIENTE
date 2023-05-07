@@ -1,12 +1,12 @@
 
 .botondrop {
-  padding-left: .2%;
+  padding-left: 0.2%;
   margin-top: 1%;
   width: 20%;
 }
 
-.drop{
-margin-left: 40%;
+.drop {
+  margin-left: 40%;
 }
 
 .featuredChart2 {
@@ -15,22 +15,21 @@ margin-left: 40%;
   padding-left: 20px;
 }
 
-
 .home {
   display: flex;
   background-color: #f0fffb;
 
- 
   .widget.order {
     .left .title {
       font-size: 24px;
-      text-align: center; /* Alinear el texto al centro horizontalmente */
-      line-height: 1.2; /* Ajustar el espaciado vertical del número */
+      text-align: center;
+      line-height: 1.2;
     }
+
     .left .counter {
       font-size: 35px;
       left: 40px;
-      line-height: 1.2; /* Ajustar el espaciado vertical del número */
+      line-height: 1.2;
     }
   }
 
@@ -60,7 +59,7 @@ margin-left: 40%;
     }
 
     .widgets,
-    .widgets2 {
+    .widgetU,.widgetB, .widgetC, .widgetE {
       display: flex;
       flex-direction: row;
       width: 100%;
@@ -95,60 +94,36 @@ margin-left: 40%;
 }
 
 @media only screen and (max-width: 1370px) {
-  .ingreso {
-    width: 50%;
-    margin-left: 27%;
-    text-align: center; /* Alinear el texto al centro horizontalmente */
-    display: flex;
-    padding: 20px;
-    gap: 20px;
-    .counter{
-      width: 250px; /* ajusta el ancho según tus necesidades */
+  .ingreso .counter {
+    width: 100%;
+    font-size: 35px;
+    margin-bottom: 20px;
+  }
 
-    }
-    
-    .title{
-      width: 250px; /* ajusta el ancho según tus necesidades */
-     margin: 0 auto  !important;
-    }
-    
+  .ingreso .title {
+    width: 100%;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .widgets,
+  .widgets2 {
+    flex-direction: column;
+    gap: 40px;
   }
 
   .charts {
-    padding: 15px;
-    gap: 10px;
-    display: flex;
-  }
-
-  .login{
-    padding-left: 515%  !important;
+    flex-direction: column;
   }
 }
 
 @media only screen and (max-width: 1200px) {
-  .ingreso {
-    width: 50%;
-    margin-left: 27%;
-    text-align: center; /* Alinear el texto al centro horizontalmente */
-    display: flex;
-    padding: 20px;
-    gap: 20px;
-    .counter{
-      margin-left: 100px !important;
-    }
-    .title{
-      margin-left: 2px !important;
-    }
+  .ingreso .counter {
+    margin-left: 0;
   }
 
-  .charts {
-    padding: 15px;
-    gap: 10px;
-    display: flex;
-  }
-
-  .login{
-    padding-left: 515%  !important;
+  .ingreso .title {
+    margin-left: 0;
   }
 }
 
@@ -230,45 +205,61 @@ margin-left: 40%;
       font-size: 10px;
     }
 
-   @media (max-width: 400px) {
+ @media only screen and (max-width: 850px) {
+
   .homeContainer{
     width: 100% !important;
     padding: 0;
   }
-  .login{
-    padding-left: 0 !important;
-    margin-right: 0;
-  } 
 
-  .widget {
-    width: 100%;
-    margin: 5px 0;
-    padding: 10px;
+  .login{
+    padding-left: 100% !important;
+   
+ 
+  }
+  .ingreso{
+    width: 100% !important;
+    height: auto !important;
+    padding: 1px !important;
+    text-align: center ;
+    align-items: center ;
+  } 
+  
+
+  .widgetU {
+    width: 100% !important;
+    height: auto !important;
+    padding: 1px !important;
+    gap: 1px;
+  }
+  .widgetE {
+    width: 100% !important;
+    height: auto !important;
+    padding: 1px !important;
+    gap: 1px;
+  }
+
+  .widgetB {
+    width: 100% !important;
+    height: auto !important;
+    padding: 1px !important;
+    gap: 1px;
   }
   
-  .widget.ingreso {
-    width: 100%;
-    margin-bottom: 10px;
+  .widgetC {
+    width: 100% !important;
+    height: auto !important;
+    padding: 1px !important;
+    gap: 1px;
   }
   
-  
-  .widget.widgetB {
-    height: 300px;
-    padding: 10px;
-    gap: 20px;
-  }
-  
-  .widget.widgetC {
-    width: 100%;
-    margin-bottom: 10px;
-  }
   
   .counter {
     margin-left: 0;
-    font-size: 30px;
+    font-size: 30px !important;
     width: auto !important;
-    white-space: normal;
-    text-align: center;
+    white-space:normal;
+    text-align: center !important;
   }
   
   .title {
@@ -307,4 +298,113 @@ margin-left: 40%;
   .navbar-brand {
     font-size: 18px;
   }
-}
+
+  .drop{
+    width: 100% !important;
+    align-items: center !important;
+    text-align: center;
+    margin: 0%;
+    
+    
+  }
+   }
+
+   @media (max-width: 480px) {
+  .homeContainer{
+    width: 100% !important;
+    padding: 0;
+  }
+
+  .login{
+    padding-left: 100% !important;
+   
+ 
+  }
+  .ingreso{
+    width: 100% !important;
+    height: auto !important;
+    padding: 1px !important;
+    
+  } 
+  
+
+  .widgetU {
+    width: 100% !important;
+    height: auto !important;
+    padding: 1px !important;
+    gap: 1px;
+  }
+  .widgetE {
+    width: 100% !important;
+    height: auto !important;
+    padding: 1px !important;
+    gap: 1px;
+  }
+
+  .widgetB {
+    width: 100% !important;
+    height: auto !important;
+    padding: 1px !important;
+    gap: 1px;
+  }
+  
+  .widgetC {
+    width: 100% !important;
+    height: auto !important;
+    padding: 1px !important;
+    gap: 1px;
+  }
+  
+  
+  .counter {
+    margin-left: 0;
+    font-size: 30px !important;
+    width: auto !important;
+    white-space:normal;
+    text-align: center !important;
+  }
+  
+  .title {
+    margin-left: 0;
+    font-size: 16px;
+    white-space: normal;
+    text-align: center;
+  }
+  
+  .charts {
+    display: flex !important;
+    flex-direction: column !important;
+    font-size: 14px !important;
+    margin-top: 10px !important;
+    width: 100% !important;
+  }
+  
+  .chart {
+    display: flex !important;
+    flex-direction: column !important;
+    font-size: 14px !important;
+    margin-top: 10px !important;
+    width: 100%;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    width: 100% !important;
+    padding: 10px;
+  }
+  
+  .navbar-brand {
+    font-size: 18px;
+  }
+
+  .drop{
+    width: 100% !important;
+    align-items: center;
+    font-size: 1px !important;
+    
+  }
+   }
