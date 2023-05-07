@@ -21,12 +21,18 @@ const Home = () => {
         <div className="ingreso"> 
         <Widget type="order" />
         </div>
-        <div className="widgets">
+        <div className="widgetU">
           <Widget type="user" />
+        </div>
+        <div className="widgetE">
           <Widget type="earning" />
+        </div>
+        <div className="widgetB">
           <Widget type="balance" />
+        </div>
+        <div className="widgetC">
           <Widget type="comisiones" />
-          </div>
+        </div>
       
         <div className="charts">
           <Featured />

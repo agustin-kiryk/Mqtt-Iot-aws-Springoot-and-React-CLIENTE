@@ -39,16 +39,23 @@ margin-left: 40%;
 
     .ingreso {
       width: 50%;
-      margin-left: 27%;
-      text-align: center; /* Alinear el texto al centro horizontalmente */
+      margin: 0 auto;
+      text-align: center;
       display: flex;
       padding: 20px;
       gap: 20px;
-      .counter{
-        margin-left: 400px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+
+      .counter {
+        width: 250px;
+        font-size: 40px;
       }
-      .title{
-        margin-left: 400px;
+
+      .title {
+        width: 250px;
+        font-size: 20px;
       }
     }
 
@@ -56,20 +63,24 @@ margin-left: 40%;
     .widgets2 {
       display: flex;
       flex-direction: row;
-      margin-left: 200px;
-      width: 80%;
+      width: 100%;
       padding: 40px;
       gap: 60px;
+
+      .widget {
+        flex: 1;
+        max-width: 33%;
+      }
     }
 
     .charts {
       padding: 15px;
       gap: 10px;
       display: flex;
+      flex-wrap: wrap;
     }
 
     .listContainer {
-      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
       box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
       padding: 20px;
       margin: 20px;
@@ -143,44 +154,157 @@ margin-left: 40%;
 
 
 @media only screen and (max-width: 900px) {
-  .ingreso {
-    width: 101% !important;
-    margin-left: .5px !important;
-    padding: 20px!important;
-    gap: 20px;
-    .counter{
-      margin-left: 60% !important;
-    }
-    .title{
-      margin-left: 300px !important ;
-    }
-  }
 
-  .widgets{
-    display: flex;
-    flex-direction: column !important;
-    margin-left: 100px  !important;
+  .homeContainer{
+    width: 100% !important;
+  }
+  .login{
+    padding-left:100%  !important;
+    
+  } 
+
+  .widget {
+    width: 95%;
+    margin: 5px;
+    padding: 10px;
+  }
+  
+  .widget.ingreso {
+    width: 95%;
+  }
+  
+  .widget.widgetB {
+    height: 200px;
+    padding: 1%;
+    gap: 10%;
+  }
+  
+  .widget.widgetC {
+    width: 95%;
+  }
+  
+  .counter {
+    margin-left: 10%;
+    font-size: 40px;
     width: 80%;
-    height: 740px;
-    padding: 10px  !important;
-    gap: 20px!important;
-    .counter{
-      margin-left: 270px !important;
-      font-size: 40px !important;
-      width: 320px!important ;
-    }
-    .title{
-      margin-left: 260px !important ;
-      font-size: 20px !important;
-    }
+    white-space: nowrap;
+    text-align: center;
   }
-
+  
+  .title {
+    margin-left: 5%;
+    font-size: 20px;
+    white-space: nowrap;
+    text-align: center;
+  }
+  
+    
+  }
 
   .charts {
+    display: flex !important;
+    flex-direction: column !important;
+    font-size: 14px !important;
+    margin-top: 10px !important ;
+    width: 100% !important;
+    
+  }
+  .chart {
+    display: flex !important;
+    flex-direction: column !important;
+    font-size: 14px !important;
+    margin-top: 10px !important ; 
+    width: auto;   
+  }
+   .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      color: rgb(153, 13, 13);
+      width: 100% !important;
+      padding: 10px;
+    }
+    
+    .navbar-brand {
+      font-size: 10px;
+    }
+
+   @media (max-width: 400px) {
+  .homeContainer{
+    width: 100% !important;
+    padding: 0;
+  }
+  .login{
+    padding-left: 0 !important;
+    margin-right: 0;
+  } 
+
+  .widget {
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+  }
+  
+  .widget.ingreso {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  
+  .widget.widgetB {
+    height: 300px;
+    padding: 10px;
+    gap: 20px;
+  }
+  
+  .widget.widgetC {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .counter {
+    margin-left: 0;
+    font-size: 30px;
+    width: auto !important;
+    white-space: normal;
+    text-align: center;
+  }
+  
+  .title {
+    margin-left: 0;
+    font-size: 16px;
+    white-space: normal;
+    text-align: center;
+  }
+  
+  .charts {
+    display: flex !important;
+    flex-direction: column !important;
+    font-size: 14px !important;
+    margin-top: 10px !important;
+    width: 100% !important;
+  }
+  
+  .chart {
+    display: flex !important;
+    flex-direction: column !important;
+    font-size: 14px !important;
+    margin-top: 10px !important;
+    width: 100%;
+  }
+  
+  .navbar {
     display: flex;
-    font-size: 14px;
-    margin-top: 10px;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    width: 100% !important;
+    padding: 10px;
+  }
+  
+  .navbar-brand {
+    font-size: 18px;
   }
 }
-
