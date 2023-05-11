@@ -1,7 +1,9 @@
 .back{
     p{
-        font-size: 35px;
+        font-size: 35p!important;
         color: #008cc4;
+        width: 30vw;
+        padding-right: 1vw;
         background-color: #00ffaa3b;
         border-radius: 7%;
         box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
@@ -16,6 +18,24 @@
   .drop{
     p{
         font-size: 30px;
+        padding-left: 7vw;
     }
   }
+
+  .drop:hover {
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: 900px) {
+    
+    .drop{
+   p{
+    width: 90vw !important;
+    font-size: 30px;
+    padding-left: 5vw;
+   }
+    }
+  
+  }
+  
   

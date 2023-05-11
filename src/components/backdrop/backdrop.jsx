@@ -1,12 +1,6 @@
 import * as React from 'react';
 import "./backdrop.scss";
 import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 
 export default function SimpleBackdrop() {
     const [open, setOpen] = React.useState(false);
@@ -20,7 +14,7 @@ export default function SimpleBackdrop() {
     return (
         <div >
             <div className='back'>
-            <Button onClick={handleOpen}><p>Ver Datos Bancarios</p></Button>
+            <a onClick={handleOpen}><p>Ver Datos Bancarios</p></a>
             </div>
             <div className='drop'>
             <Backdrop

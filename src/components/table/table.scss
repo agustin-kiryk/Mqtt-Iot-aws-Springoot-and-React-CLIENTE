@@ -16,13 +16,17 @@
     padding: 5px;
     border-radius: 5px;
 
-    &.Approved {
+    &.Corriente {
       color: green;
       background-color: rgba(0, 128, 0, 0.151);
     }
     &.Pending {
       color: goldenrod;
       background-color: rgba(189, 189, 3, 0.103);
+    }
+    &.Deuda {
+      color: rgb(218, 32, 32);
+      background-color: rgba(189, 3, 3, 0.103);
     }
   }
 }

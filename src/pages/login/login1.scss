@@ -14,6 +14,10 @@
 }
 .text1{color:white;
 }
+
+.texto{
+  color: white;
+}
 .mt-1{
   color: white;
 }
@@ -41,3 +45,42 @@
   border-bottom-right-radius: .3rem;
   }
   }
+
+  .ingresar {
+  width: 10px;
+  padding-right: 40vw;
+  background-color: #5bd9e2;
+  border-radius: 20px;
+  p {
+    width: 38vw;
+    padding-top: 1em;
+  }
+}
+
+
+  @media (max-width: 480px) {
+
+    .text-center{
+      width: 75vw ;
+    }
+
+    .form-outline{
+      width: 75vw;
+    }
+
+    .texto{
+      width: 75vw;
+    }
+ 
+    .ingresar{
+      width: 100px !important;
+      padding-right: 40vw !important;
+      margin-left: 0vw !important;
+      background-color: #5bd9e2;
+      border-radius: 20px;
+      p{
+        width: 38vw;
+        padding-top: 3vw;
+      }
+    }
+     }

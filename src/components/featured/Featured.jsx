@@ -17,7 +17,7 @@ const Featured = () => {
         <CircularProgressbar   styles={buildStyles({
           textColor: "black",
           pathColor: "turquoise",
-          trailColor: "lightgreen"
+          trailColor: "white"
         })} value={70} text={"70%"} strokeWidth={8} />
          
         </div>
@@ -30,7 +30,7 @@ const Featured = () => {
         <CircularProgressbar   styles={buildStyles({
           textColor: "black",
           pathColor: "turquoise",
-          trailColor: "lightgreen"
+          trailColor: "white"
         })} value={50} text={"50%"} strokeWidth={8} />
          </div>
          <p className="title">Proximo cambio de filtro</p>

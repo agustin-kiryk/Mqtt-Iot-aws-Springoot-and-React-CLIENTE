@@ -10,6 +10,7 @@ import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Maquinas from "./pages/maquinas/Maquinas";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -19,7 +20,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/">
- 
+          <Route path="maquinas" element={<Maquinas/>} />
             <Route index element={<Home />} />
             <Route path="users">
               <Route index element={<List />} />

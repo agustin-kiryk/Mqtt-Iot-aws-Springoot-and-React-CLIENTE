@@ -17,29 +17,37 @@ import {
   MDBListGroupItem
 } from 'mdb-react-ui-kit';
 import Navbar from "../../components/navbar/Navbar";
+import Boton from "../../components/boton2/boton"
+import Boton2 from "../../components/boton3/boton"
+import { Link } from "react-router-dom";
 
 export default function ProfilePage() {
   return (
     <section style={{ backgroundColor: '#f0fffb' }}>
-         <Navbar />
+      <Navbar />
+      <div className='volver'>
+      <Link to="/" style={{ textDecoration: "none" }}>
+      <Boton2 />
+      </Link>
+      </div>
       <MDBContainer className="py-5">
         <MDBRow>
           <MDBCol lg="4">
-            <MDBCard className="mb-4">
-              <MDBCardBody className="text-center">
+          <MDBCard className="mx-auto mb-4 text-center">
+          <MDBCardBody className="">
                 <MDBCardImage
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                  src="https://cdn.discordapp.com/attachments/1061404202498277458/1105998913749667880/image.png"
                   alt="avatar"
-                  className="rounded-circle"
-                  style={{ width: '125px' }}
-                  fluid />
-                <p className="text-muted mb-1">Full Stack Developer</p>
-                <p className="text-muted mb-4">Bay Area, San Francisco, CA</p>
-                <div className="d-flex justify-content-center mb-2">
-                  <MDBBtn>Editar Foto</MDBBtn>
-                </div>
+                  className="rounded-circle "
+                  style={{ maxWidth: '200px' }}
+                  fluid
+                />
+                <p className="text-muted mb-1">John Córdoba Morales</p>
+                <p className="text-muted mb-1">Bay Area, San Francisco, CA</p>
+
               </MDBCardBody>
             </MDBCard>
+            <Boton />
           </MDBCol>
           <MDBCol lg="8">
             <MDBCard className="mb-4">
@@ -88,7 +96,6 @@ export default function ProfilePage() {
                     <MDBCardText className="text-muted">12314</MDBCardText>
                   </MDBCol>
                 </MDBRow>
-                
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

@@ -24,10 +24,10 @@ export default function FloatingActionButtonExtendedSize() {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Box sx={{ '& > :not(style)': { m: isSmallScreen ? 0.5 : 1 } }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', '& > :not(style)': { m: isSmallScreen ? 0.5 : 1 } }}>
       <Fab variant="extended" color="success" aria-label="add">
-        <Box sx={{ mr: isSmallScreen ? 0.5 : 1, ml: isSmallScreen ? 0 : 0 }}>
-          Cerrar Sesion
+        <Box sx={{ mr: isSmallScreen ? 0.5 : 1, ml: isSmallScreen ? 1 : 0 }}>
+          Editar Foto
         </Box>
       </Fab>
     </Box>

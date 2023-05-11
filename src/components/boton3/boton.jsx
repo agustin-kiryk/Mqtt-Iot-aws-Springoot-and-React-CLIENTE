@@ -27,7 +27,7 @@ export default function FloatingActionButtonExtendedSize() {
     <Box sx={{ '& > :not(style)': { m: isSmallScreen ? 0.5 : 1 } }}>
       <Fab variant="extended" color="success" aria-label="add">
         <Box sx={{ mr: isSmallScreen ? 0.5 : 1, ml: isSmallScreen ? 0 : 0 }}>
-          Cerrar Sesion
+          Volver
         </Box>
       </Fab>
     </Box>

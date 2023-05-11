@@ -1,10 +1,11 @@
 import "./widget.scss";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import CopyrightIcon from '@mui/icons-material/Copyright';
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import GasMeterIcon from '@mui/icons-material/GasMeter';
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
+import { Link } from "react-router-dom";
 
 const Widget = ({ type }) => {
   let data;
@@ -13,14 +14,15 @@ const Widget = ({ type }) => {
   const amount = 10000;
   const diff = 20;
 
+
   switch (type) {
-    case "user":
+   case "user":
       data = {
         title: "MAQUINAS",
         isMoney: false,
         link: "See all users",
         icon: (
-          <PersonOutlinedIcon
+          <GasMeterIcon
             className="icon"
             style={{
               color: "crimson",
@@ -28,36 +30,36 @@ const Widget = ({ type }) => {
             }}
           />
         ),
+        number: 5 // Asignar un número único para este caso
       };
-      break;
-      case "order":
-        data = {
-          
-          title: "INGRESO DINERO",
-          isMoney: true,
-          link: "",
-          icon: (
-            <ShoppingCartOutlinedIcon
-              className="icon"
-              style={{
-                backgroundColor: "rgba(218, 165, 32, 0.2)",
-                color: "goldenrod",
-              }}
-            />
-          ),
-        };
-      break;
-    case "earning":
+      break; 
+    case "order":
       data = {
-        title: "LITROS VENDIDOS",
-        isMoney: false,
-        link: "View net earnings",
+
+        title: "INGRESO DINERO",
+        isMoney: true,
+        link: "",
         icon: (
           <MonetizationOnOutlinedIcon
             className="icon"
             style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
           />
         ),
+        number: "800.000" // Asignar un número único para este caso
+      };
+      break;
+    case "earning":
+      data = {
+        title: "LITROS VENDIDOS",
+        isLitros: true,
+        link: "View net earnings",
+        icon: (
+          <WaterDropIcon
+            className="icon"
+            style={{ backgroundColor: "rgba(51, 89, 212, 0.651)", color: "blue" }}
+          />
+        ),
+        number: "5.000" // Asignar un número único para este caso
       };
       break;
     case "balance":
@@ -74,6 +76,7 @@ const Widget = ({ type }) => {
             }}
           />
         ),
+        number: "300.000" // Asignar un número único para este caso
       };
       break;
     case "comisiones":
@@ -82,14 +85,15 @@ const Widget = ({ type }) => {
         isMoney: true,
         link: "View commission details",
         icon: (
-          <AccountBalanceWalletOutlinedIcon
+          <CopyrightIcon
             className="icon"
             style={{
-              backgroundColor: "rgba(128, 128, 0, 0.2)",
-              color: "yellow",
+              backgroundColor: "rgba(0, 128, 0, 0.2)",
+              color: "green",
             }}
           />
         ),
+        number: "500.000" // Asignar un número único para este caso
       };
       break;
     default:
@@ -100,19 +104,17 @@ const Widget = ({ type }) => {
     <div className={`widget ${type}`}>
       <div className="left">
         <span className="title">{data.title}</span>
-        <span className="counter">{data.isMoney && "$"} {amount}</span>
-        <span className="link">{data.link}</span>
+        <span className="counter" style={{ fontWeight: 'bold' }}>
+          {data.isMoney && "$"} {data.number}
+        </span>
       </div>
       <div className="right">
-        <div className={`percentage ${diff > 0 ? "positive" : "negative"}`}>
-          <KeyboardArrowUpIcon />
-          {diff} %
-        </div>
+        <div className=" "></div>
         {data.icon}
       </div>
     </div>
   );
-  
+
 };
 
 export default Widget;

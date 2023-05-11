@@ -31,7 +31,7 @@
     .link {
       width: max-content;
       font-size: 12px;
-      border-bottom: 1px solid gray;
+      border-bottom: 1px solid rgb(128, 128, 128);
     }
 
     .percentage {
@@ -47,8 +47,13 @@
       }
     }
 
+    .counter {
+      font-weight: bold;
+    }
+    
+
     .icon {
-      font-size: 18px;
+      font-size: 40px;
       padding: 5px;
       border-radius: 5px;
       align-self: flex-end;
