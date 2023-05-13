@@ -1,5 +1,6 @@
 .single {
   display: flex;
+  background-color: rgb(255, 255, 255);
   width: 100%;
   .singleContainer {
     flex: 6;
@@ -47,7 +48,9 @@
 
             .detailItem {
               margin-bottom: 10px;
-              font-size: 14px;
+              font-size: 30px;
+              display: flex;
+              flex-direction: row;
 
               .itemKey {
                 font-weight: bold;
@@ -66,6 +69,13 @@
       .right {
         flex: 2;
       }
+    }
+
+    .dni{
+      padding-top: 10vw;
+      padding-right: 15vw;
+      border: #555;
+      border-radius: 20px;
     }
 
     .bottom {

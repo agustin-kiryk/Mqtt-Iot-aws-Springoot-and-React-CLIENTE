@@ -3,7 +3,10 @@ import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
+import New2 from "./pages/new2/New";
 import Perfil from "./pages/perfil/Perfil";
+import Histfac from "./pages/histfac/Histfac";
+import Maquinas from "./pages/maquinas/Maquinas";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
@@ -19,7 +22,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/">
- 
+          <Route path="new" element={<New/>} />
+          <Route path="maquinas" element={<Maquinas/>} />
+          <Route path="new2" element={<New2/>} />
+          <Route path="histfac" element={<Histfac />} />
             <Route index element={<Home />} />
             <Route path="users">
               <Route index element={<List />} />

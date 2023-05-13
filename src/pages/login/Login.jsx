@@ -22,15 +22,16 @@ function App() {
                 style={{width: '185px'}} alt="logo" />
               <h4 className="mt-1 mb-5 pb-1">Madre tierra Group</h4>
             </div>
-
-            <p>Por favor ingrese su usuario</p>
-
+            <div className='texto'>    
+              <p>Por favor ingrese su usuario</p>
+            </div>
+        
             <MDBInput wrapperClass='mb-4' label='Email' id='form1' type='email'/>
             <MDBInput wrapperClass='mb-4' label='Contraseña' id='form2' type='password'/>
 
-            <div className="text-center pt-1 mb-5 pb-1">
-              <MDBBtn className="mb-4 w-100 gradient-custom-2">Sign in</MDBBtn>
-            </div>
+           <div className='text-center pt-1 mb-5 pb-1'>
+            <button className='ingresar'> <p>Ingresar</p></button>
+           </div>
 
           </div>
 

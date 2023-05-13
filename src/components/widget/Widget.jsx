@@ -1,10 +1,12 @@
 import "./widget.scss";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import CopyrightIcon from '@mui/icons-material/Copyright';
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import GasMeterIcon from '@mui/icons-material/GasMeter';
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Link } from "react-router-dom";
 
 const Widget = ({ type }) => {
   let data;
@@ -12,6 +14,7 @@ const Widget = ({ type }) => {
   //temporary
   const amount = 10000;
   const diff = 20;
+  
 
   switch (type) {
     case "user":
@@ -20,14 +23,17 @@ const Widget = ({ type }) => {
         isMoney: false,
         link: "See all users",
         icon: (
-          <PersonOutlinedIcon
+          <Link to="/maquinas" style={{ textDecoration: "none" }}>
+          <GasMeterIcon
             className="icon"
             style={{
               color: "crimson",
               backgroundColor: "rgba(255, 0, 0, 0.2)",
             }}
           />
+           </Link>
         ),
+        number: 60 // Asignar un número único para este caso
       };
       break;
       case "order":
@@ -37,27 +43,26 @@ const Widget = ({ type }) => {
           isMoney: true,
           link: "",
           icon: (
-            <ShoppingCartOutlinedIcon
-              className="icon"
-              style={{
-                backgroundColor: "rgba(218, 165, 32, 0.2)",
-                color: "goldenrod",
-              }}
-            />
+            <MonetizationOnOutlinedIcon
+            className="icon"
+            style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
+          />
           ),
+          number: 800000 // Asignar un número único para este caso
         };
       break;
     case "earning":
       data = {
         title: "LITROS VENDIDOS",
-        isMoney: false,
+        isLitros: true,
         link: "View net earnings",
         icon: (
-          <MonetizationOnOutlinedIcon
+          <WaterDropIcon
             className="icon"
-            style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
+            style={{ backgroundColor: "rgba(51, 89, 212, 0.651)", color: "blue" }}
           />
         ),
+        number: 5000 // Asignar un número único para este caso
       };
       break;
     case "balance":
@@ -74,22 +79,24 @@ const Widget = ({ type }) => {
             }}
           />
         ),
+        number: 300000 // Asignar un número único para este caso
       };
       break;
     case "comisiones":
       data = {
-        title: "DERECHO DE MARCA",
-        isMoney: true,
+        title: "Clientes",
+        isMoney: false,
         link: "View commission details",
         icon: (
-          <AccountBalanceWalletOutlinedIcon
+          <AccountCircleIcon
             className="icon"
             style={{
-              backgroundColor: "rgba(128, 128, 0, 0.2)",
-              color: "yellow",
+              backgroundColor: "rgba(0, 128, 0, 0.2)",
+              color: "green",
             }}
           />
         ),
+        number: 50 // Asignar un número único para este caso
       };
       break;
     default:
@@ -98,16 +105,15 @@ const Widget = ({ type }) => {
 
   return (
     <div className={`widget ${type}`}>
-      <div className="left">
-        <span className="title">{data.title}</span>
-        <span className="counter">{data.isMoney && "$"} {amount}</span>
-        <span className="link">{data.link}</span>
-      </div>
+<div className="left">
+  <span className="title">{data.title}</span>
+  <span className="counter" style={{fontWeight: 'bold'}}>
+  {data.isMoney && "$"} {data.number}
+</span>
+
+</div>
       <div className="right">
-        <div className={`percentage ${diff > 0 ? "positive" : "negative"}`}>
-          <KeyboardArrowUpIcon />
-          {diff} %
-        </div>
+        <div className=" "></div>
         {data.icon}
       </div>
     </div>

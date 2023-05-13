@@ -57,3 +57,9 @@ body{margin-top:20px;
         margin-left: 1rem;
         margin-right: 1rem;
     }
+
+    @media (max-width: 480px) {
+    button.editar{
+        width: 30vw !important;
+    }
+    }

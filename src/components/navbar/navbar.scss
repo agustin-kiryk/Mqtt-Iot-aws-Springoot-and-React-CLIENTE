@@ -30,12 +30,13 @@
         }
       }
     }
-    .login{
-    position: fixed;
-    top: 0;
+.login{
+    position: absolute;
+    top: 1;
     right: 0;
-    z-index: 9999;
-    }
+    z-index: 0;
+}
+
 
     .items {
       display: flex;
@@ -83,7 +84,7 @@
 
 @media only screen and (max-width: 900px) {
   .login{
-    padding-left: 500px !important;
+    padding-left: 400px !important;
   }
 }
 

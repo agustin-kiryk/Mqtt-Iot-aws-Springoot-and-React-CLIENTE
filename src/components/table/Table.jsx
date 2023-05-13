@@ -61,11 +61,10 @@ const List = () => {
         <TableHead>
           <TableRow>
             <TableCell className="tableCell">ID Maquina</TableCell>
-            <TableCell className="tableCell">Mes</TableCell>
-            <TableCell className="tableCell">Litros Vendidos</TableCell>
-            <TableCell className="tableCell">Ganancias</TableCell>
-            <TableCell className="tableCell">Derecho de Marca</TableCell>
-            <TableCell className="tableCell">Total Vendido</TableCell>
+            <TableCell className="tableCell">Cliente</TableCell>
+            <TableCell className="tableCell">Telefono</TableCell>
+            <TableCell className="tableCell">Direccion</TableCell>
+            <TableCell className="tableCell">Mantenimiento</TableCell>
             <TableCell className="tableCell">Estatus</TableCell>
           </TableRow>
         </TableHead>
@@ -75,14 +74,13 @@ const List = () => {
               <TableCell className="tableCell">{row.id}</TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
+                  <img  alt="" className="image" />
                   {row.product}
                 </div>
               </TableCell>
               <TableCell className="tableCell">{row.customer}</TableCell>
               <TableCell className="tableCell">{row.date}</TableCell>
               <TableCell className="tableCell">{row.amount}</TableCell>
-              <TableCell className="tableCell">{row.method}</TableCell>
               <TableCell className="tableCell">
                 <span className={`status ${row.status}`}>{row.status}</span>
               </TableCell>

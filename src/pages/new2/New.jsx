@@ -83,134 +83,90 @@ const New = ({ inputs, title, apiUrl }) => {
       <div className="newContainer">
         <Navbar />
         <div className="top">
-          <h1>{title}</h1>
+          <h1>INGRESO DE MAQUINA NUEVA</h1>
         </div>
         <div className="bottom">
-          <div className="left">
-            <img
-              src={
-                file
-                  ? URL.createObjectURL(file)
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt=""
-              style={{
-                width: "300px",
-                height: "300px",
-                borderRadius: "5px" // Agrega esta línea para quitar los bordes redondeados
-              }}
-            />
-          </div>
-          
           <div className="right">
             <form onSubmit={handleSubmit}>
-            
               <div className="formInput">
-                <label htmlFor="image">Imagen:</label>
-                <input
-                  type="file"
-                  name="image"
-                  onChange={handleFileChange}
-                />
-                <button
-                  type="submit"
-                  className={`submitButton ${isUploading ? 'disabledButton' : ''}`}
-                  onClick={handleImageUpload}
-                  disabled={isButtonDisabled}
-                >
-                  Subir imagen
-                </button>
-              </div>
-             
-              <div className="formInput">
-                <label>Nombre:</label>
+                <label>Id de maquina:</label>
 
                 <input
                   type="text"
-                  placeholder="Ingrese su nombre"
+                  placeholder="Ingrese su id de maquina"
                   name="name"
                   onChange={handleInputChange}
                 />
               </div>
 
               <div className="formInput">
-                <label>Apellido:</label>
+                <label>Direccion:</label>
 
                 <input
                   type="text"
-                  placeholder="Ingrese su apellido"
+                  placeholder="Ingrese su Direccion"
                   name="lastName"
                   onChange={handleInputChange}
                 />
               </div>
 
-              <div className="formInput">
-                <label htmlFor="address">Dirección:</label>
-                <input
-                  type="text"
-                  placeholder="Ingrese su dirección"
-                  name="adress"
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="formInput">
-                <label htmlFor="address">Ditrito:</label>
-                <input
-                  type="text"
-                  placeholder="Ingrese el distrito"
-                  name="adress"
-                  onChange={handleInputChange}
-                />
-              </div>
 
               <div className="formInput">
-                <label>Identificacion:</label>
+                <label>Distrito:</label>
 
                 <input
                   type="text"
-                  placeholder="Ingrese su número de documento"
+                  placeholder="Ingrese su Distrito"
                   name="documentNumber"
                   onChange={handleInputChange}
                 />
               </div>
               <div className="formInput">
-                <label htmlFor="type">Tipo de cliente:</label>
+                <label htmlFor="type">Modelo:</label>
                 <input
                   type="text"
-                  placeholder="Ingrese el tipo de cliente"
+                  placeholder="Ingrese el Modelo"
                   name="type"
                   onChange={handleInputChange}
                 />
               </div>
-
               <div className="formInput">
-                <label htmlFor="phone">Teléfono:</label>
+                <label htmlFor="type">Detalle:</label>
                 <input
                   type="text"
-                  placeholder="Ingrese su teléfono"
-                  name="phone"
+                  placeholder="Ingrese el Detalle"
+                  name="type"
                   onChange={handleInputChange}
                 />
               </div>
               <div className="formInput">
-                <label>Derecho de marca:</label>
-
+                <label htmlFor="type">Informacion adicional:</label>
                 <input
                   type="text"
-                  placeholder="Ingresar derecho de marca"
-                  name="name"
+                  placeholder="Ingrese Informacion adicional"
+                  name="type"
                   onChange={handleInputChange}
                 />
               </div>
               <div className="formInput">
-                <label>ID de maquina:</label>
+                <label htmlFor="type">Fecha de inicio:</label>
                 <input
                   type="text"
-                  placeholder="Ingrese la id de maquina"
-                  name="name"
+                  placeholder="Ingrese la Fecha de inicio"
+                  name="type"
                   onChange={handleInputChange}
                 />
               </div>
+              <div className="formInput">
+                <label htmlFor="type">Infomacion de servidor:</label>
+                <input
+                  type="text"
+                  placeholder="Ingrese la Infomacion de servidor"
+                  name="type"
+                  onChange={handleInputChange}
+                />
+              </div>
+              
               <button type="submit" className="submitButton">
                 Guardar
               </button>

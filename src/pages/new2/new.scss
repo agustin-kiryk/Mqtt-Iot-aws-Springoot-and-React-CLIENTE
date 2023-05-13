@@ -8,6 +8,8 @@
       flex-direction: column !important;
     }
   }
+
+
   
   .newContainer {
     flex: 6;
@@ -46,7 +48,7 @@
           justify-content: space-around;
 
           .formInput {
-            width: 30%;
+            width: 40%;
 
             label {
               display: flex;
@@ -70,6 +72,7 @@
             color: white; // Cambia el color de texto del botón deshabilitado
             cursor: not-allowed;
           }
+        
 
           button {
             width: 150px;
