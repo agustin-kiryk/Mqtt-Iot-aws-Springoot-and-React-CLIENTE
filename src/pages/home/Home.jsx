@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "./home.scss";
+import Estatus from "../../pages/estatus/Estatus"
 import Widget from "../../components/widget/Widget";
 import BackDrop from "../../components/backdrop/backdrop";
 import Featured from "../../components/featured/Featured";
@@ -56,6 +57,10 @@ const Home = () => {
           <div className="widgetC">
             <Widget type="comisiones" />
           </div>
+        </div>
+
+        <div className="estatus">
+          <Estatus></Estatus>
         </div>
 
         <div className="charts">
