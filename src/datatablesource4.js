@@ -7,62 +7,60 @@ import TextField from "@mui/material/TextField";
 export const userColumns = [
   {
     field: "machineId",
-    headerName: "Identificador",
-    width: 120,
+    headerName: "Id de Maquina",
+    width: 200,
   },
   {
-    field: "userId",
-    headerName: "Id de Usuario",
+    field: "transactionId",
+    headerName: "Id de Transaccion",
+    width: 200,
+  },
+  {
+    field: "id",
+    headerName: "Referencia",
     width: 150,
   },
-
+  {
+    field: "amount",
+    headerName: "Monto",
+    width: 150,
+  },
   {
     field: "currency",
     headerName: "Tipo de moneda",
     width: 180,
   },
   {
-    field: "price",
-    headerName: "Precio por litro",
-    width: 150,
+    field: "dispensedWater",
+    headerName: "Agua Dispensada",
+    width: 200,
     renderCell: (params) => {
     },
   },
   {
-    field: "status",
-    headerName: "Estatus",
-    width: 150,
+    field: "date",
+    headerName: "Fecha",
+    width: 200,
     renderCell: (params) => {
+      const dateArray = params.value; // Suponiendo que 'params.value' contiene el array de fecha y hora
+  
+      if (Array.isArray(dateArray) && dateArray.length === 6) {
+        const [year, month, day, hour, minute, second] = dateArray;
+        const formattedDate = new Date(year, month - 1, day).toLocaleDateString();
+        const formattedTime = `${hour}:${minute}:${second}`;
+  
+        return (
+          <div>
+            <div>{formattedDate}</div>
+            <div>{formattedTime}</div>
+          </div>
+        );
+      }
+  
+      return null; // Manejo de error en caso de datos incorrectos
     },
-  },
-  {
-    field: "light",
-    headerName: "Luz",
-    width: 90,
-  },
-
-  {
-    field: "valveFill",
-    headerName: "Valvula de Carga",
-    width: 250,
-    renderCell: (params) => {
-    },
-  },
-  {
-    field: "valveWash",
-    headerName: "Valvula de Lavado",
-    width: 250,
-    renderCell: (params) => {
-    },
-  },
-  {
-    field: "waterPumpSwich",
-    headerName: "Bomba de Agua",
-    width: 240,
-    renderCell: (params) => {
-    },
-  },
-
+  }
+  
 
 ];
 
@@ -106,24 +104,28 @@ export function UserTable() {
 
 export async function fetchUserData() {
   try {
-    const token =
-      "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZXhwIjoxNjg5ODM4ODY4LCJpYXQiOjE2ODk4MDI4Njh9.zvJZ_imtsBaeSMj6za2rPuWfojuVBHBqHBfbcJzeLQlX7QxJvWv-FcpYZQn4_tsO0XaiWAWIc07Yy9LJYoad2g";
+    const token = localStorage.getItem('jwtToken'); // Obtener el token del localStorage
+
+    if (!token) {
+      throw new Error('Token no encontrado en el localStorage');
+    }
 
     const response = await axios.get(
-      "https://iotcoremt-production.up.railway.app/machines/allMachines",
+      'https://iotcoremt-production.up.railway.app/transactions/all', // Cambiar la URL al endpoint deseado
       {
         headers: {
+          "Content-Type": "application/json", 'Access-Control-Allow-Origin': '*',
           Authorization: `Bearer ${token}`,
         },
       }
     );
+
     return response.data;
   } catch (error) {
     console.log(error);
     return [];
   }
 }
-
 // Estilos CSS
 const styles = {
   imageContainer: {

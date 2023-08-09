@@ -15,13 +15,18 @@ const New = ({ inputs, title, apiUrl }) => {
   const [dni, setDni] = useState('');
 
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    image: "",
     lastName: "",
     adress: "",
     documentNumber: "",
-    type: "",
-    phone: "",
+    password: "",
+    email: "",
     image: "",
+    district: "",
+    machineid: "",
+    type: "",
+    charge: "",
   });
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -55,7 +60,7 @@ const New = ({ inputs, title, apiUrl }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://disfracesrosario.up.railway.app/clients/newClient", JSON.stringify(formData), {
+      .post("https://iotcoremt-production.up.railway.app/auth/register", JSON.stringify(formData), {
         headers: {
           "Content-Type": "application/json", 'Access-Control-Allow-Origin': '*'
         },
@@ -63,7 +68,6 @@ const New = ({ inputs, title, apiUrl }) => {
       .then((response) => {
         console.log(response);
         alert("Cliente creado correctamente")
-        window.location.href = '/users';
       })
       .catch((error) => {
         console.log(error);
@@ -74,9 +78,6 @@ const New = ({ inputs, title, apiUrl }) => {
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-
-
 
   return (
     <div className="new">
@@ -128,7 +129,7 @@ const New = ({ inputs, title, apiUrl }) => {
                 <input
                   type="text"
                   placeholder="Ingrese su nombre"
-                  name="name"
+                  name="firstName"
                   onChange={handleInputChange}
                 />
               </div>
@@ -145,6 +146,29 @@ const New = ({ inputs, title, apiUrl }) => {
               </div>
 
               <div className="formInput">
+                <label>Email:</label>
+
+                <input
+                  type="text"
+                  placeholder="Ingrese su Email"
+                  name="email"
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div className="formInput">
+                <label>Contraseña:</label>
+
+                <input
+                  type="text"
+                  placeholder="Ingrese su Contraseña"
+                  name="password"
+                  onChange={handleInputChange}
+                />
+              </div>
+              
+
+              <div className="formInput">
                 <label htmlFor="address">Dirección:</label>
                 <input
                   type="text"
@@ -154,11 +178,11 @@ const New = ({ inputs, title, apiUrl }) => {
                 />
               </div>
               <div className="formInput">
-                <label htmlFor="address">Ditrito:</label>
+                <label htmlFor="address">Distrito:</label>
                 <input
                   type="text"
                   placeholder="Ingrese el distrito"
-                  name="adress"
+                  name="district"
                   onChange={handleInputChange}
                 />
               </div>
@@ -198,7 +222,7 @@ const New = ({ inputs, title, apiUrl }) => {
                 <input
                   type="text"
                   placeholder="Ingresar derecho de marca"
-                  name="name"
+                  name="charge"
                   onChange={handleInputChange}
                 />
               </div>
@@ -207,7 +231,7 @@ const New = ({ inputs, title, apiUrl }) => {
                 <input
                   type="text"
                   placeholder="Ingrese la id de maquina"
-                  name="name"
+                  name="machineid"
                   onChange={handleInputChange}
                 />
               </div>

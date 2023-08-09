@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import "./single.scss";
-import TransactionTable from "../lista/ListaDis";
+import "./single2.scss";
+import TransactionTable from "../lista2/ListaDis";
 
 const Single = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [details, setDetails] = useState({
-    id: "",
-    firstName: "",
+    machineId: "",
+    userId: "",
     lastName: "",
     phone: "",
     adress: "",
     type: "",
-    cost: "",
     documentNumber: "",
     joinDate: "",
     costumeRented: "",
@@ -25,12 +24,12 @@ const Single = () => {
   const url = window.location.href;
   const id = url.split("/").pop(); // Obtener la id de la URL actual
 
-  console.log("Selected User ID:", details.id);
+  
 
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
-        `https://iotcoremt-production.up.railway.app/user/${id}`
+        `https://iotcoremt-production.up.railway.app/machines/${id}`
       );
       const data = await response.json();
       setDetails(data);
@@ -38,28 +37,47 @@ const Single = () => {
     fetchData();
   }, [id]);
 
-  const [selectedMachineId, setSelectedMachineId] = useState("1"); // Valor inicial seleccionado
-
   const handleEditClick = () => setIsEditing(!isEditing);
 
   const [editedDetails, setEditedDetails] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
+    userId: "",
+    price: "",
+    light: "",
+    status: "",
+    valveWash: "",
+    valveFill: "",
+    waterPumpSwich: "",
   });
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target; // Get the name and value from the event target
+    const {
+      userId,
+      value,
+      valveFill,
+      price,
+      light,
+      status,
+      valveWash,
+      image,
+      waterPumpSwich,
+    } = event.target;
     setEditedDetails({
       ...editedDetails,
-      [name]: value, // Use the 'name' variable as the key to update the corresponding field in 'editedDetails'
+      [userId]: value,
+      [waterPumpSwich]: value,
+      [valveFill]: value,
+      [price]: value,
+      [light]: value,
+      [valveWash]: value,
+      [status]: value,
+      [image]: value,
     });
   };
 
   const handleSaveClick = async () => {
     try {
       const response = await fetch(
-        `https://iotcoremt-production.up.railway.app/user/edit/${id}`,
+        `https://iotcoremt-production.up.railway.app/machines/${id}`,
         {
           method: "PATCH",
           headers: {
@@ -82,155 +100,68 @@ const Single = () => {
         <div className="top">
           <div className="left">
             <div className="datos">
-              <div className="editButton" onClick={handleEditClick}>
-                {isEditing ? "Terminar" : "Editar"}
-              </div>
-              {isEditing && (
-                <div className="editButtons">
-                  <button className="saveButton" onClick={handleSaveClick}>
-                    Guardar
-                  </button>
-                </div>
-              )}
-              <h1 className="title1">Informacion de Cliente</h1>
+
+              <h1 className="title1">Informacion</h1>
               <div className="item">
                 <div className="details">
+                  <h1 className="itemTitle">Maquina</h1>
                   <div className="detailItem">
-                    <span className="itemKey">ID de cliente:</span>
+                    <span className="itemKey">ID de Maquina:</span>
                     <span className="itemValue">
                       {isEditing ? (
                         <input
                           type="text"
-                          name="id"
-                          value={details.id}
+                          name="machineId"
+                          value={details.machineId}
                           onChange={handleInputChange}
                         />
                       ) : (
-                        details.id
+                        details.machineId
                       )}
                     </span>
                   </div>
                   <div className="detailItem">
-                    <span className="itemKey">Nombre:</span>
+                    <span className="itemKey">ID de usuario:</span>
                     <span className="itemValue">
                       {isEditing ? (
                         <input
                           type="text"
-                          name="firstName"
-                          value={editedDetails.firstName || details.firstName}
+                          name="userId"
+                          value={editedDetails.userId || details.userId}
                           onChange={handleInputChange}
                         />
                       ) : (
-                        details.firstName
+                        details.userId
                       )}
                     </span>
                   </div>
                   <div className="detailItem">
-                    <span className="itemKey">Apellido:</span>
+                    <span className="itemKey">Precio:</span>
                     <span className="itemValue">
                       {isEditing ? (
                         <input
                           type="text"
-                          name="lastName"
-                          value={editedDetails.lastName}
+                          name="price"
+                          value={editedDetails.price || details.price}
                           onChange={handleInputChange}
                         />
                       ) : (
-                        details.lastName
+                        details.price
                       )}
                     </span>
                   </div>
                   <div className="detailItem">
-                    <span className="itemKey">Email:</span>
+                    <span className="itemKey">Luz:</span>
                     <span className="itemValue">
                       {isEditing ? (
                         <input
                           type="text"
-                          name="email"
-                          value={editedDetails.email || details.email}
+                          name="light"
+                          value={editedDetails.light || details.light}
                           onChange={handleInputChange}
                         />
                       ) : (
-                        details.email
-                      )}
-                    </span>
-                  </div>
-                  <div className="detailItem">
-                    <span className="itemKey">Cargo:</span>
-                    <span className="itemValue">
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          name="role"
-                          value={editedDetails.role || details.role}
-                          onChange={handleInputChange}
-                        />
-                      ) : (
-                        details.role
-                      )}
-                    </span>
-                  </div>
-                  <div className="detailItem">
-                    <span className="itemKey">Documento:</span>
-                    <span className="itemValue">
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          name="document"
-                          value={editedDetails.document || details.document}
-                          onChange={handleInputChange}
-                        />
-                      ) : (
-                        details.document
-                      )}
-                    </span>
-                  </div>
-                  <div className="detailItem">
-                    <span className="itemKey">Distrito:</span>
-                    <span className="itemValue">
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          name="type"
-                          value={editedDetails.district || details.district}
-                          onChange={handleInputChange}
-                        />
-                      ) : (
-                        details.district
-                      )}
-                    </span>
-                  </div>
-                  <div className="detailItem">
-                    <span className="itemKey">
-                      {" "}
-                      Porcentaje de derecho de marca:
-                    </span>
-                    <span className="itemValue">
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          name="cost"
-                          value={editedDetails.cost || details.cost}
-                          onChange={handleInputChange}
-                        />
-                      ) : (
-                        `${details.cost}%` // Agregar el símbolo "%" al valor
-                      )}
-                    </span>
-                  </div>
-
-                  <div className="detailItem">
-                    <span className="itemKey">Cantidad de Maquinas:</span>
-                    <span className="itemValue">
-                      {isEditing ? (
-                        <input
-                          type="text"
-                          name="type"
-                          value={editedDetails.machinesTotals || details.machinesTotals}
-                          onChange={handleInputChange}
-                        />
-                      ) : (
-                        details.machinesTotals
+                        details.light
                       )}
                     </span>
                   </div>
@@ -249,25 +180,64 @@ const Single = () => {
                       )}
                     </span>
                   </div>
-                  <div className="right">
-                    <div className="detailItem">
-                      <img
-                        src="https://cdn.discordapp.com/attachments/1061404202498277458/1104503779795140618/18067b8c-fc00-4ca3-9c02-eaea4b3c7f21.jpg"
-                        alt=""
-                        width="550px"
-                        height="400px"
-                        style={{ borderRadius: "4px" }}
-                      />
-                    </div>
+                  <div className="detailItem">
+                    <span className="itemKey">Valvula de Llenado:</span>
+                    <span className="itemValue">
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          name="valveFill"
+                          value={editedDetails.valveFill || details.valveFill}
+                          onChange={handleInputChange}
+                        />
+                      ) : (
+                        details.valveFill
+                      )}
+                    </span>
+                  </div>
+                  <div className="detailItem">
+                    <span className="itemKey">Valvula de Lavado:</span>
+                    <span className="itemValue">
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          name="valveWash"
+                          value={editedDetails.valveWash || details.valveWash}
+                          onChange={handleInputChange}
+                        />
+                      ) : (
+                        details.valveWash
+                      )}
+                    </span>
+                  </div>
+                  <div className="detailItem">
+                    <span className="itemKey">Bomba de Agua:</span>
+                    <span className="itemValue">
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          name="waterPumpSwich"
+                          value={
+                            editedDetails.waterPumpSwich ||
+                            details.waterPumpSwich
+                          }
+                          onChange={handleInputChange}
+                        />
+                      ) : (
+                        details.waterPumpSwich
+                      )}
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
             <div>
-              <h1 className="long-title">Datos de transacciones</h1>
-              {details.id && <TransactionTable machineId={details.id} />}
-            </div>
+            <h1>Datos de transaccion</h1>
+            {details.machineId && <TransactionTable machineId={details.machineId} />}
           </div>
+          </div>
+
+
         </div>
       </div>
     </div>

@@ -3,13 +3,11 @@
   padding: 20px;
   
   .datatableTitle{
-    width: 100%;
     font-size: 24px;
     color: gray;
-    margin-bottom: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
     .link{
       text-decoration: none;
@@ -22,6 +20,8 @@
       cursor: pointer;
     }
   }
+
+ 
 
   .cellWithImg {
     display: flex;

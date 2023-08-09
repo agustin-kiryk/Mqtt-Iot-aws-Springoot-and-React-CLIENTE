@@ -6,63 +6,50 @@ import Typography from '@mui/material/Typography';
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import axios from "axios";
-import "./widget.scss";
+import "./widget3.scss";
 
 export default function BasicCard() {
   const [data, setData] = useState({
-    monthly: 0,
-    electronicBilling: 0,
-    collected: 0,
-    owed: 0
+    totalAmount: 0,
+    totalWaterDispensed: 0,
+    revenue: 0,
+    pending: 0
   });
-  const [type, setType] = useState('');
-  const [monthNumber, setMonthNumber] = useState(1);
+  const [selectedMonth, setSelectedMonth] = useState('01');
+  const currentYear = new Date().getFullYear();
 
-  const convertMonthToNumber = (month) => {
-    const monthList = {
-      '01': 1,
-      '02': 2,
-      '03': 3,
-      '04': 4,
-      '05': 5,
-      '06': 6,
-      '07': 7,
-      '08': 8,
-      '09': 9,
-      '10': 10,
-      '11': 11,
-      '12': 12
-    }
-    return monthList[month];
-  }
-
-  const handleTypeChange = (event) => {
-    setType(event.target.value);
+  const handleMonthChange = (event) => {
+    setSelectedMonth(event.target.value);
   };
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const monthSelected = convertMonthToNumber(type); // Obtener el mes seleccionado en el TextField
-        const response = await fetch(`https://disfracesrosario.up.railway.app/transactions/monthSelected?month=${monthSelected}`);
-        const responseData = await response.json();
-        console.log(responseData)
+        const token = localStorage.getItem('jwtToken');
+        const config = {
+          headers: {
+            "Content-Type": "application/json", 'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${token}`,
+          },
+        };
 
-        setData({
-          currentMonth: responseData.currentMonth || 0,
-          selectMonth: responseData.selectMonth || 0,
-          totalElectronic: responseData.totalElectronic || 0,
-          collected: responseData.collected || 0,
-          selectMonthPending2: responseData.selectMonthPending2 || 0
-        });
+        if (selectedMonth) {
+          const response = await axios.get(`https://iotcoremt-production.up.railway.app/transactions/summary/${currentYear}/${selectedMonth}`, config);
+          const responseData = response.data;
+
+          setData({
+            totalAmount: responseData[0].totalAmount,
+            totalWaterDispensed: responseData[0].totalWaterDispensed,
+            revenue: responseData[0].revenue,
+            pending: responseData[0].pending
+          });
+        }
       } catch (error) {
         console.error(error);
       }
     }
     fetchData();
-  }, [type]);
-
-  const cobrado = data.currentMonth - data.selectMonthPending2;
+  }, [selectedMonth, currentYear]);
 
   return (
     <div className='container1'>
@@ -70,10 +57,10 @@ export default function BasicCard() {
         <TextField
           color="info"
           select
-          label="Seleccionar mes"
+          label="Mes"
           variant="outlined"
-          value={type}
-          onChange={handleTypeChange}
+          value={selectedMonth}
+          onChange={handleMonthChange}
           style={{ marginBottom: "25px", minWidth: "170px" }}
         >
           <MenuItem value="01">Enero</MenuItem>
@@ -97,10 +84,10 @@ export default function BasicCard() {
           <Card sx={{ minWidth: 275 }}>
             <CardContent>
               <Typography sx={{ fontSize: 20 }} color="text.primary" gutterBottom>
-                MENSUAL
+                Cobrado
               </Typography>
               <Typography variant="body2" sx={{ fontSize: 25 }}>
-                ${data.selectMonth}
+                ${data.totalAmount}
               </Typography>
             </CardContent>
           </Card>
@@ -108,10 +95,20 @@ export default function BasicCard() {
           <Card sx={{ minWidth: 275 }}>
             <CardContent>
               <Typography sx={{ fontSize: 20 }} color="text.primary" gutterBottom>
-                FACTURACION ELECTRONICA
+                Agua Dispensada
               </Typography>
               <Typography variant="body2" sx={{ fontSize: 25 }}>
-                ${data.totalElectronic}
+                {data.totalWaterDispensed} Litros
+              </Typography>
+            </CardContent>
+          </Card>
+          <Card sx={{ minWidth: 275 }}>
+            <CardContent>
+              <Typography sx={{ fontSize: 20 }} color="text.primary" gutterBottom>
+                Derecho de Marca
+              </Typography>
+              <Typography variant="body2" sx={{ fontSize: 25 }}>
+                ${data.revenue}
               </Typography>
             </CardContent>
           </Card>
@@ -119,21 +116,10 @@ export default function BasicCard() {
           <Card sx={{ minWidth: 275 }}>
             <CardContent>
               <Typography sx={{ fontSize: 20 }} color="text.primary" gutterBottom>
-                COBRADO
+                Adeudado
               </Typography>
               <Typography variant="body2" sx={{ fontSize: 25 }}>
-                ${cobrado}
-              </Typography>
-            </CardContent>
-          </Card>
-
-          <Card sx={{ minWidth: 275 }}>
-            <CardContent>
-              <Typography sx={{ fontSize: 20 }} color="text.primary" gutterBottom>
-                ADEUDADO
-              </Typography>
-              <Typography variant="body2" sx={{ fontSize: 25 }}>
-                ${data.selectMonthPending2}
+                ${data.pending}
               </Typography>
             </CardContent>
           </Card>
@@ -141,5 +127,4 @@ export default function BasicCard() {
       </div>
     </div>
   );
-
 }

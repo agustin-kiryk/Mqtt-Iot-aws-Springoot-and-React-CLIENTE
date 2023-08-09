@@ -5,19 +5,19 @@ import { DataGrid } from "@mui/x-data-grid";
 export const userColumns = [
   //Cambiar ancho tablas
   {
-    field: "id",
-    headerName: "ID de Maquina",
-    width: 130,
+    field: "machinesTotals",
+    headerName: "Cantidad de Maquinas",
+    width: 150,
   },
   {
-    field: "name",
+    field: "firstName",
     headerName: "Nombre",
     width: 170,
     renderCell: (params) => {
       return (
         <div className="">
           <img className="" alt="" />
-          {params.row.name}
+          {params.row.firstName}
         </div>
       );
     },
@@ -25,34 +25,29 @@ export const userColumns = [
   {
     field: "lastName",
     headerName: "Apellido",
-    width: 150,
+    width: 170,
   },
+  {
+    field: "email",
+    headerName: "Email",
+    width: 250,
+  },
+  {
+    field: "adress",
+    headerName: "Direccion",
+    width: 100,
+  },
+
   {
     field: "phone",
     headerName: "Telefono",
-    width: 160,
+    width: 200,
   },
   {
-    field: "psod",
-    headerName: "Litros vendidos",
-    width: 150,
-  },
-  {
-    field: "type",
+    field: "cost",
     headerName: "Derecho de marca",
-    width: 150,
-  },
-  {
-    field: "Filtros",
-    headerName: "Filtros",
-    width: 160,
-    renderCell: (params) => {
-      return (
-        <div className={`cellWithStatus ${params.row.status}`}>
-          {params.row.status}
-        </div>
-      );
-    },
+    width: 200,
+    valueFormatter: ({ value }) => `${value}%`, // Agregar el símbolo "%" al valor
   },
   {
     field: "status",
@@ -73,7 +68,7 @@ export function UserTable() {
 
   useEffect(() => {
     axios
-      .get("https://disfracesrosario.up.railway.app/clients")
+      .get("https://iotcoremt-production.up.railway.app/user/all")
       .then((response) => setUserRows(response.data))
       .catch((error) => console.log(error));
   }, []);
@@ -88,7 +83,7 @@ export function UserTable() {
 
 export async function userRows() {
   try {
-    const response = await axios.get('https://disfracesrosario.up.railway.app/clients');
+    const response = await axios.get('https://iotcoremt-production.up.railway.app/user/all');
     return response.data;
   } catch (error) {
     console.log(error);

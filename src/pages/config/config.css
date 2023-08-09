@@ -1,0 +1,11 @@
+/* Consulta de medios para resoluciones de celular */
+@media (max-width: 768px) {
+    .popup-content {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .popup-content > div {
+      margin-bottom: 20px;
+    }
+  }

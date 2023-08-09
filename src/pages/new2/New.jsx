@@ -2,82 +2,59 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { useState } from "react";
 import axios from "axios";
-import "./new.scss";
-import React, { useRef } from 'react';
-
+import "./new2.scss";
+import React, { useRef, useEffect } from 'react';
 
 const New = ({ inputs, title, apiUrl }) => {
 
-  const [file, setFile] = useState("");
-  const [imagePreview, setImagePreview] = useState("");
-  const [nombre, setNombre] = useState('');
-  const [apellido, setApellido] = useState('');
-  const [dni, setDni] = useState('');
-
   const [formData, setFormData] = useState({
-    name: "",
-    lastName: "",
+    machineId: "",
+    light: "",
+    currency: "",
+    price: "",
+    status: "",
+    valveFill: "",
+    valveWash: "",
+    waterPumpSwich: "",
+    district: "",
+    detail: "",
     adress: "",
-    documentNumber: "",
-    type: "",
-    phone: "",
-    image: "",
+    model: "",
+    coment: "",
+    mail: "",
   });
 
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
-
-  const handleImageUpload = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsUploading(true);
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "qarsntph");
     try {
-      const res = await axios.post(
-        "https://api.cloudinary.com/v1_1/dkzil7l5p/image/upload",
-        formData
-      );
-      setFormData({ ...formData, image: res.data.secure_url });
-      setIsButtonDisabled(true); // Deshabilitar el botón
-      alert("La imagen se subió correctamente");
-    } catch (err) {
-      console.error(err);
-      setIsUploading(false);
+      const jwtToken = localStorage.getItem("jwtToken");
+
+      const response = await axios.post("https://iotcoremt-production.up.railway.app/machines/new", formData, {
+        headers: {
+          "Content-Type": "application/json", 'Access-Control-Allow-Origin': '*',
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      });
+
+      console.log(response);
+      alert("Máquina creada correctamente");
+      // Redireccionar u otras acciones aquí
+    } catch (error) {
+      console.error(error);
     }
   };
-
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-    setImagePreview(URL.createObjectURL(e.target.files[0]));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post("https://disfracesrosario.up.railway.app/clients/newClient", JSON.stringify(formData), {
-        headers: {
-          "Content-Type": "application/json", 'Access-Control-Allow-Origin': '*'
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        alert("Cliente creado correctamente")
-        window.location.href = '/users';
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-
+  
   const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    let value = e.target.value;
+    
+    // Convertir el campo price a un número si es necesario
+    if (e.target.name === "price") {
+      value = parseFloat(value);
+    }
+    
+    setFormData({ ...formData, [e.target.name]: value });
   };
-
-
-
-
+  
   return (
     <div className="new">
       <div className="newContainer">
@@ -90,22 +67,20 @@ const New = ({ inputs, title, apiUrl }) => {
             <form onSubmit={handleSubmit}>
               <div className="formInput">
                 <label>Id de maquina:</label>
-
                 <input
                   type="text"
                   placeholder="Ingrese su id de maquina"
-                  name="name"
+                  name="machineId"
                   onChange={handleInputChange}
                 />
               </div>
 
               <div className="formInput">
                 <label>Direccion:</label>
-
                 <input
                   type="text"
                   placeholder="Ingrese su Direccion"
-                  name="lastName"
+                  name="adress"
                   onChange={handleInputChange}
                 />
               </div>
@@ -117,7 +92,7 @@ const New = ({ inputs, title, apiUrl }) => {
                 <input
                   type="text"
                   placeholder="Ingrese su Distrito"
-                  name="documentNumber"
+                  name="district"
                   onChange={handleInputChange}
                 />
               </div>
@@ -126,7 +101,70 @@ const New = ({ inputs, title, apiUrl }) => {
                 <input
                   type="text"
                   placeholder="Ingrese el Modelo"
-                  name="type"
+                  name="model"
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="formInput">
+                <label htmlFor="type">Moneda:</label>
+                <input
+                  type="text"
+                  placeholder="Ingrese el tipo de Moneda"
+                  name="currency"
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="formInput">
+                <label htmlFor="type">Precio:</label>
+                <input
+                  type="text"
+                  placeholder="Ingrese el precio"
+                  name="price"
+                  onChange={handleInputChange}
+                />
+              </div>
+               <div className="formInput">
+                <label htmlFor="type">Mail:</label>
+                <input
+                  type="text"
+                  placeholder="Ingrese el estado"
+                  name="mail"
+                  onChange={handleInputChange}
+                />
+              </div>
+               <div className="formInput">
+                <label htmlFor="type">Estado:</label>
+                <input
+                  type="text"
+                  placeholder="Ingrese el estado"
+                  name="status"
+                  onChange={handleInputChange}
+                />
+              </div>
+                             <div className="formInput">
+                <label htmlFor="type">Valvula de llenado:</label>
+                <input
+                  type="text"
+                  placeholder="Ingrese el estado de la valvula de llenado"
+                  name="valveFill"
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="formInput">
+                <label htmlFor="type">Valvula de lavado:</label>
+                <input
+                  type="text"
+                  placeholder="Ingrese el estado de la valvula de lavado"
+                  name="valveWash"
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="formInput">
+                <label htmlFor="type">Valvula waterPumpSwich:</label>
+                <input
+                  type="text"
+                  placeholder="Ingrese el estado de la valvula de lavado"
+                  name="waterPumpSwich"
                   onChange={handleInputChange}
                 />
               </div>
@@ -135,7 +173,7 @@ const New = ({ inputs, title, apiUrl }) => {
                 <input
                   type="text"
                   placeholder="Ingrese el Detalle"
-                  name="type"
+                  name="detail"
                   onChange={handleInputChange}
                 />
               </div>
@@ -144,25 +182,16 @@ const New = ({ inputs, title, apiUrl }) => {
                 <input
                   type="text"
                   placeholder="Ingrese Informacion adicional"
-                  name="type"
+                  name="coment"
                   onChange={handleInputChange}
                 />
               </div>
               <div className="formInput">
-                <label htmlFor="type">Fecha de inicio:</label>
+                <label htmlFor="type">Luz:</label>
                 <input
                   type="text"
                   placeholder="Ingrese la Fecha de inicio"
-                  name="type"
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="formInput">
-                <label htmlFor="type">Infomacion de servidor:</label>
-                <input
-                  type="text"
-                  placeholder="Ingrese la Infomacion de servidor"
-                  name="type"
+                  name="light"
                   onChange={handleInputChange}
                 />
               </div>

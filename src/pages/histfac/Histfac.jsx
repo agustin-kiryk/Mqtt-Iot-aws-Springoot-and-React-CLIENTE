@@ -1,12 +1,13 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns } from "../../datatablesource3";
-import UserTable, { userRows } from "../../datatablesource3";
+import { userColumns } from "../../datatablesource4";
+import { UserTable, fetchUserData } from '../../datatablesource4';
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./histfac.scss";
 import Widget from "../../components/widget3/Widget";
-
+import { saveAs } from "file-saver"; // Import file-saver to save the Excel file
+import * as ExcelJS from "exceljs";
 
 const Datatable = () => {
   const [data, setData] = useState([]);
@@ -15,18 +16,37 @@ const Datatable = () => {
   const [monthNumber, setMonthNumber] = useState(1);
 
 
-  const handleDelete = (id) => {
-    if (window.confirm("¿Estás seguro de que quieres borrar este cliente?")) {
-      axios
-        .delete(`https://disfracesrosario.up.railway.app/transactions/${id}`)
-        .then(() => {
-          setData(data.filter((item) => item.id !== id));
-        })
-        .catch((error) => console.log(error));
-    }
-  };
 
  
+  const exportToExcel = async () => {
+    // Create a new Workbook
+    const workbook = new ExcelJS.Workbook();
+
+    // Add a new worksheet to the workbook
+    const worksheet = workbook.addWorksheet("Maquinas");
+
+    // Extract the column headers from userColumns
+    const columnHeaders = userColumns.map((column) => column.headerName);
+
+    // Set the headers as the first row in the worksheet
+    worksheet.addRow(columnHeaders);
+
+    // Extract the data rows from the DataGrid rows prop
+    const rows = data.map((rowData) => {
+      return userColumns.map((column) => rowData[column.field]);
+    });
+
+    // Add the data rows to the worksheet
+    rows.forEach((row) => {
+      worksheet.addRow(row);
+    });
+
+    // Generate a buffer for the Excel file
+    const buffer = await workbook.xlsx.writeBuffer();
+
+    // Save the buffer as a file using FileSaver
+    saveAs(new Blob([buffer]), "maquinas.xlsx");
+  };
 
 
   const handleSearch = (event) => {
@@ -37,37 +57,12 @@ const Datatable = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const rows = await userRows(id); // Pasar la ID a la función userRows
+      const rows = await fetchUserData(id); // Pasar la ID a la función userRows
       setData(rows);
     };
     fetchData();
   }, [id]);
 
-  const actionColumn = [
-    {
-      field: "action",
-      headerName: "Accion",
-      width: 190,
-      renderCell: (params) => {
-        return (
-          <div className="cellAction">
-            <Link
-              to={`/single8/${params.row.id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <div className="viewButton">Detalles</div>
-            </Link>
-            <div
-              className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
-            >
-              Borrar
-            </div>
-          </div>
-        );
-      },
-    },
-  ];
 
   // Filtrar los datos en función del término de búsqueda
   const filteredData = data.filter((row) =>
@@ -100,14 +95,15 @@ const Datatable = () => {
         <DataGrid
           className="datagrid"
           rows={filteredData}
-          columns={userColumns.concat(actionColumn)}
+          columns={userColumns}
           pageSize={8}
           rowsPerPageOptions={[8]}
           checkboxSelection
-          rowHeight={140}
+          rowHeight={80}
           autoHeight
         />
       </div>
+      <button onClick={exportToExcel}>Exportar a Excel</button>
     </div>
   );
 };

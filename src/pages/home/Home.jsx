@@ -1,6 +1,7 @@
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "./home.scss";
+import Estatus from "../../pages/config/config"
 import Datatable from "../../components/datatable/Datatable";
 import Widget from "../../components/widget/Widget";
 import BackDrop from "../../components/backdrop/backdrop";
@@ -40,8 +41,12 @@ const Home = () => {
           <Boton></Boton>
         </div>
         <div className="charts">
-          <Featured />
-          <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
+          <Chart title="Last 6 Months (Revenue)" aspect={3/1} />
+        </div>
+
+        
+        <div className="estatus">
+          <Estatus></Estatus>
         </div>
         <div className="listContainer">
           <Datatable />

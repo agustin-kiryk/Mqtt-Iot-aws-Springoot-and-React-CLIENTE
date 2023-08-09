@@ -5,7 +5,8 @@ import UserTable, { userRows } from "../../datatablesource";
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect  } from "react";
 import axios from "axios";
-
+import { saveAs } from "file-saver"; // Import file-saver to save the Excel file
+import * as ExcelJS from "exceljs";
 
 const Datatable = () => {
   
@@ -15,12 +16,41 @@ const Datatable = () => {
   const handleDelete = (id) => {
     if (window.confirm("¿Estás seguro de que quieres borrar este cliente?")) {
       axios
-        .delete(`https://disfracesrosario.up.railway.app/clients/${id}`)
+        .delete(`https://iotcoremt-production.up.railway.app/clients/${id}`)
         .then(() => {
           setData(data.filter((item) => item.id !== id));
         })
         .catch((error) => console.log(error));
     }
+  };
+  const exportToExcel = async () => {
+    // Create a new Workbook
+    const workbook = new ExcelJS.Workbook();
+
+    // Add a new worksheet to the workbook
+    const worksheet = workbook.addWorksheet("Maquinas");
+
+    // Extract the column headers from userColumns
+    const columnHeaders = userColumns.map((column) => column.headerName);
+
+    // Set the headers as the first row in the worksheet
+    worksheet.addRow(columnHeaders);
+
+    // Extract the data rows from the DataGrid rows prop
+    const rows = data.map((rowData) => {
+      return userColumns.map((column) => rowData[column.field]);
+    });
+
+    // Add the data rows to the worksheet
+    rows.forEach((row) => {
+      worksheet.addRow(row);
+    });
+
+    // Generate a buffer for the Excel file
+    const buffer = await workbook.xlsx.writeBuffer();
+
+    // Save the buffer as a file using FileSaver
+    saveAs(new Blob([buffer]), "maquinas.xlsx");
   };
   
   
@@ -74,6 +104,24 @@ const Datatable = () => {
         autoHeight
       />
     </div>
+    <div className="excel">
+  <a
+    href="#"
+    onClick={exportToExcel}
+    style={{
+      display: "inline-block",
+      textDecoration: "none",
+      background: "rgba(0,128,0,255)",
+      color: "white",
+      padding: "5px 10px",
+      borderRadius: "5px",
+      fontSize: "14px",
+    }}
+  >
+    Exportar tabla a Excel
+  </a>
+</div>
+
     </div>
   );
 };
