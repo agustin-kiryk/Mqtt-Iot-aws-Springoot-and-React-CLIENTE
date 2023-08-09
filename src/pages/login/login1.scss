@@ -41,3 +41,28 @@
   border-bottom-right-radius: .3rem;
   }
   }
+
+  @media (max-width: 480px) {
+
+    .text-center{
+      width: 70vw ;
+    }
+
+    .form-outline{
+      width: 70vw;
+    }
+
+    .texto{
+      width: 70vw;
+    }
+ 
+    .ingresar{
+      width: 100px !important;
+      padding-right: 40vw !important;
+      margin-left: 1vw !important;
+      p{
+        width: 15vw;
+        padding-top: 3vw;
+      }
+    }
+     }

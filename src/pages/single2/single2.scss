@@ -2,7 +2,6 @@
   display: flex;
   background-color: rgb(255, 255, 255);
   width: 100%;
-
   .singleContainer {
     flex: 6;
 
@@ -29,7 +28,6 @@
           cursor: pointer;
           border-radius: 0px 0px 0px 5px;
         }
-
         .item {
           display: flex;
           gap: 20px;
@@ -48,8 +46,8 @@
             }
 
             .detailItem {
-              margin-bottom: 1.5vw !important;
-              font-size: 1px;
+              margin-bottom: 10px;
+              font-size: 30px;
               display: flex;
               flex-direction: row;
 
@@ -66,49 +64,32 @@
           }
         }
       }
+
       .right {
-        flex: 1;
-        margin-left: 60vw; /* Espacio entre la sección izquierda y la imagen */
-        position: relative;
-        top: -35vw; /* Ajusta este valor negativo para subir la imagen más */
-        @media screen and (max-width: 1600px) {
-          /* Cambiar el valor de 'top' para resoluciones menores a 768px */
-          top: -50vw;
-        }
-      }
-      
-      // Move these styles out of the .left block to target them correctly
-      .long-title {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 20px;
-      }
-      
-      .title1 {
-        font-size: 28px;
-        font-weight: bold;
-        margin-bottom: 20px;
+        flex: 2;
       }
     }
-  }
 
-  .dni {
-    padding-top: 10vw;
-    padding-right: 15vw;
-    border: #555;
-    border-radius: 20px;
-  }
+    .dni{
+      padding-top: 10vw;
+      padding-right: 15vw;
+      border: #555;
+      border-radius: 20px;
+    }
 
-  .bottom {
-    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-    padding: 20px;
-    margin: 10px 20px;
-  }
+    .bottom {
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      padding: 20px;
+      margin: 10px 20px;
+    }
 
-  .title {
-    font-size: 16px;
-    color: lightgray;
-    margin-bottom: 20px;
+    .title {
+      font-size: 12px;
+      color: lightgray;
+      margin-bottom: 20px;
+    }
   }
 }
+
+//cambiar tamaño letras

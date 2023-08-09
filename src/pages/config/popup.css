@@ -1,0 +1,86 @@
+h3{
+    padding-bottom: 1vw;
+    padding-top: 1vw;
+    padding-left: 20vw;
+}
+
+.switches{
+display: flex;
+flex-direction: column;
+padding-left: 20vw;
+}
+
+label{
+    padding-left: 2vw;
+}
+
+
+.idcliente{
+  margin-bottom: 30px ;
+}
+.text{
+    padding-left: 10vw !important;
+}
+
+.tex2t{
+    padding-left: .7vw;
+    margin-top: 1vw;
+}
+  
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre las columnas */
+  }
+  
+h3{
+  padding-left: 35vw;
+}
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacio entre los elementos en cada columna */
+  }
+  
+  /* Resto de tus estilos CSS existentes */
+  .popup-content {
+    overflow-y: auto; /* Añade desplazamiento vertical si el contenido excede la altura */
+    max-height: 100vh; /* Establece una altura máxima para el contenido del Popup */
+  }
+
+  .close-button {
+    margin-top: 10px;
+    background-color: #ccc;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .close-button:hover {
+    background-color: #aaa;
+  }
+  
+  .pap{
+    margin-bottom: 10px;
+  }
+  
+@media only screen and (max-width: 768px) {
+
+
+.tex2t{
+    padding-left: 3vw !important;
+    margin-top: 1vw;
+}
+.switches{
+  padding-left: 40vw;
+  }
+  
+
+  .estado{
+    padding-left: 35vw;
+  }
+    
+  }

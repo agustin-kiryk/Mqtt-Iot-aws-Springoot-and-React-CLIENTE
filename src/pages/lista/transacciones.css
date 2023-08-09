@@ -1,0 +1,25 @@
+/* styles.css (o el nombre que hayas elegido para tu archivo CSS) */
+
+.transaction-table-container {
+    margin-top: 20px;
+  }
+  
+  .transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .transaction-table th,
+  .transaction-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+
+
+  .excel{
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Estilos adicionales que desees agregar */
+  

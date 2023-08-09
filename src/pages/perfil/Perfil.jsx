@@ -22,6 +22,9 @@ export default function ProfilePage() {
   return (
     <section style={{ backgroundColor: '#f0fffb' }}>
          <Navbar />
+         <div className='volver'>
+          <a href="/">Volver</a>
+        </div>
       <MDBContainer className="py-5">
         <MDBRow>
           <MDBCol lg="4">
@@ -35,10 +38,10 @@ export default function ProfilePage() {
                   fluid />
                 <p className="text-muted mb-1">Full Stack Developer</p>
                 <p className="text-muted mb-4">Bay Area, San Francisco, CA</p>
-                <div className="d-flex justify-content-center mb-2">
-                  <MDBBtn>Editar Foto</MDBBtn>
-                </div>
               </MDBCardBody>
+              <div className='edit'>
+                  <button className='editar'>Editar Foto</button>
+                </div>
             </MDBCard>
           </MDBCol>
           <MDBCol lg="8">

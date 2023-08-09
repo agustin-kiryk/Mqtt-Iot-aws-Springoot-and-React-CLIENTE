@@ -21,7 +21,7 @@ const Featured = () => {
         })} value={70} text={"70%"} strokeWidth={8} />
          
         </div>
-        <p className="title">Dias para finalizar el ciclo de facturacion</p>
+        <p className="title">Dias para finalizar el cierre mensual</p>
         <p className="amount">15</p>
         <p className="desc">
           Historial de ventas

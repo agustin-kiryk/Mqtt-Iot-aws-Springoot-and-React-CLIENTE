@@ -5,19 +5,19 @@ import { DataGrid } from "@mui/x-data-grid";
 export const userColumns = [
   //Cambiar ancho tablas
   {
-    field: "machinesTotals",
-    headerName: "Cantidad de Maquinas",
-    width: 150,
+    field: "id",
+    headerName: "ID de Maquina",
+    width: 130,
   },
   {
-    field: "firstName",
+    field: "name",
     headerName: "Nombre",
     width: 170,
     renderCell: (params) => {
       return (
         <div className="">
           <img className="" alt="" />
-          {params.row.firstName}
+          {params.row.name}
         </div>
       );
     },
@@ -25,29 +25,34 @@ export const userColumns = [
   {
     field: "lastName",
     headerName: "Apellido",
-    width: 170,
+    width: 150,
   },
-  {
-    field: "email",
-    headerName: "Email",
-    width: 250,
-  },
-  {
-    field: "adress",
-    headerName: "Direccion",
-    width: 100,
-  },
-
   {
     field: "phone",
     headerName: "Telefono",
-    width: 200,
+    width: 160,
   },
   {
-    field: "cost",
+    field: "psod",
+    headerName: "Litros vendidos",
+    width: 150,
+  },
+  {
+    field: "type",
     headerName: "Derecho de marca",
-    width: 200,
-    valueFormatter: ({ value }) => `${value}%`, // Agregar el símbolo "%" al valor
+    width: 150,
+  },
+  {
+    field: "Filtros",
+    headerName: "Filtros",
+    width: 160,
+    renderCell: (params) => {
+      return (
+        <div className={`cellWithStatus ${params.row.status}`}>
+          {params.row.status}
+        </div>
+      );
+    },
   },
   {
     field: "status",
@@ -68,7 +73,7 @@ export function UserTable() {
 
   useEffect(() => {
     axios
-      .get("https://iotcoremt-production.up.railway.app/user/all")
+      .get("https://disfracesrosario.up.railway.app/clients")
       .then((response) => setUserRows(response.data))
       .catch((error) => console.log(error));
   }, []);
@@ -83,7 +88,7 @@ export function UserTable() {
 
 export async function userRows() {
   try {
-    const response = await axios.get('https://iotcoremt-production.up.railway.app/user/all');
+    const response = await axios.get('https://disfracesrosario.up.railway.app/clients');
     return response.data;
   } catch (error) {
     console.log(error);
