@@ -117,7 +117,7 @@ const Widget = ({ type }) => {
       break;
     case "comisiones":
       widgetData = {
-        title: "Clientes",
+        title: "FRANQUICIADOS",
         isMoney: false,
         link: "View commission details",
         icon: (

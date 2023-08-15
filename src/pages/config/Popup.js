@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import Modal from 'react-modal';
+import React, { useState } from "react";
+import Modal from "react-modal";
 import "./popup.css";
-import axios from 'axios';
-import Switch from 'react-switch';
+import axios from "axios";
+import Switch from "react-switch";
 import "./config.css";
+import { Typography } from "@mui/material";
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 const Popup = ({ isOpen, onClose, data, sendComand }) => {
-  const [clientId, setClientId] = useState('');
-  const [cop, setCop] = useState('');
-  const [price, setPrice] = useState('');
+  const [clientId, setClientId] = useState("");
+  const [cop, setCop] = useState("");
+  const [price, setPrice] = useState("");
   const [isBlocked, setIsBlocked] = useState(false);
   const [isBlocked1, setIsBlocked1] = useState(false);
   const [isBlocked2, setIsBlocked2] = useState(false);
@@ -51,28 +52,29 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
   };
 
   const handleBlockedAccept = () => {
-    const status = isBlocked ? 'blocked' : 'unblocked';
+    const status = isBlocked ? "blocked" : "unblocked";
     const payload = {
-        idMachine: clientId,
-        status: status
-      };
+      idMachine: clientId,
+      status: status,
+    };
     const data = {
-      comand:`dispensador/bloqueo/${clientId}`,
-      payload: payload
+      comand: `dispensador/bloqueo/${clientId}`,
+      payload: payload,
     };
 
-    axios.post('https://iotcoremt-production.up.railway.app/mqtt/publish', data)
-      .then(response => {
-        console.log('Data sent successfully:', response.data);
+    axios
+      .post("https://iotcoremt-production.up.railway.app/mqtt/publish", data)
+      .then((response) => {
+        console.log("Data sent successfully:", response.data);
         onClose();
       })
-      .catch(error => {
-        console.error('Error sending data:', error);
+      .catch((error) => {
+        console.error("Error sending data:", error);
         onClose();
       });
   };
 
-   const handleConfigAccept = () => {
+  const handleConfigAccept = () => {
     const payload = {
       currency: cop,
       price: price, // The price state is now an integer, not a string
@@ -84,37 +86,37 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
     };
 
     axios
-      .post('https://iotcoremt-production.up.railway.app/mqtt/publish', data)
+      .post("https://iotcoremt-production.up.railway.app/mqtt/publish", data)
       .then((response) => {
-        console.log('Data sent successfully:', response.data);
+        console.log("Data sent successfully:", response.data);
         onClose();
       })
       .catch((error) => {
-        console.error('Error sending data:', error);
+        console.error("Error sending data:", error);
         onClose();
       });
   };
 
   const handleControlAccept = () => {
-    const switch1Status = isBlocked1 ? 'ON' : 'OFF';
-    const switch2Status = isBlocked2 ? 'ON' : 'OFF';
-    const switch3Status = isBlocked3 ? 'ON' : 'OFF';
-    const switch4Status = isBlocked4 ? 'ON' : 'OFF';
-  
+    const switch1Status = isBlocked1 ? "ON" : "OFF";
+    const switch2Status = isBlocked2 ? "ON" : "OFF";
+    const switch3Status = isBlocked3 ? "ON" : "OFF";
+    const switch4Status = isBlocked4 ? "ON" : "OFF";
+
     // Define an array to hold the commands
     const commands = [
-      { command: 'water_pump', status: switch1Status },
-      { command: 'light', status: switch2Status },
-      { command: 'valve_wash', status: switch3Status },
-      { command: 'valve_fill', status: switch4Status },
+      { command: "water_pump", status: switch1Status },
+      { command: "light", status: switch2Status },
+      { command: "valve_wash", status: switch3Status },
+      { command: "valve_fill", status: switch4Status },
     ];
-  
+
     // Define a variable to keep track of the current index
     let currentIndex = 0;
-  
+
     // Define the interval in milliseconds (3 seconds = 3000 milliseconds)
     const interval = 3000;
-  
+
     // Function to send individual API requests
     const sendCommand = () => {
       const command = commands[currentIndex];
@@ -122,99 +124,231 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
         command: command.command,
         status: command.status,
       };
-  
+
       const data = {
         comand: `dispensador/control/${clientId}`,
         payload: payload,
       };
-  
+
       axios
-        .post('https://iotcoremt-production.up.railway.app/mqtt/publish', data)
+        .post("https://iotcoremt-production.up.railway.app/mqtt/publish", data)
         .then((response) => {
-          console.log('Data sent successfully:', response.data);
+          console.log("Data sent successfully:", response.data);
         })
         .catch((error) => {
-          console.error('Error sending data:', error);
+          console.error("Error sending data:", error);
         });
-  
+
       // Increase the current index
       currentIndex++;
-  
+
       // If the currentIndex exceeds the commands array length, clear the interval
       if (currentIndex >= commands.length) {
         clearInterval(intervalId);
         onClose();
       }
     };
-  
+
     // Call sendCommand immediately before starting the interval
     sendCommand();
-  
+
     // Start the interval and store the intervalId
     const intervalId = setInterval(sendCommand, interval);
   };
-  
-  
+
   return (
-<Modal isOpen={isOpen} onRequestClose={onClose} className="popup-modal">
-  <div className="popup-content">
-    <div className='column'>
-      <div className='blocked'>
-        <h3>Bloqueo</h3>
-        <label htmlFor="clientId1" className='idcliente'>ID de Cliente:</label>
-        <input type="text" id="clientId1" value={clientId} onChange={handleClientIdChange} />
-<div className='estado'>
-        <label htmlFor="switch">Estado:</label>
-        <Switch id="switch"  checked={isBlocked} onChange={handleSwitchChange}  />
-        </div>
-        <button onClick={handleBlockedAccept}>Aceptar Bloqueo</button>
-      </div>
-    </div>
-
-    <div className='column'>
-      <div className='config'>
-        <h3>Configuracion</h3>
-        <label htmlFor="clientId2" className='pap'>ID de Cliente:</label>
-        <input type="text" id="clientId2" value={clientId} onChange={handleClientIdChange} />
-       
-<label htmlFor="cop"  className='pap' style={{ paddingLeft:'44px' }}>Moneda:</label>
-<input type="text" id="cop" value={cop} onChange={handleCopChange} style={{ paddingLeft:'44px' }} />
-
-<label htmlFor="price" className='pap' style={{  paddingLeft:'55px', gap: '20px' }}>Precio: </label>
-<input type="text" id="price" value={price} onChange={handlePriceChange} style={{  paddingLeft:'55px' }} />
-
-
-        <button onClick={handleConfigAccept}>Aceptar Configuracion</button>
-      </div>
-    </div>
-
-    <div className='column'>
-      <div className='control'>
-        <h3>Control</h3>
-        <label htmlFor="clientId3">ID de Cliente:</label>
-        <input type="text" id="clientId3" value={clientId} onChange={handleClientIdChange} />
-
-        <div className='switches'>
-          <a>Bomba de Agua</a>
-          <Switch id="switch1" checked={isBlocked1} onChange={handleSwitchChange1} />
-          <a>Luz</a>
-          <Switch id="switch2" checked={isBlocked2} onChange={handleSwitchChange2} />
-          <a>Valvula de Lavado</a>
-          <Switch id="switch3" checked={isBlocked3} onChange={handleSwitchChange3} />
-          <a>Valvula de Llenado</a>
-          <Switch id="switch4" checked={isBlocked4} onChange={handleSwitchChange4} />
-        </div>
-        <button onClick={handleControlAccept}>Aceptar Control</button>
+    <Modal isOpen={isOpen} onRequestClose={onClose} className="popup-modal">
+      <div className="popup-container">
         <button className="close-button" onClick={onClose}>
-          Cerrar
+          X
         </button>
-      </div>
-    </div>
-  </div>
-</Modal>
+        <div className="popup-content">
+          <div className="blocked">
+            <h3>BLOQUEO</h3>
+            <label htmlFor="clientId3">ID de Maquina:</label>
+              <input
+                type="text"
+                id="clientId3"
+                value={clientId}
+                className="input-field" // Agrega la clase CSS aquí
+                onChange={handleClientIdChange}
+              />
 
+
+            <div className="estado">
+              <label htmlFor="switch">Estado:</label>
+              <Switch
+                id="switch"
+                checked={isBlocked}
+                onChange={handleSwitchChange}
+                onColor="#FF0000" // Red color when blocked
+                offColor="#42a342" // Adjusted green color when unblocked
+              />
+              <span className="switch-label">
+                {isBlocked ? "Bloqueado" : "Desbloqueado"}
+              </span>
+
+            </div>
+            <button
+              className="jul"
+              onClick={handleBlockedAccept}
+              style={{ backgroundColor: "rgba(0, 128, 0, 1)", color: "white" }}
+            >
+              Bloquear/Desbloquear
+            </button>
+
+          </div>
+
+          <div className="column">
+            <div className="config">
+              <div className="titulo3">
+              <h3>CONFIGURACION</h3>
+              </div>
+              <label htmlFor="clientId2" className="pap">
+                ID de Maquina:
+              </label>
+              <input
+                type="text"
+                id="clientId2"
+                value={clientId}
+                className="input-field" // Agrega la clase CSS aquí
+                onChange={handleClientIdChange}
+              />
+              
+              <label
+                htmlFor="cop"
+                className="pap"
+                style={{ paddingLeft: "44px" }}
+              >
+                Moneda:
+              </label>
+              <input
+                type="text"
+                id="cop"
+                className="input-field" // Agrega la clase CSS aquí
+                value={cop}
+                onChange={handleCopChange}
+                style={{ paddingLeft: "44px" }}
+              />
+
+              <label
+                htmlFor="price"
+                className="pap"
+             
+              >
+                Precio:{" "}
+              </label>
+              <input
+                type="text"
+                id="price"
+                value={price}
+                className="input-field" // Agrega la clase CSS aquí
+                onChange={handlePriceChange}
+                style={{ paddingLeft: "55px" }}
+              />
+
+              <button
+                className="jul"
+                onClick={handleConfigAccept}
+                style={{
+                  backgroundColor: "rgba(0, 128, 0, 1)",
+                  color: "white",
+                }}
+              >
+                Aceptar Configuracion
+              </button>
+            </div>
+          </div>
+
+          <div className="column">
+            <div className="control">
+              <h3>CONTROL</h3>
+              <label htmlFor="clientId3" className="titulo">ID de Maquina:</label>
+              <input
+                type="text"
+                id="clientId3"
+                value={clientId}
+                className="input-field" // Agrega la clase CSS aquí
+                onChange={handleClientIdChange}
+              />
+
+
+              <div className="switches">
+                <label htmlFor="switch1">Bomba de Agua</label>
+                <div className="switch-papu">
+                <Switch
+                  id="switch1"
+                  checked={isBlocked1}
+                  onChange={handleSwitchChange1}
+                  onColor="#FF0000"
+                  offColor="#42a342"
+                />
+                <span className={`status ${isBlocked1 ? "off" : "on"}`}>
+                  {isBlocked1 ? "OFF" : "ON"}
+                </span>
+                </div>
+
+                <div className="luz">
+                <label htmlFor="switch2">Luz</label>
+                </div>
+                <div className="switch-papu">
+                <Switch
+                  id="switch2"
+                  checked={isBlocked2}
+                  onChange={handleSwitchChange2}
+                  onColor="#FF0000"
+                  offColor="#42a342"
+                />
+                <span className={`status ${isBlocked2 ? "off" : "on"}`}>
+                  {isBlocked2 ? "OFF" : "ON"}
+                </span>
+                </div>
+
+                <label htmlFor="switch3">Valvula de Lavado</label>
+                <div className="switch-papu">
+                <Switch
+                  id="switch3"
+                  checked={isBlocked3}
+                  onChange={handleSwitchChange3}
+                  onColor="#FF0000"
+                  offColor="#42a342"
+                />
+                <span className={`status ${isBlocked3 ? "off" : "on"}`}>
+                  {isBlocked3 ? "OFF" : "ON"}
+                </span>
+                </div>
+
+                <label htmlFor="switch4">Valvula de Llenado</label>
+                <div className="switch-papu">
+                <Switch
+                  id="switch4"
+                  checked={isBlocked4}
+                  onChange={handleSwitchChange4}
+                  onColor="#FF0000"
+                  offColor="#42a342"
+                />
+                <span className={`status ${isBlocked4 ? "off" : "on"}`}>
+                  {isBlocked4 ? "OFF" : "ON"}
+                </span>
+                </div>
+
+              </div>
+              <button
+                className="jul"
+                onClick={handleControlAccept}
+                style={{
+                  backgroundColor: "rgba(0, 128, 0, 1)",
+                  color: "white",
+                }}
+              >
+                Aceptar Control
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Modal>
   );
 };
-
 
 export default Popup;

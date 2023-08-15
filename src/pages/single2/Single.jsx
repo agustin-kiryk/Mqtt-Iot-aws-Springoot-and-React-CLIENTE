@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "./single2.scss";
@@ -21,10 +21,19 @@ const Single = () => {
     clientStatus: "",
     image: "",
   });
-  const url = window.location.href;
-  const id = url.split("/").pop(); // Obtener la id de la URL actual
 
-  
+  const [editedDetails, setEditedDetails] = useState({
+    userId: "",
+    price: "",
+    light: "",
+    status: "",
+    valveWash: "",
+    valveFill: "",
+    waterPumpSwich: "",
+  });
+
+  const url = window.location.href;
+  const id = url.split("/").pop();
 
   useEffect(() => {
     async function fetchData() {
@@ -37,70 +46,72 @@ const Single = () => {
     fetchData();
   }, [id]);
 
-  const handleEditClick = () => setIsEditing(!isEditing);
+  const handleEditClick = () => {
+    setIsEditing(!isEditing);
+    if (isEditing) {
+      setEditedDetails(details);
+    }
+  }
 
-  const [editedDetails, setEditedDetails] = useState({
-    userId: "",
-    price: "",
-    light: "",
-    status: "",
-    valveWash: "",
-    valveFill: "",
-    waterPumpSwich: "",
-  });
 
   const handleInputChange = (event) => {
-    const {
-      userId,
-      value,
-      valveFill,
-      price,
-      light,
-      status,
-      valveWash,
-      image,
-      waterPumpSwich,
-    } = event.target;
-    setEditedDetails({
-      ...editedDetails,
-      [userId]: value,
-      [waterPumpSwich]: value,
-      [valveFill]: value,
-      [price]: value,
-      [light]: value,
-      [valveWash]: value,
-      [status]: value,
-      [image]: value,
-    });
-  };
+    const { name, value } = event.target;
+    setEditedDetails({ ...editedDetails, [name]: value });
+  }
 
   const handleSaveClick = async () => {
+    // Obtener el token JWT del localStorage
+    const jwtToken = localStorage.getItem('jwtToken');
+  
+    // Verificar si el token está presente
+    if (!jwtToken) {
+      // Manejar el caso en el que el token no esté disponible
+      console.error('JWT token not available');
+      return;
+    }
+  
     try {
-      const response = await fetch(
-        `https://iotcoremt-production.up.railway.app/machines/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(editedDetails),
-        }
-      );
-      const data = await response.json();
-      setDetails(editedDetails);
-      setIsEditing(false);
+      const response = await fetch(`https://iotcoremt-production.up.railway.app/machines/edit/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${jwtToken}`, // Agregar el token JWT al encabezado de autorización
+        },
+        body: JSON.stringify(editedDetails),
+      });
+  
+      if (response.ok) {
+        setDetails(editedDetails);
+        setIsEditing(false);
+      } else {
+        // Manejar el error de acuerdo a tus requerimientos
+        console.error('Error:', response.statusText);
+      }
     } catch (error) {
-      console.error(error);
+      // Manejar cualquier error de red u otros errores
+      console.error('Error:', error);
     }
   };
+  
+
   return (
     <div className="single">
       <div className="singleContainer">
         <Navbar />
         <div className="top">
           <div className="left">
+            <div className="editButtonContainer">
+              {isEditing ? (
+                <button className="editButton" onClick={handleSaveClick}>
+                  Save
+                </button>
+              ) : (
+                <button className="editButton" onClick={handleEditClick}>
+                  Edit
+                </button>
+              )}
+            </div>
             <div className="datos">
-
               <h1 className="title1">Informacion</h1>
               <div className="item">
                 <div className="details">
@@ -112,7 +123,7 @@ const Single = () => {
                         <input
                           type="text"
                           name="machineId"
-                          value={details.machineId}
+                          value={editedDetails.machineId || details.machineId}
                           onChange={handleInputChange}
                         />
                       ) : (
@@ -232,12 +243,10 @@ const Single = () => {
               </div>
             </div>
             <div>
-            <h1>Datos de transaccion</h1>
-            {details.machineId && <TransactionTable machineId={details.machineId} />}
+              <h1>Datos de transaccion</h1>
+              {details.machineId && <TransactionTable machineId={details.machineId} />}
+            </div>
           </div>
-          </div>
-
-
         </div>
       </div>
     </div>

@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 import {
   MDBBtn,
   MDBContainer,
   MDBRow,
   MDBCol,
-  MDBInput
-} from 'mdb-react-ui-kit';
+  MDBInput,
+} from "mdb-react-ui-kit";
 import "./login1.scss";
 import Navbar from "../../components/navbar/Navbar";
 
 function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+
+  const jwtToken = localStorage.getItem('jwtToken');
+
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -24,35 +28,34 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.post('https://iotcoremt-production.up.railway.app/auth/login', {
-        email,
-        password
-      });
-
-      console.log(response.data); // Maneja la respuesta como desees
-      
-      // Guardar el token en localStorage
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
-        console.log(response.data.token)
-      }
   
+    try {
+      const response = await axios.post(
+        "https://iotcoremt-production.up.railway.app/auth/login",
+        {
+          email,
+          password,
+        }
+      );
+  
+      // Extraer el token de la respuesta
+      const token = response.data.jwt;
+      console.log('Token almacenado en el LocalStorage:', token);
+      // Guardar el token en el LocalStorage
+      localStorage.setItem('jwtToken', token);
 
-      // Restablece los valores del formulario después de enviarlo
-      setEmail('');
-      setPassword('');
-      
-      // Redirigir al usuario a otra página después del inicio de sesión exitoso
- 
+      setEmail("");
+      setPassword("");
+      window.location.href = '/';
     } catch (error) {
-      console.error(error);
+      console.error("Error al enviar la solicitud:", error);
     }
   };
+  
 
+  
   return (
-    <MDBContainer className="my-6 gradient-form" color='black'>
+<MDBContainer className="my-6 gradient-form container" color="black">
       <MDBRow>
         <MDBCol col='6' className="mb-5">
           <div className="d-flex flex-column ms-5">

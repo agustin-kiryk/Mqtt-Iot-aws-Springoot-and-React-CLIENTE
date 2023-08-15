@@ -2,13 +2,13 @@
     text-align: center;
 }
 
-button {
+.selector {
     display: inline-block;
     border-radius: 4px;
-    background-color: #c4fdff;
+    background-color: rgba(0, 128, 0, 1);
     border: none;
-    color: #000000;
     text-align: center;
+    text-decoration: none;
     font-size: 17px;
     padding: 16px;
     width: 200px;
@@ -16,6 +16,10 @@ button {
     cursor: pointer;
     margin: 40px !important;
     border-radius: 40px !important;
+    
+    a{
+        color: #ffffff;
+    }
 }
 
 button span {
@@ -49,7 +53,7 @@ button:hover span:after {
      
     }
     
-    button {
+    .selector {
         padding-left: 27vw;
         margin: 20px !important;
         display: flex;

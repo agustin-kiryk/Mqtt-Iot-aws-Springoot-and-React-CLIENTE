@@ -19,7 +19,7 @@ const App = () => {
 
   return (
     <div>
-      <button onClick={handleButtonClick}>Configuracion</button>
+      <button className='hul' onClick={handleButtonClick}>Configuracion</button>
       <Popup isOpen={isOpen} onClose={handleClosePopup} data={popupData} />
     </div>
   );

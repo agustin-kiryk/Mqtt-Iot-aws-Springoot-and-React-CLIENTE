@@ -19,14 +19,13 @@ const New = ({ inputs, title, apiUrl }) => {
     image: "",
     lastName: "",
     adress: "",
-    documentNumber: "",
+    document: "",
     password: "",
     email: "",
-    image: "",
     district: "",
     machineid: "",
     type: "",
-    charge: "",
+    cost: "",
   });
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -193,7 +192,7 @@ const New = ({ inputs, title, apiUrl }) => {
                 <input
                   type="text"
                   placeholder="Ingrese su número de documento"
-                  name="documentNumber"
+                  name="document"
                   onChange={handleInputChange}
                 />
               </div>
@@ -222,7 +221,7 @@ const New = ({ inputs, title, apiUrl }) => {
                 <input
                   type="text"
                   placeholder="Ingresar derecho de marca"
-                  name="charge"
+                  name="cost"
                   onChange={handleInputChange}
                 />
               </div>

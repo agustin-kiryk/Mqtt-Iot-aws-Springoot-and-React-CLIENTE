@@ -91,7 +91,7 @@ const Datatable = () => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        <h1> Lista de Clientes</h1>
+        <h1> Lista de Franquiciados</h1>
       </div>
       <div className="tableWrapper">
       <DataGrid

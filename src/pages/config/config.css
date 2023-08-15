@@ -9,3 +9,20 @@
       margin-bottom: 20px;
     }
   }
+
+
+  .hul{
+    display: inline-block;
+    border-radius: 4px;
+    background-color: rgba(0, 128, 0, 1);
+    border: none;
+    color: #ffffff;
+    text-align: center;
+    font-size: 17px;
+    padding: 16px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 40px !important;
+    border-radius: 40px !important;
+  }

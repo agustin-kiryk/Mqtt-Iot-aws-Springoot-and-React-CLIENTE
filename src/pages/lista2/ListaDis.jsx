@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./transacciones2.css";
 import { userColumns } from "../../datatablesource3";
-import { UserTable, fetchUserData } from '../../datatablesource3';
+import { UserTable, fetchUserData } from "../../datatablesource3";
+import { saveAs } from "file-saver"; // Import file-saver to save the Excel file
+import * as ExcelJS from "exceljs";
 
 const TransactionTable = ({ machineId }) => {
   const [transactions, setTransactions] = useState([]);
@@ -12,14 +14,47 @@ const TransactionTable = ({ machineId }) => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchText, setSearchText] = useState("");
   const [filteredTransactions, setFilteredTransactions] = useState([]);
+  const [data, setData] = useState([]);
+
+  const exportToExcel = async () => {
+    // Create a new Workbook
+    const workbook = new ExcelJS.Workbook();
+
+    // Add a new worksheet to the workbook
+    const worksheet = workbook.addWorksheet("Maquinas");
+
+    // Extract the column headers from userColumns
+    const columnHeaders = userColumns.map((column) => column.headerName);
+
+    // Set the headers as the first row in the worksheet
+    worksheet.addRow(columnHeaders);
+
+    // Extract the data rows from the DataGrid rows prop
+    const rows = data.map((rowData) => {
+      return userColumns.map((column) => rowData[column.field]);
+    });
+
+    // Add the data rows to the worksheet
+    rows.forEach((row) => {
+      worksheet.addRow(row);
+    });
+
+    // Generate a buffer for the Excel file
+    const buffer = await workbook.xlsx.writeBuffer();
+
+    // Save the buffer as a file using FileSaver
+    saveAs(new Blob([buffer]), "maquinas.xlsx");
+  };
 
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get(`https://iotcoremt-production.up.railway.app/transactions/${machineId}`);
+        const response = await axios.get(
+          `https://iotcoremt-production.up.railway.app/transactions/${machineId}`
+        );
         setTransactions(response.data);
       } catch (error) {
-        console.error('Error fetching transactions:', error);
+        console.error("Error fetching transactions:", error);
       }
     };
 
@@ -50,14 +85,15 @@ const TransactionTable = ({ machineId }) => {
     const searchText = event.target.value.toLowerCase();
     setFilteredTransactions(
       transactions.filter((transaction) =>
-        Object.values(transaction).some((value) =>
-          value && value.toString().toLowerCase().includes(searchText)
+        Object.values(transaction).some(
+          (value) =>
+            value && value.toString().toLowerCase().includes(searchText)
         )
       )
     );
     setSearchText(searchText);
   };
-  
+
   const compareFunction = (a, b) => {
     const aValue = a[sortField];
     const bValue = b[sortField];
@@ -80,12 +116,36 @@ const TransactionTable = ({ machineId }) => {
   return (
     <div className="transaction-table-container">
       <h2>Transacciones de la Maquina: {machineId}</h2>
-      <input
-                type="text"
-                value={searchText}
-                onChange={handleSearch}
-                placeholder="Buscar..."
-              />
+      <div
+        className="excel"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <input
+          type="text"
+          value={searchText}
+          onChange={handleSearch}
+          placeholder="Buscar..."
+        />
+
+        <a
+          href="#"
+          onClick={exportToExcel}
+          style={{
+            textDecoration: "none",
+            background: "rgba(0, 128, 0, 1)",
+            color: "white",
+            padding: "5px 10px",
+            borderRadius: "5px",
+            fontSize: "14px",
+          }}
+        >
+          Exportar tabla a Excel
+        </a>
+      </div>
       <table className="transaction-table">
         <thead>
           <tr>
@@ -97,11 +157,15 @@ const TransactionTable = ({ machineId }) => {
             </th>
             <th onClick={() => handleSort("date")}>
               Fecha{" "}
-              {sortField === "date" && <span>{sortOrder === "asc" ? "▲" : "▼"}</span>}
+              {sortField === "date" && (
+                <span>{sortOrder === "asc" ? "▲" : "▼"}</span>
+              )}
             </th>
             <th onClick={() => handleSort("amount")}>
               Monto{" "}
-              {sortField === "amount" && <span>{sortOrder === "asc" ? "▲" : "▼"}</span>}
+              {sortField === "amount" && (
+                <span>{sortOrder === "asc" ? "▲" : "▼"}</span>
+              )}
             </th>
             <th onClick={() => handleSort("currency")}>
               Tipo{" "}
@@ -117,8 +181,7 @@ const TransactionTable = ({ machineId }) => {
             </th>
           </tr>
           <tr>
-            <th>
-            </th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -126,11 +189,10 @@ const TransactionTable = ({ machineId }) => {
           </tr>
         </thead>
         <tbody>
-          
           {currentTransactions.map((transaction) => (
             <tr key={transaction.id}>
               <td>{transaction.transactionId}</td>
-              <td>{transaction.date.join('/')}</td>
+              <td>{transaction.date.join("/")}</td>
               <td>{transaction.amount}</td>
               <td>{transaction.currency}</td>
               <td>{transaction.dispensedWater}</td>
@@ -139,10 +201,16 @@ const TransactionTable = ({ machineId }) => {
         </tbody>
       </table>
       <div className="pagination">
-        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
           Anterior
         </button>
-        <button onClick={() => handlePageChange(currentPage + 1)} disabled={indexOfLastTransaction >= transactions.length}>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={indexOfLastTransaction >= transactions.length}
+        >
           Siguiente
         </button>
       </div>

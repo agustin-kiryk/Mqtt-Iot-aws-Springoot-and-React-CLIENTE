@@ -1,86 +1,220 @@
-h3{
-    padding-bottom: 1vw;
-    padding-top: 1vw;
-    padding-left: 20vw;
+.popup-container {
+  background-color: #f0fffb;
+  width: 100% ;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: column !important;
 }
 
-.switches{
-display: flex;
-flex-direction: column;
-padding-left: 20vw;
+.jul {
+  display: inline-block;
+  border: none;
+  color: #000000;
+  text-align: center;
+  font-size: 17px;
+  padding: 13px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 50px !important;
 }
-
+.jul2 {
+  display: inline-block;
+  border: none;
+  color: #000000;
+  text-align: center;
+  font-size: 17px;
+  padding: 13px;
+  width: 200px;
+  margin: 50px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+h3 {
+  padding-right: 40vw;
+  width: 100%;
+}
 label{
-    padding-left: 2vw;
+  padding-left: 2vw;
 }
-
-
 .idcliente{
-  margin-bottom: 30px ;
+margin-bottom: 30px ;
 }
 .text{
-    padding-left: 10vw !important;
+  padding-left: 10vw !important;
 }
 
 .tex2t{
-    padding-left: .7vw;
-    margin-top: 1vw;
+  padding-left: .7vw;
+  margin-top: 1vw;
 }
-  
+
+
 .popup-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Espacio entre las columnas */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espacio entre las columnas */
+}
+
 h3{
-  padding-left: 35vw;
+padding-left: 35vw;
 }
 
-  .column {
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacio entre los elementos en cada columna */
+}
+
+/* Resto de tus estilos CSS existentes */
+.popup-content {
+  overflow-y: auto; /* Añade desplazamiento vertical si el contenido excede la altura */
+  max-height: 100vh; /* Establece una altura máxima para el contenido del Popup */
+}
+
+
+.close-button:hover {
+  background-color: #aaa;
+}
+
+.pap{
+  margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  label {
+    text-align: center;
+    padding-left: 30vw !important;
+  }
+
+  .tex2t {
+    padding-left: 0 !important;
+    text-align: center;
+    margin-top: 1vw;
+  }
+
+  .switches {
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .estado {
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .blocked{
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Espacio entre los elementos en cada columna */
-  }
-  
-  /* Resto de tus estilos CSS existentes */
-  .popup-content {
-    overflow-y: auto; /* Añade desplazamiento vertical si el contenido excede la altura */
-    max-height: 100vh; /* Establece una altura máxima para el contenido del Popup */
+    align-items: center;
+    padding-left: 0 !important;
   }
 
-  .close-button {
-    margin-top: 10px;
-    background-color: #ccc;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .close-button:hover {
-    background-color: #aaa;
-  }
-  
-  .pap{
-    margin-bottom: 10px;
-  }
-  
-@media only screen and (max-width: 768px) {
 
+  .config {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 0 !important;
+  }
 
-.tex2t{
-    padding-left: 3vw !important;
-    margin-top: 1vw;
+.control{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 0 !important;
 }
+  .input-field {
+    width: 50% !important;
+    margin: 0 auto !important;
+    padding-left: 0 !important;
+  }
 .switches{
-  padding-left: 40vw;
+  text-align: center;
+  padding-left: 0 !important;
+}
+  .titulo {
+    padding-left: 0 !important;
+    text-align: center;
+    label{
+      padding-left: 10vw !important;
+    }
   }
-  
+}
 
-  .estado{
-    padding-left: 35vw;
-  }
-    
-  }
+
+.config {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.estado {
+  display: flex;
+  align-items: center;
+}
+
+
+.close-button {
+  margin-top: 10px;
+  background-color: #bb4d4d;
+  color: #fffcfc;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 95vw;
+  font-size: 16px;
+}
+
+
+.input-field {
+  width: 10vw; /* Puedes ajustar el valor para establecer un ancho deseado */
+}
+.switches {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.switch-label {
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.switch-option {
+  display: flex;
+  align-items: center;
+}
+
+.switch-option a {
+  margin-right: 10px;
+}
+
+.luz{
+  margin-left: 2.5vw;
+}
+
+.switch-papu{
+  margin-left: 3.5vw;
+  margin-top: .5vw;
+}
+
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Espacio entre grupos */
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre elementos */
+}
+
+.form-group label {
+  width: 150px; /* Ancho fijo para las etiquetas */
+}
