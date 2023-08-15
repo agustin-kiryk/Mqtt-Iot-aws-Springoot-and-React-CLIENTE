@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   MDBCol,
   MDBContainer,
@@ -7,44 +7,74 @@ import {
   MDBCardText,
   MDBCardBody,
   MDBCardImage,
-  MDBBtn,
-  MDBBreadcrumb,
-  MDBBreadcrumbItem,
-  MDBProgress,
-  MDBProgressBar,
-  MDBIcon,
-  MDBListGroup,
-  MDBListGroupItem
 } from 'mdb-react-ui-kit';
 import Navbar from "../../components/navbar/Navbar";
 import Boton from "../../components/boton2/boton"
 import Boton2 from "../../components/boton3/boton"
 import { Link } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"; // Import the ArrowBack icon
+
+// Usar datos por usuario Logeado https://iotcoremt-production.up.railway.app/user/userLogin
 
 export default function ProfilePage() {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // Obtener el token del LocalStorage
+        const token = localStorage.getItem('jwtToken');
+
+        // Realizar la solicitud al endpoint con el token en el encabezado de autorización
+        const response = await fetch('https://iotcoremt-production.up.railway.app/user/userLogin', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          // Si la solicitud fue exitosa, obtener los datos del usuario
+          const data = await response.json();
+          setUserData(data);
+        } else {
+          // Si hubo un error en la solicitud, manejar el error aquí
+          console.error('Error fetching user data:', response.status);
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
     <section style={{ backgroundColor: '#f0fffb' }}>
       <Navbar />
+      
       <div className='volver'>
-      <Link to="/" style={{ textDecoration: "none" }}>
-      <Boton2 />
-      </Link>
+        <Link to="/home" style={{ textDecoration: "none" }}>
+          <Boton2 />
+        </Link>
       </div>
       <MDBContainer className="py-5">
         <MDBRow>
           <MDBCol lg="4">
-          <MDBCard className="mx-auto mb-4 text-center">
-          <MDBCardBody className="">
-                <MDBCardImage
-                  src="https://cdn.discordapp.com/attachments/1061404202498277458/1105998913749667880/image.png"
-                  alt="avatar"
-                  className="rounded-circle "
-                  style={{ maxWidth: '200px' }}
-                  fluid
-                />
-                <p className="text-muted mb-1">John Córdoba Morales</p>
-                <p className="text-muted mb-1">Bay Area, San Francisco, CA</p>
-
+            <MDBCard className="mx-auto mb-4 text-center">
+              <MDBCardBody className="">
+                {userData && (
+                  <>
+                    <MDBCardImage
+                      src={userData.image} // Agregar el campo de avatarUrl en la respuesta del endpoint
+                      alt="avatar"
+                      className="rounded-circle "
+                      style={{ maxWidth: '200px' }}
+                      fluid
+                    />
+                    <p className="text-muted mb-1">{`${userData.firstName} ${userData.lastName}`}</p>
+                    <p className="text-muted mb-1">{userData.location}</p>
+                  </>
+                )}
               </MDBCardBody>
             </MDBCard>
             <Boton />
@@ -57,7 +87,9 @@ export default function ProfilePage() {
                     <MDBCardText>Nombre</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">Johnatan Smith</MDBCardText>
+                    {userData && (
+                      <MDBCardText className="text-muted">{`${userData.firstName} ${userData.lastName}`}</MDBCardText>
+                    )}
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -66,7 +98,9 @@ export default function ProfilePage() {
                     <MDBCardText>Email</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">example@example.com</MDBCardText>
+                    {userData && (
+                      <MDBCardText className="text-muted">{userData.email}</MDBCardText>
+                    )}
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -75,7 +109,9 @@ export default function ProfilePage() {
                     <MDBCardText>Telefono</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">(097) 234-5678</MDBCardText>
+                    {userData && (
+                      <MDBCardText className="text-muted">{userData.phone}</MDBCardText>
+                    )}
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -84,16 +120,20 @@ export default function ProfilePage() {
                     <MDBCardText>Direccion</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">Bay Area, San Francisco, CA</MDBCardText>
+                    {userData && (
+                      <MDBCardText className="text-muted">{userData.adress}</MDBCardText>
+                    )}
                   </MDBCol>
                 </MDBRow>
                 <hr />
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>Id Maquina</MDBCardText>
+                    <MDBCardText>Maquinas Totales</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">12314</MDBCardText>
+                    {userData && (
+                      <MDBCardText className="text-muted">{userData.machinesTotals}</MDBCardText>
+                    )}
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>

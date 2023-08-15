@@ -16,7 +16,6 @@
   
   .row {
     margin-bottom: 10px;
-    border: 1px solid #ccc;
     padding: 10px;
   }
   
@@ -47,3 +46,17 @@
     background-color: #999;
   }
   
+  /* MainComponent.css */
+.open-popup-button {
+  background-color: rgba(0,128,0,255);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.open-popup-button:hover {
+  background-color: rgba(0,127,0,253);
+}

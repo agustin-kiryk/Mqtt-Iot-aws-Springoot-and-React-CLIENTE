@@ -10,6 +10,7 @@
 
 .estatus{
   display: flex;
+  margin-top: 2vw;
   align-items: center;
   justify-content: center;
 }
@@ -123,7 +124,7 @@
       padding: 15px;
       gap: 10px;
       display: flex;
-      flex-wrap: wrap;
+
       flex-direction: row ;
     }
 
@@ -390,6 +391,10 @@
   .homeContainer{
     width: 100% !important;
     padding: 0;
+  }
+  .item-right{
+    padding-left: 30vw;
+    padding-top: 5vw;
   }
 
   .login{

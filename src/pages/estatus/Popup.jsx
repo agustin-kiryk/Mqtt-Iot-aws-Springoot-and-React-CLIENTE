@@ -7,7 +7,7 @@ Modal.setAppElement('#root'); // Establece el elemento raíz de tu aplicación
 
 const Popup = ({ isOpen, onClose, token }) => {
   const [data, setData] = useState([]);
-  const jwtToken = localStorage.getItem('jwtToken').trim();
+  const jwtToken = localStorage.getItem('jwtToken');
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 5;
 
@@ -16,7 +16,7 @@ const Popup = ({ isOpen, onClose, token }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'https://iotcoremt-production.up.railway.app/transactions/machineUserLogin',
+          'https://iotcoremt-production.up.railway.app/machines/machinesUser',
           {
             headers: {
               Authorization: `Bearer ${token}`, // Utiliza el token que proviene de la prop 'token'
@@ -43,13 +43,20 @@ const Popup = ({ isOpen, onClose, token }) => {
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} className="popup-modal">
-      <h2>Título de la ventana emergente</h2>
-      <div className="row-container">
+      <h2>Detalle de Maquina</h2>
+      <button onClick={onClose} className="close-button">Cerrar</button>
+      <div className="row-container" style={{ maxHeight: '800px', overflowY: 'auto' }}>
         {currentRows.map((item) => (
           <div key={item.id} className="row">
-            <p>Transaction ID: {item.transactionId}</p>
-            <p>Amount: {item.amount}</p>
-            <p>Currency: {item.currency}</p>
+            <p>ID de Maquina: {item.machineId}</p>
+            <p>ID de usuario: {item.userId}</p>
+            <p>Precio: {item.price}</p>
+            <p>Luz: {item.light}</p>
+            <p>Estatus: {item.status}</p>
+            <p>Valvula de Llenado: {item.valveFill}</p>
+            <p>Valvula de Lavado: {item.valveWash}</p>
+            <p>Bomba de Agua: {item.waterPumpSwich}</p>
+            <p>Moneda: {item.currency}</p>
             {/* Add other properties as needed */}
           </div>
         ))}
@@ -61,7 +68,7 @@ const Popup = ({ isOpen, onClose, token }) => {
           </button>
         ))}
       </div>
-      <button onClick={onClose} className="close-button">Cerrar</button>
+     
     </Modal>
   );
 };

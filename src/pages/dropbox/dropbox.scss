@@ -1,0 +1,83 @@
+.widgets {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: 'Roboto', sans-serif;
+}
+h3 {
+  font-family: 'Roboto', sans-serif !important; /* La fuente que desees usar */
+}
+.widget {
+  font-family: 'Roboto', sans-serif;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 10px; /* Espacio entre cada widget */
+}
+
+.widget-container {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Ajusta los estilos para el contenedor de los widgets */
+.widget-container .widget:nth-child(1) {
+  order: -1; /* Coloca el primer widget (Total Amount) al principio */
+}
+
+/* Estilos para el contenedor de los otros tres widgets */
+.widget-container .widget:nth-child(n+2) {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Estilos para el grid de los otros tres widgets */
+.widget-container .widget:nth-child(n+2) .widget-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
+}
+/* Add this CSS inside your stylesheet or in a style tag in your HTML file */
+@media screen and (max-width: 768px) {
+  .widgets {
+    flex-direction: column;
+  }
+  .widget-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+  .widgets {
+    gap: 20px !important;
+    padding: 5px !important;
+  }
+  .widget {
+    width: 100% !important;
+    position: relative;
+    text-align: right;
+    padding-bottom: 50px; /* Ajusta este valor según sea necesario */
+  }
+  .icon2 {
+    position: relative;
+    top:  5vw !important;
+    left: 15vw !important;
+  }
+  
+  .icon {
+    position: relative;
+    top:  5vw !important;
+    left: 35vw !important;
+  }
+
+  .widget-container {
+    gap: 20px !important;
+  }
+}

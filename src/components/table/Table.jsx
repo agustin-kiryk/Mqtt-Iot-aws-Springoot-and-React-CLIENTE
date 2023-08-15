@@ -1,4 +1,4 @@
-import "./table.scss";
+import React, { useState, useEffect } from 'react';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -6,91 +6,137 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
+import SearchIcon from "@mui/icons-material/Search";
+import axios from 'axios';
+import { saveAs } from "file-saver";
+import * as ExcelJS from "exceljs";
 
 const List = () => {
-  const rows = [
-    {
-      id: 1143155,
-      product: "Enero",
-      customer: "5000",
-      date: "1400$",
-      amount: "500$",
-      method: "1900$",
-      status: "Corriente", 
-    },
-    {
-      id: 2235235,
-      product: "Febrero",
-      customer: "3000",
-      date: "3000$",
-      amount: "1000$",
-      method: "4000$",
-      status: "Deuda",
-    },
-    {
-      id: 2342353,
-      product: "Marzo",
-      customer: "2000",
-      date: "1000$",
-      amount: "300$",
-      method: "1300$",
-      status: "Corriente",
-    },
-    {
-      id: 2357741,
-      product: "Abril",
-      customer: "8000",
-      date: "500$",
-      amount: "200$",
-      method: "700$",
-      status: "Corriente",
-    },
-    {
-      id: 2342355,
-      product: "Mayo",
-      customer: "1000",
-      date: "2000$",
-      amount: "1000$",
-      method: "3000$",
-      status: "Deuda",
-    },
+  const [data, setData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem('jwtToken');
+        if (token) {
+          const response = await axios.get('https://iotcoremt-production.up.railway.app/transactions/monthlySummaryByUserLogin', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const jsonData = response.data;
+          setData(jsonData);
+        } else {
+          console.error('Token no encontrado en el localStorage.');
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const userColumns = [ // Define your userColumns here
+    { field: 'machineId', headerName: 'ID Maquina' },
+    { field: 'month', headerName: 'Mes' },
+    { field: 'totalWaterDispensed', headerName: 'Litros Vendidos' },
+    { field: 'revenue', headerName: 'Ganancias' },
+    { field: 'cost', headerName: 'Derecho de Marca' },
+    { field: 'totalAmount', headerName: 'Total Vendido' },
+    { field: 'status', headerName: 'Estatus' },
   ];
+
+  const exportToExcel = async () => {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Maquinas");
+
+    const columnHeaders = userColumns.map((column) => column.headerName);
+    worksheet.addRow(columnHeaders);
+
+    const rows = data.map((rowData) => {
+      return userColumns.map((column) => rowData[column.field]);
+    });
+
+    rows.forEach((row) => {
+      worksheet.addRow(row);
+    });
+
+    const buffer = await workbook.xlsx.writeBuffer();
+    saveAs(new Blob([buffer]), "maquinas.xlsx");
+  };
+
+  const filteredData = data.filter((row) =>
+    Object.values(row).some((value) =>
+      value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
   return (
-    <TableContainer component={Paper} className="table">
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell className="tableCell">ID Maquina</TableCell>
-            <TableCell className="tableCell">Mes</TableCell>
-            <TableCell className="tableCell">Litros Vendidos</TableCell>
-            <TableCell className="tableCell">Ganancias</TableCell>
-            <TableCell className="tableCell">Derecho de Marca</TableCell>
-            <TableCell className="tableCell">Total Vendido</TableCell>
-            <TableCell className="tableCell">Estatus</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell className="tableCell">{row.id}</TableCell>
-              <TableCell className="tableCell">
-                <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
-                  {row.product}
-                </div>
-              </TableCell>
-              <TableCell className="tableCell">{row.customer}</TableCell>
-              <TableCell className="tableCell">{row.date}</TableCell>
-              <TableCell className="tableCell">{row.amount}</TableCell>
-              <TableCell className="tableCell">{row.method}</TableCell>
-              <TableCell className="tableCell">
-                <span className={`status ${row.status}`}>{row.status}</span>
-              </TableCell>
+    <div>
+<div className="excel" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+  <TextField
+    label="Buscar"
+    variant="outlined"
+    size="small"
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    InputProps={{
+      startAdornment: (
+        <InputAdornment position="start">
+          <SearchIcon />
+        </InputAdornment>
+      ),
+    }}
+  />
+  <a
+    href="#"
+    onClick={exportToExcel}
+    style={{
+      textDecoration: "none",
+      background: "rgba(0, 128, 0, 1)",
+      color: "white",
+      padding: "5px 10px",
+      borderRadius: "5px",
+      fontSize: "14px",
+    }}
+  >
+    Exportar tabla a Excel
+  </a>
+</div>
+
+
+      <TableContainer component={Paper} className="table">
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              {userColumns.map((column) => (
+                <TableCell className="tableCell" key={column.field}>
+                  {column.headerName}
+                </TableCell>
+              ))}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {filteredData.map((row) => (
+              <TableRow key={row.id}>
+                {userColumns.map((column) => (
+                  <TableCell className="tableCell" key={column.field}>
+                    {row[column.field]}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        
+      </TableContainer>
+
+
+    </div>
   );
 };
 
