@@ -29,7 +29,6 @@ export default function FloatingActionButtonExtendedSize() {
       <a href="/" style={{ textDecoration: "none", display: "inline-block", padding: "10px ", margin:"10px",backgroundColor: "green", color: "#fff", borderRadius: "10px" }}>
         <Box sx={{ display: "flex", alignItems: "center", fontSize: "17px" }}>
           <ArrowBackIcon sx={{ marginRight: "0.5rem" }} />
-          
         </Box>
       </a>
     </div>
