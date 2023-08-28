@@ -10,6 +10,8 @@ const Single = () => {
     machineId: "",
     userId: "",
     lastName: "",
+    coment: "",
+    district:"",
     phone: "",
     adress: "",
     type: "",
@@ -33,7 +35,7 @@ const Single = () => {
   });
 
   const url = window.location.href;
-  const id = url.split("/").pop();
+  const id = url.split("/").pop(); // Obtener la id de la URL actual
 
   useEffect(() => {
     async function fetchData() {
@@ -42,76 +44,72 @@ const Single = () => {
       );
       const data = await response.json();
       setDetails(data);
+      setEditedDetails(data); // Initialize editedDetails with fetched data
     }
     fetchData();
   }, [id]);
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
-    if (isEditing) {
-      setEditedDetails(details);
-    }
-  }
-
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setEditedDetails({ ...editedDetails, [name]: value });
-  }
+  };
 
   const handleSaveClick = async () => {
-    // Obtener el token JWT del localStorage
-    const jwtToken = localStorage.getItem('jwtToken');
+ 
+    const editedCost = parseInt(editedDetails.cost, 10);
   
-    // Verificar si el token está presente
-    if (!jwtToken) {
-      // Manejar el caso en el que el token no esté disponible
-      console.error('JWT token not available');
-      return;
-    }
+    const requestData = {
+      ...editedDetails,
+      cost: editedCost, 
+    };
   
     try {
-      const response = await fetch(`https://iotcoremt-production.up.railway.app/machines/edit/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${jwtToken}`, // Agregar el token JWT al encabezado de autorización
-        },
-        body: JSON.stringify(editedDetails),
-      });
-  
+      const token = localStorage.getItem("jwtToken");
+      const response = await fetch(
+        `https://iotcoremt-production.up.railway.app/machines/edit/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(editedDetails), // Send editedDetails
+        }
+      );
+
       if (response.ok) {
-        setDetails(editedDetails);
+        setDetails(editedDetails); // Update details with edited data
         setIsEditing(false);
       } else {
-        // Manejar el error de acuerdo a tus requerimientos
-        console.error('Error:', response.statusText);
+        console.error("Save failed with status:", response.status);
       }
     } catch (error) {
-      // Manejar cualquier error de red u otros errores
-      console.error('Error:', error);
+      console.error("An error occurred:", error);
     }
   };
   
 
-  return (
-    <div className="single">
-      <div className="singleContainer">
-        <Navbar />
-        <div className="top">
-          <div className="left">
-            <div className="editButtonContainer">
-              {isEditing ? (
-                <button className="editButton" onClick={handleSaveClick}>
-                  Save
-                </button>
-              ) : (
-                <button className="editButton" onClick={handleEditClick}>
-                  Edit
-                </button>
+    return (
+      <div className="single">
+        <div className="singleContainer">
+          <Navbar />
+          <div className="top">
+            <div className="left">
+              <div className="editButton" onClick={handleEditClick}>
+                {isEditing ? "" : "Editar"}
+              </div>
+              {isEditing && (
+                <div className="editButtons">
+                  <button className="saveButton" onClick={handleSaveClick}>
+                    Guardar
+                  </button>
+                </div>
               )}
-            </div>
-            <div className="datos">
+  
               <h1 className="title1">Informacion</h1>
               <div className="item">
                 <div className="details">
@@ -123,7 +121,7 @@ const Single = () => {
                         <input
                           type="text"
                           name="machineId"
-                          value={editedDetails.machineId || details.machineId}
+                          value={editedDetails.machineId}
                           onChange={handleInputChange}
                         />
                       ) : (
@@ -132,13 +130,13 @@ const Single = () => {
                     </span>
                   </div>
                   <div className="detailItem">
-                    <span className="itemKey">ID de usuario:</span>
+                    <span className="itemKey">ID de Usuario:</span>
                     <span className="itemValue">
                       {isEditing ? (
                         <input
                           type="text"
                           name="userId"
-                          value={editedDetails.userId || details.userId}
+                          value={editedDetails.userId}
                           onChange={handleInputChange}
                         />
                       ) : (
@@ -153,11 +151,41 @@ const Single = () => {
                         <input
                           type="text"
                           name="price"
-                          value={editedDetails.price || details.price}
+                          value={editedDetails.price}
                           onChange={handleInputChange}
                         />
                       ) : (
                         details.price
+                      )}
+                    </span>
+                  </div>
+                  <div className="detailItem">
+                    <span className="itemKey">Comentario:</span>
+                    <span className="itemValue">
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          name="coment"
+                          value={editedDetails.coment}
+                          onChange={handleInputChange}
+                        />
+                      ) : (
+                        details.coment
+                      )}
+                    </span>
+                  </div>
+                  <div className="detailItem">
+                    <span className="itemKey">Direccion:</span>
+                    <span className="itemValue">
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          name="adress"
+                          value={editedDetails.adress + editedDetails.district}
+                          onChange={handleInputChange}
+                        />
+                      ) : (
+                        details.adress
                       )}
                     </span>
                   </div>
@@ -168,7 +196,7 @@ const Single = () => {
                         <input
                           type="text"
                           name="light"
-                          value={editedDetails.light || details.light}
+                          value={editedDetails.light}
                           onChange={handleInputChange}
                         />
                       ) : (
@@ -183,7 +211,7 @@ const Single = () => {
                         <input
                           type="text"
                           name="status"
-                          value={editedDetails.status || details.status}
+                          value={editedDetails.status}
                           onChange={handleInputChange}
                         />
                       ) : (
@@ -198,7 +226,7 @@ const Single = () => {
                         <input
                           type="text"
                           name="valveFill"
-                          value={editedDetails.valveFill || details.valveFill}
+                          value={editedDetails.valveFill}
                           onChange={handleInputChange}
                         />
                       ) : (
@@ -213,7 +241,7 @@ const Single = () => {
                         <input
                           type="text"
                           name="valveWash"
-                          value={editedDetails.valveWash || details.valveWash}
+                          value={editedDetails.valveWash}
                           onChange={handleInputChange}
                         />
                       ) : (
@@ -228,10 +256,7 @@ const Single = () => {
                         <input
                           type="text"
                           name="waterPumpSwich"
-                          value={
-                            editedDetails.waterPumpSwich ||
-                            details.waterPumpSwich
-                          }
+                          value={editedDetails.waterPumpSwich}
                           onChange={handleInputChange}
                         />
                       ) : (
@@ -239,17 +264,20 @@ const Single = () => {
                       )}
                     </span>
                   </div>
+
                 </div>
               </div>
             </div>
-            <div>
+            <div className="dni">
+              <img src={details.image} alt="" width="500px" height="400px" />
+            </div>
+          </div>
+          <div>
               <h1>Datos de transaccion</h1>
               {details.machineId && <TransactionTable machineId={details.machineId} />}
             </div>
           </div>
         </div>
-      </div>
-    </div>
   );
 };
 

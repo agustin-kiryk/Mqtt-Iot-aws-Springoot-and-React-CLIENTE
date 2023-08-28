@@ -14,6 +14,12 @@ const Single = () => {
     document: "",
     district: "",
     cost: "",
+    role:"",
+    creationDate:"",
+    updateDate:"",
+    machineId:"",
+    idientifier:"",
+    password:"",
     image: "",
   });
   const [editedDetails, setEditedDetails] = useState({
@@ -37,15 +43,13 @@ const Single = () => {
       );
       const data = await response.json();
       setDetails(data);
+      setEditedDetails(data); // Initialize editedDetails with fetched data
     }
     fetchData();
   }, [id]);
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
-    if (isEditing) {
-      setEditedDetails(details);
-    }
   };
 
   const handleInputChange = (event) => {
@@ -54,38 +58,36 @@ const Single = () => {
   };
 
   const handleSaveClick = async () => {
-    // Convert the cost value to an integer before sending
+ 
     const editedCost = parseInt(editedDetails.cost, 10);
   
     const requestData = {
       ...editedDetails,
-      cost: editedCost, // Replace the cost value with the integer value
+      cost: editedCost, 
     };
   
     try {
-      const token = localStorage.getItem("jwtToken"); // Assuming your token key is "jwtToken"
+      const token = localStorage.getItem("jwtToken");
       const response = await fetch(
         `https://iotcoremt-production.up.railway.app/user/edit/${id}`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(requestData), // Use the modified request data
+          body: JSON.stringify(editedDetails), // Send editedDetails
         }
       );
-  
+
       if (response.ok) {
-        setDetails(requestData); // Update with the modified data
+        setDetails(editedDetails); // Update details with edited data
         setIsEditing(false);
       } else {
         console.error("Save failed with status:", response.status);
-        // Handle the error appropriately
       }
     } catch (error) {
       console.error("An error occurred:", error);
-      // Handle the error appropriately
     }
   };
   
@@ -139,6 +141,51 @@ const Single = () => {
                       />
                     ) : (
                       details.lastName
+                    )}
+                  </span>
+                </div>
+                <div className="detailItem">
+                  <span className="itemKey">Fecha de Creacion:</span>
+                  <span className="itemValue">
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="creationDate"
+                        value={details.creationDate}
+                        onChange={handleInputChange}
+                      />
+                    ) : (
+                      details.creationDate
+                    )}
+                  </span>
+                </div>
+                <div className="detailItem">
+                  <span className="itemKey">Ultima actualizacion del usuario:</span>
+                  <span className="itemValue">
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="updateDate"
+                        value={details.updateDate}
+                        onChange={handleInputChange}
+                      />
+                    ) : (
+                      details.updateDate
+                    )}
+                  </span>
+                </div>
+                <div className="detailItem">
+                  <span className="itemKey">Id de Maquina:</span>
+                  <span className="itemValue">
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="machineId"
+                        value={editedDetails.machineId}
+                        onChange={handleInputChange}
+                      />
+                    ) : (
+                      details.machineId
                     )}
                   </span>
                 </div>
