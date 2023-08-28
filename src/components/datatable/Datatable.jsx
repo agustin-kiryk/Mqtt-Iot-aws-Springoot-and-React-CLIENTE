@@ -14,7 +14,7 @@ const Datatable = () => {
   const [data, setData] = useState([]);
 
   const handleDelete = (id) => {
-    if (window.confirm("¿Estás seguro de que quieres borrar este cliente?")) {
+    if (window.confirm("¿Estás seguro de que quieres borrar este Franquiciado?")) {
       axios
         .delete(`https://iotcoremt-production.up.railway.app/clients/${id}`)
         .then(() => {
@@ -90,7 +90,7 @@ const Datatable = () => {
   ];
   return (
     <div className="datatable">
-      <div className="datatableTitle">
+      <div className="datatableTitle5">
         <h1> Lista de Franquiciados</h1>
       </div>
       <div className="tableWrapper">

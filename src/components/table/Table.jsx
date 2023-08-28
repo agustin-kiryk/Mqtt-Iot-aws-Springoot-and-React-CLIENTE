@@ -61,7 +61,7 @@ const List = () => {
         <TableHead>
           <TableRow>
             <TableCell className="tableCell">ID Maquina</TableCell>
-            <TableCell className="tableCell">Cliente</TableCell>
+            <TableCell className="tableCell">Franquiciado</TableCell>
             <TableCell className="tableCell">Telefono</TableCell>
             <TableCell className="tableCell">Direccion</TableCell>
             <TableCell className="tableCell">Mantenimiento</TableCell>

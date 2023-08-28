@@ -71,19 +71,22 @@
         margin-left: 60vw; /* Espacio entre la sección izquierda y la imagen */
         position: relative;
         top: -35vw; /* Ajusta este valor negativo para subir la imagen más */
-        @media screen and (max-width: 1600px) {
-          /* Cambiar el valor de 'top' para resoluciones menores a 768px */
-          top: -50vw;
+        img {
+          /* Hide the image on screens with a maximum width of 768px */
+          @media screen and (max-width: 768px) {
+            display: none;
+          }
+
         }
       }
-      
+
       // Move these styles out of the .left block to target them correctly
       .long-title {
         font-size: 24px;
         font-weight: bold;
         margin-bottom: 20px;
       }
-      
+
       .title1 {
         font-size: 28px;
         font-weight: bold;

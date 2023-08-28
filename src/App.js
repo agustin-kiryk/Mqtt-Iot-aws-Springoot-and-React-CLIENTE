@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import { DarkModeContext } from "./context/darkModeContext";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { Image } from "@cloudinary/react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Home from "./pages/home/Home";
@@ -17,16 +19,17 @@ import Maquinas from "./pages/maquinas/Maquinas";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
-
+  const cld = new Cloudinary({ cloud: { cloudName: 'dpjnr25nl' } });
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
-          {/* Cambio aquí: Renderizar <Home /> en la ruta principal */}
-          <Route path="/" element={<Home />} />
+          {/* Set the default landing page to Login */}
+          <Route path="/" element={<Login />} />
 
           <Route path="login" element={<Login />} />
-
+          
+          <Route path="home" element={<Home />} />
           <Route path="perfil" element={<Perfil />} />
 
           <Route path="histfac" element={<Histfac />} />
@@ -66,4 +69,3 @@ function App() {
 }
 
 export default App;
-

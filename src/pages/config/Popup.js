@@ -164,8 +164,12 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
         </button>
         <div className="popup-content">
           <div className="blocked">
+            <div className="titulo1">
             <h3>BLOQUEO</h3>
+            </div>
+            <div className="maquinoide">
             <label htmlFor="clientId3">ID de Maquina:</label>
+            </div>
               <input
                 type="text"
                 id="clientId3"
@@ -189,6 +193,7 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
               </span>
 
             </div>
+            <div className="deslock">
             <button
               className="jul"
               onClick={handleBlockedAccept}
@@ -196,7 +201,7 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
             >
               Bloquear/Desbloquear
             </button>
-
+            </div>
           </div>
 
           <div className="column">
@@ -211,21 +216,17 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
                 type="text"
                 id="clientId2"
                 value={clientId}
-                className="input-field" // Agrega la clase CSS aquí
+                className="input-field2" // Agrega la clase CSS aquí
                 onChange={handleClientIdChange}
               />
               
-              <label
-                htmlFor="cop"
-                className="pap"
-                style={{ paddingLeft: "44px" }}
-              >
+              <label>
                 Moneda:
               </label>
               <input
                 type="text"
                 id="cop"
-                className="input-field" // Agrega la clase CSS aquí
+                className="input-field2" // Agrega la clase CSS aquí
                 value={cop}
                 onChange={handleCopChange}
                 style={{ paddingLeft: "44px" }}
@@ -234,7 +235,6 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
               <label
                 htmlFor="price"
                 className="pap"
-             
               >
                 Precio:{" "}
               </label>
@@ -242,11 +242,11 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
                 type="text"
                 id="price"
                 value={price}
-                className="input-field" // Agrega la clase CSS aquí
+                className="input-field2" // Agrega la clase CSS aquí
                 onChange={handlePriceChange}
                 style={{ paddingLeft: "55px" }}
               />
-
+             <div className="vai">
               <button
                 className="jul"
                 onClick={handleConfigAccept}
@@ -255,14 +255,18 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
                   color: "white",
                 }}
               >
+                
                 Aceptar Configuracion
               </button>
+              </div>
             </div>
           </div>
 
           <div className="column">
             <div className="control">
+              <div className="titulo1">
               <h3>CONTROL</h3>
+              </div>
               <label htmlFor="clientId3" className="titulo">ID de Maquina:</label>
               <input
                 type="text"
@@ -274,7 +278,7 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
 
 
               <div className="switches">
-                <label htmlFor="switch1">Bomba de Agua</label>
+                <label htmlFor="switch1" className="texto">Bomba de Agua</label>
                 <div className="switch-papu">
                 <Switch
                   id="switch1"
@@ -289,7 +293,7 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
                 </div>
 
                 <div className="luz">
-                <label htmlFor="switch2">Luz</label>
+                <label htmlFor="switch2" className="texto">Luz</label>
                 </div>
                 <div className="switch-papu">
                 <Switch
@@ -304,7 +308,7 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
                 </span>
                 </div>
 
-                <label htmlFor="switch3">Valvula de Lavado</label>
+                <label htmlFor="switch3" className="texto">Valvula de Lavado</label>
                 <div className="switch-papu">
                 <Switch
                   id="switch3"
@@ -318,7 +322,7 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
                 </span>
                 </div>
 
-                <label htmlFor="switch4">Valvula de Llenado</label>
+                <label htmlFor="switch4" className="texto">Valvula de Llenado</label>
                 <div className="switch-papu">
                 <Switch
                   id="switch4"

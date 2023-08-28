@@ -75,7 +75,7 @@
         padding-left: 5.5vw;
       }
       .title{
-        padding-left: 3vw;
+        padding-left: 3.5vw;
         font-size: 20px;
       }
     }
@@ -85,10 +85,42 @@
     .widgetC{
       .counter{
         height: 80px;
-        padding-left: 7vw;
+        padding-left: 7.5vw;
       }
       .title{
        text-align: center;
+        font-size: 20px;
+      }
+    }
+
+
+    .widgetE{
+      .counter{
+        height: 80px;
+        padding-left: 6.7vw;
+      }
+      .title{
+       padding-left: 3.2vw;
+        font-size: 20px;
+      }
+    }
+    .widgetB{
+      .counter{
+        height: 80px;
+        padding-left: 5.5vw;
+      }
+      .title{
+       padding-left: 5vw;
+        font-size: 20px;
+      }
+    }
+    .widgetU{
+      .counter{
+        height: 80px;
+        padding-left: 7.2vw;
+      }
+      .title{
+       padding-left: 5vw;
         font-size: 20px;
       }
     }
@@ -425,10 +457,10 @@
     padding: 1px !important;
     gap: 1px;
     .counter{
-      padding-left:  30vw !important;
+      padding-left:  22vw !important;
     }
     .title{
-      padding-left: 30vw !important ;
+      padding-left: 18vw !important ;
     }
   }
   

@@ -29,6 +29,22 @@
   color: #080808; 
 }
 
+.ingresar {
+  background-color: #1fccc3; /* Color celeste */
+  color: #000000; /* Color del texto */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 10px 20px; /* Espaciado interno */
+  width: 50%;
+  font-size: 16px; /* Tamaño de fuente */
+  cursor: pointer; /* Cambio de cursor al pasar el mouse */
+}
+
+/* Estilo al pasar el mouse por encima */
+.ingresar:hover {
+  background-color: #22c2ba; /* Cambia el color de fondo al pasar el mouse */
+}
+
 
   @media (min-width: 768px) {
   .gradient-form {

@@ -2,10 +2,12 @@
   height: 600px;
   padding: 20px;
   
-  .datatableTitle{
+  .datatableTitle5{
     font-size: 24px;
-    color: gray;
+    color: rgb(0, 0, 0);
     display: flex;
+    padding-left: 1vw !important;
+    margin-bottom: 5pc;
     align-items: center;
     justify-content: center;
 
@@ -76,3 +78,5 @@
     }
   }
 }
+
+

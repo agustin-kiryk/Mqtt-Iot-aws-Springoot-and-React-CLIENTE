@@ -136,15 +136,18 @@ const Widget = ({ type }) => {
       break;
   }
 
+  // Define a CSS class to determine alignment
+  const alignmentClass = widgetData.isMoney ? "center" : "right";
+
   return (
     <div className={`widget ${type}`}>
-      <div className="left">
+      <div className={`left ${alignmentClass}`}>
         <span className="title">{widgetData.title}</span>
         <span className="counter" style={{ fontWeight: "bold" }}>
           {widgetData.isMoney && "$"} {widgetData.number}
         </span>
       </div>
-      <div className="right">
+      <div className={`right ${alignmentClass}`}>
         <div className=" "></div>
         {widgetData.icon}
       </div>

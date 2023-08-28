@@ -18,7 +18,7 @@
   width: 200px;
   transition: all 0.5s;
   cursor: pointer;
-  margin: 50px !important;
+  margin: 50px;
 }
 .jul2 {
   display: inline-block;
@@ -74,6 +74,10 @@ padding-left: 35vw;
   max-height: 100vh; /* Establece una altura máxima para el contenido del Popup */
 }
 
+.deslock{
+  margin-left: -2vw;
+}
+
 
 .close-button:hover {
   background-color: #aaa;
@@ -83,10 +87,30 @@ padding-left: 35vw;
   margin-bottom: 10px;
 }
 
+.blocked{
+  margin-left: 2.2vw;
+}
+
+.estado {
+  margin-top: 10px;
+}
+
+
 @media only screen and (max-width: 768px) {
   label {
     text-align: center;
     padding-left: 30vw !important;
+  }
+
+.estado{
+  padding-right: 30vw !important ;
+}
+  .titulo1{
+    padding-left: 5vw !important;
+  }
+
+  .maquinoide{
+    padding-right: 30vw !important;
   }
 
   .tex2t {
@@ -103,6 +127,11 @@ padding-left: 35vw;
   .estado {
     text-align: center;
     padding-left: 0;
+    margin-top: 10px;
+  }
+
+  .texto{
+    padding-left: 5vw !important;
   }
 
   .blocked{
@@ -142,6 +171,15 @@ padding-left: 35vw;
       padding-left: 10vw !important;
     }
   }
+
+  .input-field2 {
+    width: 50% !important; /* Puedes ajustar el valor para establecer un ancho deseado */
+    margin-left: 30vw !important;
+  }
+ .vai{
+  margin-left: 22vw !important;
+ }
+
 }
 
 
@@ -171,6 +209,11 @@ padding-left: 35vw;
 
 .input-field {
   width: 10vw; /* Puedes ajustar el valor para establecer un ancho deseado */
+
+}
+.input-field2 {
+  width: 10vw; /* Puedes ajustar el valor para establecer un ancho deseado */
+  margin-left: 2vw;
 }
 .switches {
   margin-top: 10px;

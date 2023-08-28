@@ -74,11 +74,11 @@ const Datatable = () => {
 
   return (
     <div className="datatable">
-      <button>
+      <div className="back">
         <span>
-          <a href="/">Volver</a>
+          <a href="/home">Volver</a>
         </span>
-      </button>
+      </div>
       <div className="datatableTitle">
         <h1>Historial de Facturacion</h1>
       </div>

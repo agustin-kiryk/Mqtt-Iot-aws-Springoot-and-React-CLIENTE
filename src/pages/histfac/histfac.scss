@@ -64,11 +64,7 @@
     }
   }
   
-  h1{
-    color: black;
-    font-size: 50px;
-    padding-left: 40vw ;
-  }
+
 
   @media (max-width: 480px) {
     h1{
@@ -78,5 +74,26 @@
     }
   }
 
+
+  .back{
+      display: inline-block;
+      border-radius: 4px;
+      background-color: rgba(0, 128, 0, 1);
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      font-size: 17px;
+      padding: 16px;
+      width: 100px;
+      transition: all 0.5s;
+      cursor: pointer;
+
+      border-radius: 40px !important;
+      
+      a{
+          color: #ffffff;
+      }
+  }
+  
 
   

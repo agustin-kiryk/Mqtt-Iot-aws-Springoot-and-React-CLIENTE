@@ -23,7 +23,7 @@ export default function ProfilePage() {
     <section style={{ backgroundColor: '#f0fffb' }}>
          <Navbar />
          <div className='volver'>
-          <a href="/">Volver</a>
+          <a href="/home">Volver</a>
         </div>
       <MDBContainer className="py-5">
         <MDBRow>
