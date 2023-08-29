@@ -54,16 +54,15 @@ const Featured = () => {
     <div className="featured">
       <div className="top">
         <h1 className="title"></h1>
-      </div>
-      <div className="bottom">
         <Select
           value={selectedId}
           onChange={handleIdChange}
           style={{
             backgroundColor: "green",
             color: "white",
+            width: "150px",
+            marginRight:"25vw",
             borderRadius: "5px",
-            marginRight: "25vw",
           }}
         >
           {machineData.map((machine) => (
@@ -72,6 +71,9 @@ const Featured = () => {
             </MenuItem>
           ))}
         </Select>
+      </div>
+      <div className="bottom">
+
 
         {isLoading ? (
           <p>Loading...</p>

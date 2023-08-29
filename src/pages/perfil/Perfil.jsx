@@ -9,10 +9,12 @@ import {
   MDBCardImage,
 } from 'mdb-react-ui-kit';
 import Navbar from '../../components/navbar/Navbar';
-import Boton from '../../components/boton2/boton';
+
 import Boton2 from '../../components/boton3/boton';
 import { Link } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import axios from "axios";
+import { Height } from '@mui/icons-material';
 
 export default function ProfilePage() {
   const [userData, setUserData] = useState(null);
@@ -50,40 +52,59 @@ export default function ProfilePage() {
     try {
       const token = localStorage.getItem('jwtToken');
       const formData = new FormData();
-      formData.append('image', newImage);
-
-      const response = await fetch(
-        'https://iotcoremt-production.up.railway.app/user/userLoged',
-        {
-          method: 'PATCH',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formData,
+      formData.append('file', newImage); 
+      formData.append('upload_preset', 'shvapk2i'); 
+  
+      const cloudinaryUploadUrl = 'https://api.cloudinary.com/v1_1/dpjnr25nl/image/upload'; 
+  
+      const response = await axios.post(cloudinaryUploadUrl, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', 
+        },
+      });
+  
+      if (response.status === 200) {
+        const imageUrl = response.data.secure_url; 
+  
+        
+        const updateUserImageResponse = await fetch(
+          'https://iotcoremt-production.up.railway.app/user/userLoged', // Update this URL to your actual endpoint
+          {
+            method: 'PATCH',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ image: imageUrl }),
+          }
+        );
+  
+        if (updateUserImageResponse.ok) {
+          const data = await updateUserImageResponse.json();
+          setUserData(data);
+          setEditingImage(false);
+        } else {
+          console.error('Error updating user image:', updateUserImageResponse.status);
         }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        setUserData(data);
-        setEditingImage(false);
       } else {
-        console.error('Error uploading image:', response.status);
+        console.error('Error uploading image to Cloudinary:', response.status);
       }
     } catch (error) {
       console.error('Error uploading image:', error);
     }
   };
+  
 
   return (
-    <section style={{ backgroundColor: '#f0fffb' }}>
+    <div className='container2'>
+    <section style={{ backgroundColor: '#f0fffb'  }} >
       <Navbar />
       <div className='volver'>
-        <Link to='/home' style={{ textDecoration: 'none' }}>
+        <Link to='/home' style={{ textDecoration: 'none'}}>
           <Boton2 />
         </Link>
       </div>
-      <MDBContainer className='py-5'>
+      <MDBContainer className='d-flex flex-column min-vh-100'>
         <MDBRow>
           <MDBCol lg='4'>
             <MDBCard className='mx-auto mb-4 text-center'>
@@ -92,12 +113,6 @@ export default function ProfilePage() {
                   <>
                     {editingImage ? (
                       <div>
-                        <input
-                          type='file'
-                          accept='image/*'
-                          onChange={(e) => setNewImage(e.target.files[0])}
-                        />
-                        <button onClick={handleImageUpload}>Guardar</button>
                       </div>
                     ) : (
                       <>
@@ -107,10 +122,7 @@ export default function ProfilePage() {
                           className='rounded-circle '
                           style={{ maxWidth: '200px' }}
                           fluid
-                        />
-                        <button onClick={() => setEditingImage(true)}>
-                          Editar Imagen
-                        </button>
+                        /> 
                       </>
                     )}
                     <p className='text-muted mb-1'>{`${userData.firstName} ${userData.lastName}`}</p>
@@ -119,7 +131,47 @@ export default function ProfilePage() {
                 )}
               </MDBCardBody>
             </MDBCard>
-            <Boton />
+            <MDBCardBody className='d-flex justify-content-center align-items-center'>
+  {userData && (
+    <>
+      {editingImage ? (
+        <div>
+          <input
+            type='file'
+            onChange={(e) => setNewImage(e.target.files[0])}
+          />
+          <button
+            className='btn'
+            style={{
+              backgroundColor: '#048404',
+              color:'white',
+              borderRadius: '8px',
+            }}
+            onClick={handleImageUpload}
+          >
+            Guardar
+          </button>
+        </div>
+      ) : (
+        <>
+          <button
+            className='btn'
+            style={{
+              backgroundColor: '#048404',
+              color:'white',
+              borderRadius: '8px',
+            }}
+            onClick={() => setEditingImage(true)}
+          >
+            Editar Imagen
+          </button>
+        </>
+      )}
+    </>
+  )}
+</MDBCardBody>
+
+
           </MDBCol>
           <MDBCol lg="8">
             <MDBCard className="mb-4">
@@ -184,5 +236,6 @@ export default function ProfilePage() {
         </MDBRow>
       </MDBContainer>
     </section>
+    </div>
   );
 }

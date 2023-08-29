@@ -52,7 +52,7 @@ const Home = (selectedMachineData) => {
         </div>
 
         <div className="charts">
-          <Featured />
+          <Featured title="relojes" />
           <Chart title="Ganancias" aspect={2 / 1} />
         </div>
         <div className="drop">
