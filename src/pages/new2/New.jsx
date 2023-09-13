@@ -127,7 +127,7 @@ const New = ({ inputs, title, apiUrl }) => {
                 <label htmlFor="type">Mail:</label>
                 <input
                   type="text"
-                  placeholder="Ingrese el estado"
+                  placeholder="Ingrese el Mail"
                   name="mail"
                   onChange={handleInputChange}
                 />
@@ -160,10 +160,10 @@ const New = ({ inputs, title, apiUrl }) => {
                 />
               </div>
               <div className="formInput">
-                <label htmlFor="type">Valvula waterPumpSwich:</label>
+                <label htmlFor="type">Interruptor de la bomba:</label>
                 <input
                   type="text"
-                  placeholder="Ingrese el estado de la valvula de lavado"
+                  placeholder="Ingrese el estado del Interruptor de la bomba"
                   name="waterPumpSwich"
                   onChange={handleInputChange}
                 />
@@ -190,7 +190,7 @@ const New = ({ inputs, title, apiUrl }) => {
                 <label htmlFor="type">Luz:</label>
                 <input
                   type="text"
-                  placeholder="Ingrese la Fecha de inicio"
+                  placeholder="Ingrese el estado de Luz"
                   name="light"
                   onChange={handleInputChange}
                 />
