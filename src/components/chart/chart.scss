@@ -13,4 +13,11 @@
   .chartGrid {
     stroke: rgb(68, 68, 68);
   }
+/* Estilos para la clase "custom-select" en pantallas de celular */
+@media (max-width: 768px) {
+  .custom-select {
+    width: 50% !important; /* Cambiar el ancho a 50% en pantallas de celular */
+  }
+}
+
 }

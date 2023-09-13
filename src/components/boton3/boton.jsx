@@ -6,6 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import { breakpoints } from '@mui/system';
 import { createTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"; // Import the ArrowBack icon
 
 const theme = createTheme({
   breakpoints: {
@@ -24,12 +25,12 @@ export default function FloatingActionButtonExtendedSize() {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Box sx={{ '& > :not(style)': { m: isSmallScreen ? 0.5 : 1 } }}>
-      <Fab variant="extended" color="success" aria-label="add">
-        <Box sx={{ mr: isSmallScreen ? 0.5 : 1, ml: isSmallScreen ? 0 : 0 }}>
-          Volver
+    <div className='volver'>
+      <a href="/" style={{ textDecoration: "none", display: "inline-block", padding: "10px ", margin:"10px",backgroundColor: "green", color: "#fff", borderRadius: "10px" }}>
+        <Box sx={{ display: "flex", alignItems: "center", fontSize: "17px" }}>
+          <ArrowBackIcon sx={{ marginRight: "0.5rem" }} />
         </Box>
-      </Fab>
-    </Box>
+      </a>
+    </div>
   );
-}
+};

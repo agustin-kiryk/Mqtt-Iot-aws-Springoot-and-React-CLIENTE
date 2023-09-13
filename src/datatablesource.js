@@ -1,123 +1,146 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { DataGrid } from "@mui/x-data-grid";
+import TextField from "@mui/material/TextField";
+
+
 export const userColumns = [
-  { field: "id", headerName: "ID", width: 70 },
   {
-    field: "user",
-    headerName: "User",
-    width: 230,
+    field: "id",
+    headerName: "Id",
+    width: 80,
+  },
+  {
+    field: "name",
+    headerName: "Distrito",
+    width: 290,
     renderCell: (params) => {
       return (
-        <div className="cellWithImg">
-          <img className="cellImg" src={params.row.img} alt="avatar" />
-          {params.row.username}
+        <div>
+          {params.row.clientLastName + ' ' + params.row.clientName}
         </div>
       );
     },
   },
   {
-    field: "email",
-    headerName: "Email",
+    field: "amount",
+    headerName: "Direccion",
     width: 230,
   },
-
   {
-    field: "age",
-    headerName: "Age",
-    width: 100,
+    field: "type",
+    headerName: "Modelo",
+    width: 230,
   },
   {
-    field: "status",
-    headerName: "Status",
-    width: 160,
+    field: "gas",
+    headerName: "Detalle",
+    width: 200,
     renderCell: (params) => {
-      return (
-        <div className={`cellWithStatus ${params.row.status}`}>
-          {params.row.status}
-        </div>
-      );
     },
   },
+  {
+    field: "4ds",
+    headerName: "Informacion adicional",
+    width: 250,
+    renderCell: (params) => {
+    },
+  },
+  {
+    field: "sda",
+    headerName: "Fecha de inicio",
+    width: 250,
+    renderCell: (params) => {
+    },
+  },
+  {
+    field: "ccga",
+    headerName: "Informacion de servidor",
+    width: 250,
+    renderCell: (params) => {
+    },
+  },
+
+
 ];
 
-//temporary data
-export const userRows = [
-  {
-    id: 1,
-    username: "Snow",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    status: "active",
-    email: "1snow@gmail.com",
-    age: 35,
+export function UserTable() {
+  const [userRows, setUserRows] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [machineUserLoginRows, setMachineUserLoginRows] = useState([]); // Nuevo estado
+
+  useEffect(() => {
+    async function fetchData() {
+      const users = await userRows(); // Cambia a la función userRows existente
+      setUserRows(users);
+
+      try {
+        const response = await axios.get(
+          "https://iotcoremt-production.up.railway.app/transactions/machineUserLogin",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwtToken")}`, // Reemplaza con la obtención correcta del token
+            },
+          }
+        );
+        setMachineUserLoginRows(response.data);
+      } catch (error) {
+        console.log(error);
+        setMachineUserLoginRows([]);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const handleSearchChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  // Filtrar los disfraces en función de la búsqueda
+  const filteredData = userRows.filter((row) => {
+    const costumeName = row.name.toLowerCase();
+    return costumeName.includes(searchValue.toLowerCase());
+  });
+
+  return (
+    <div>
+      <h1>Tabla de usuarios</h1>
+      <TextField
+        label="Buscar disfraces"
+        variant="outlined"
+        value={searchValue}
+        onChange={handleSearchChange}
+        fullWidth
+      />
+      <DataGrid rows={machineUserLoginRows} columns={userColumns} /> {/* Cambia a machineUserLoginRows */}
+    </div>
+  );
+}
+
+export async function userRows() {
+  try {
+    const response = await axios.get(
+      "https://iotcoremt-production.up.railway.app/transactions/machineUserLogin"
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}
+
+// Estilos CSS
+const styles = {
+  imageContainer: {
+    display: "flex",
+    alignItems: "center",
   },
-  {
-    id: 2,
-    username: "Jamie Lannister",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "2snow@gmail.com",
-    status: "passive",
-    age: 42,
+  userImage: {
+    width: "50px",
+    height: "50px",
+    borderRadius: "50%",
+    marginRight: "10px",
   },
-  {
-    id: 3,
-    username: "Lannister",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "3snow@gmail.com",
-    status: "pending",
-    age: 45,
-  },
-  {
-    id: 4,
-    username: "Stark",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "4snow@gmail.com",
-    status: "active",
-    age: 16,
-  },
-  {
-    id: 5,
-    username: "Targaryen",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "5snow@gmail.com",
-    status: "passive",
-    age: 22,
-  },
-  {
-    id: 6,
-    username: "Melisandre",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "6snow@gmail.com",
-    status: "active",
-    age: 15,
-  },
-  {
-    id: 7,
-    username: "Clifford",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "7snow@gmail.com",
-    status: "passive",
-    age: 44,
-  },
-  {
-    id: 8,
-    username: "Frances",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "8snow@gmail.com",
-    status: "active",
-    age: 36,
-  },
-  {
-    id: 9,
-    username: "Roxie",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "snow@gmail.com",
-    status: "pending",
-    age: 65,
-  },
-  {
-    id: 10,
-    username: "Roxie",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "snow@gmail.com",
-    status: "active",
-    age: 65,
-  },
-];
+};
+
+export default UserTable;

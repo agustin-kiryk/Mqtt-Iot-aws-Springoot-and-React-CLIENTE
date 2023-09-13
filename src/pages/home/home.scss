@@ -8,6 +8,13 @@
   margin-left:35vw;
 }
 
+.estatus{
+  display: flex;
+  margin-top: 2vw;
+  align-items: center;
+  justify-content: center;
+}
+
 .featuredChart2 {
   width: 170px;
   height: 170px;
@@ -117,9 +124,10 @@
       padding: 15px;
       gap: 10px;
       display: flex;
-      flex-wrap: wrap;
+
       flex-direction: row ;
     }
+    
 
     .listContainer {
       box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
@@ -239,7 +247,7 @@
     display: flex !important;
     flex-direction: column ;
     font-size: 14px !important;
-    margin-top: 10px !important ;
+
     width: 100% !important;
     
   }
@@ -247,7 +255,7 @@
     display: flex !important;
     flex-direction: column ;
     font-size: 14px !important;
-    margin-top: 10px !important ; 
+
     width: auto;   
   }
    .navbar {
@@ -336,7 +344,7 @@
     display: flex !important;
     flex-direction: column !important;
     font-size: 14px !important;
-    margin-top: 10px !important;
+  
     width: 100% !important;
   }
   
@@ -344,7 +352,7 @@
     display: flex !important;
     flex-direction: column !important;
     font-size: 14px !important;
-    margin-top: 10px !important;
+  
     width: 100%;
   }
   
@@ -384,6 +392,10 @@
   .homeContainer{
     width: 100% !important;
     padding: 0;
+  }
+  .item-right{
+    padding-left: 30vw;
+    padding-top: 5vw;
   }
 
   .login{
@@ -476,7 +488,6 @@
     display: flex !important;
     flex-direction: column !important;
     font-size: 14px !important;
-    margin-top: 10px !important;
     width: 100% !important;
   }
   
@@ -484,7 +495,6 @@
     display: flex !important;
     flex-direction: column !important;
     font-size: 14px !important;
-    margin-top: 10px !important;
     width: 100%;
   }
   
