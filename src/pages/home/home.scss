@@ -1,3 +1,17 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll !important; /* Agrega la barra de desplazamiento vertical */
+  overflow: hidden;
+  border-right: 1px solid #f0fffb; /* Cambiar a #f0fffb para cambiar el color */
+}
+
+/* Agrega un contenedor adicional y aplica el desplazamiento solo en la dirección vertical */
+.container1 {
+  width: 100%; /* O ajusta el ancho según tus necesidades */
+  height: 100vh; /* Ajusta la altura según tus necesidades */
+  overflow-y: scroll; /* Agrega la barra de desplazamiento vertical */
+}
 .botondrop {
   padding-left: 0.2%;
   margin-top: 1%;
@@ -128,7 +142,7 @@
 
     .widgetU,.widgetB, .widgetC, .widgetE {
       display: flex;
-      width: 100%;
+    
       flex-direction: row;
       padding: 40px;
       gap: 60px;
@@ -146,7 +160,7 @@
     .listContainer {
       box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
       padding: 20px;
-      margin: 20px;
+    
 
       .listTitle {
         font-size: 24px;
@@ -194,10 +208,12 @@
   }
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1290px) {
   .ingreso .counter {
     margin-left: 0;
   }
+
+
 
   .ingreso .title {
     margin-left: 0;
