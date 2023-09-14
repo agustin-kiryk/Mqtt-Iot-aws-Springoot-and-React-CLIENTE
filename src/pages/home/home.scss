@@ -208,6 +208,23 @@ body {
     flex-direction: column;
   }
 }
+@media only screen and (max-width: 1400px) {
+  .ingreso .counter {
+    margin-left: 0;
+  }
+
+  .listContainer{
+    margin-right: 2px;
+  }
+  .widgets{
+    gap:2px !important;
+  }
+
+
+  .ingreso .title {
+    margin-left: 0;
+  }
+}
 
 @media only screen and (max-width: 1290px) {
   .ingreso .counter {
