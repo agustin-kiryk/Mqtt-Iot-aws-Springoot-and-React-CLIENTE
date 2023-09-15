@@ -5,7 +5,7 @@
   padding: 10px;
   color: gray;
   background-color: white;
-  margin: 10vw;
+  margin-left: .5vw; /* Cambiado a margin-left en lugar de margin */
 
   .title {
     margin-bottom: 20px;
@@ -15,3 +15,12 @@
     stroke: rgb(68, 68, 68);
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .chart {
+    margin-top: 15vw; /* Aplica el margen en la parte superior en resoluciones de pantalla más pequeñas */
+    margin-left: 0; /* Elimina el margen izquierdo en resoluciones de pantalla más pequeñas */
+  }
+
+}
+

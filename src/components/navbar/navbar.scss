@@ -1,5 +1,5 @@
 .navbar {
-  height: 60px;
+  height: 70px;
   border-bottom: 0.5px solid rgb(0, 0, 0);
   display: flex;
   align-items: center;
@@ -7,12 +7,6 @@
   color: #000000;
   background: linear-gradient(to right, #37e6b1, #26bfda, #1bcfa8, #00ffaa);
 
-  .wrapper {
-   
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 
     .search {
       display: flex;
@@ -29,27 +23,20 @@
           font-size: 12px;
         }
       }
-    }
-.login{
-    position: absolute;
-    top: 1;
-    right: 0;
-    z-index: 0;
-}
-
+    
 
     .items {
       display: flex;
-      height: .1px;
-      align-items: center; 
+      margin-bottom: 10px;
+      align-items: center;
+      position: absolute;
       cursor: pointer;
-
+  
       .item {
-        display: flex;
-        align-items: center;
-        margin-right: 20px;
-        position: relative;
-
+        /* Estilos para el botón */
+        margin-right: 0; /* Asegura que no haya margen derecho */
+        padding: 0; /* Asegura que no haya relleno */
+        flex: 1; /* Hace que el botón ocupe todo el espacio disponible */
         .icon {
           font-size: 20px;
         }
@@ -80,25 +67,23 @@
   }
 }
 @media only screen and (max-width: 1490px) {
-  .login{
+  .login {
     margin-right: 2px !important;
   }
 }
 @media only screen and (max-width: 1390px) {
-  .login{
+  .login {
     margin-right: 20px !important;
   }
 }
 @media only screen and (max-width: 1290px) {
-  .login{
+  .login {
     margin-right: 90px !important;
   }
 }
 
-
-
 @media only screen and (max-width: 900px) {
-  .login{
+  .login {
     padding-left: 400px !important;
   }
 }
@@ -175,5 +160,3 @@
     opacity: 0;
   }
 }
-
-
