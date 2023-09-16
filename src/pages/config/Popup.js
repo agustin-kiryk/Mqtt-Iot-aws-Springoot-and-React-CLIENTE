@@ -51,6 +51,27 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
     setIsBlocked4(!isBlocked4);
   };
 
+  const handleRetInformation = () => {
+    const payload = {
+      idMachine: clientId,
+    };
+    const data = {
+      comand: `dispensador/ret_informacion/${clientId}`,
+      payload: payload,
+    };
+
+    axios
+      .post("https://iotcoremt-production.up.railway.app/mqtt/publish", data)
+      .then((response) => {
+        console.log("Data sent successfully:", response.data);
+        onClose();
+      })
+      .catch((error) => {
+        console.error("Error sending data:", error);
+        onClose();
+      });
+  };
+
   const handleBlockedAccept = () => {
     const status = isBlocked ? "blocked" : "unblocked";
     const payload = {
@@ -163,6 +184,29 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
           X
         </button>
         <div className="popup-content">
+        <div className="refresh">
+            <div className="titulo1">
+            <h3>REFRESCAR INFORMACION</h3>
+            </div>
+            <div className="maquinoide">
+            <label htmlFor="clientId3">ID de Maquina:</label>
+            </div>
+              <input
+                type="text"
+                id="clientId3"
+                value={clientId}
+                className="input-field" // Agrega la clase CSS aquí
+                onChange={handleClientIdChange}
+              />
+            <button
+              className="jul"
+              onClick={handleRetInformation}
+              style={{ backgroundColor: "rgba(0, 128, 0, 1)", color: "white" }}
+            >
+              Refrescar
+            </button>
+            </div>
+          </div>
           <div className="blocked">
             <div className="titulo1">
             <h3>BLOQUEO</h3>
@@ -350,7 +394,6 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
             </div>
           </div>
         </div>
-      </div>
     </Modal>
   );
 };
