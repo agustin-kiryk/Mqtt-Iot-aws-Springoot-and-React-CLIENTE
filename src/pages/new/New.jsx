@@ -6,6 +6,8 @@ import "./new.scss";
 import React, { useRef } from "react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage } from "@cloudinary/react";
+import { Link } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"; // Import the ArrowBack icon
 
 const New = ({ inputs, title, apiUrl }) => {
   const [file, setFile] = useState("");
@@ -55,8 +57,6 @@ const New = ({ inputs, title, apiUrl }) => {
     setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -73,6 +73,8 @@ const New = ({ inputs, title, apiUrl }) => {
       .then((response) => {
         console.log(response);
         alert("Franquiciado creado correctamente");
+        // Redirigir al usuario de nuevo a /home
+        window.location.href = "/home";
       })
       .catch((error) => {
         console.log(error);
@@ -88,10 +90,26 @@ const New = ({ inputs, title, apiUrl }) => {
   return (
     <div className="new">
       <div className="newContainer">
-        <Navbar />
         <div className="top">
           <h1>{title}</h1>
         </div>
+        <div className="flecha">
+          <a
+            href="/home"
+            style={{
+              textDecoration: "none",
+              display: "inline-block",
+              padding: "10px",
+              margin: "10px",
+              backgroundColor: "green",
+              color: "#fff",
+              borderRadius: "10px",
+            }}
+          >
+            <ArrowBackIcon />
+          </a>
+        </div>
+
         <div className="bottom">
           <div className="left">
             <AdvancedImage

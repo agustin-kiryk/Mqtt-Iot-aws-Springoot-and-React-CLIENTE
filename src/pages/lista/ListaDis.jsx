@@ -59,6 +59,25 @@ const TransactionTable = ({ machineId }) => {
     fetchTransactions();
   }, [machineId]);
 
+
+  const formatDate = (dateArray) => {
+    if (!dateArray || dateArray.length < 6) {
+      return "";
+    }
+  
+    const [year, month, day, hour, minute, second] = dateArray;
+    const date = new Date(year, month - 1, day, hour, minute, second);
+  
+    const yearStr = date.getFullYear();
+    const monthStr = String(date.getMonth() + 1).padStart(2, "0");
+    const dayStr = String(date.getDate()).padStart(2, "0");
+    const hourStr = String(date.getHours()).padStart(2, "0");
+    const minuteStr = String(date.getMinutes()).padStart(2, "0");
+    const secondStr = String(date.getSeconds()).padStart(2, "0");
+  
+    return `${yearStr}/${monthStr}/${dayStr} ${hourStr}:${minuteStr}:${secondStr}`;
+  };
+
   useEffect(() => {
     setFilteredTransactions(transactions);
   }, [transactions]);
@@ -184,7 +203,7 @@ const TransactionTable = ({ machineId }) => {
           {currentTransactions.map((transaction) => (
             <tr key={transaction.id}>
               <td>{transaction.transactionId}</td>
-              <td>{transaction.date.join("/")}</td>
+              <td>{formatDate(transaction.date)}</td>
               <td>{transaction.amount}</td>
               <td>{transaction.currency}</td>
               <td>{transaction.dispensedWater}</td>

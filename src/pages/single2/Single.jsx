@@ -3,6 +3,8 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "./single2.scss";
 import TransactionTable from "../lista2/ListaDis";
+import { Link } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"; // Import the ArrowBack icon
 
 const Single = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -96,8 +98,23 @@ const Single = () => {
     return (
       <div className="single">
         <div className="singleContainer">
-          <Navbar />
           <div className="top">
+          <div className="flecha">
+          <a
+            href="/home"
+            style={{
+              textDecoration: "none",
+              display: "inline-block",
+              padding: "10px",
+              margin: "10px",
+              backgroundColor: "green",
+              color: "#fff",
+              borderRadius: "10px",
+            }}
+          >
+            <ArrowBackIcon />
+          </a>
+        </div>
             <div className="left">
               <div className="editButton" onClick={handleEditClick}>
                 {isEditing ? "" : "Editar"}
@@ -269,7 +286,7 @@ const Single = () => {
               </div>
             </div>
             <div className="dni">
-              <img src={details.image} alt="" width="500px" height="400px" />
+            <img src="https://cdn.discordapp.com/attachments/744349867559747615/1152704428491681862/638e4d8b-5cff-406b-9377-6d2f8e4802c8.png"  width="500px" height="400px" />
             </div>
           </div>
           <div>

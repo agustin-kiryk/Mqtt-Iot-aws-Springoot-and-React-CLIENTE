@@ -3,6 +3,10 @@
   display: flex;
   background-color: white;
 
+  .flecha {
+    margin-top: -20px; 
+  }
+
   @media screen and (max-width: 992px) {
     .bottom {
       flex-direction: column !important;

@@ -1,7 +1,10 @@
 .new {
   width: 100%;
   display: flex;
- 
+
+  .flecha {
+    margin-top: -60px; 
+  }
 
   @media screen and (max-width: 992px) {
     .bottom {
@@ -19,6 +22,7 @@
       margin: 20px;
       display: flex;
       flex-direction: row;
+      align-items: flex-start; /* Alinea los elementos en la parte superior */
 
       h1 {
         color: lightgray;

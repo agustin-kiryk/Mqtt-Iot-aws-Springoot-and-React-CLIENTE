@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { saveAs } from "file-saver"; // Import file-saver to save the Excel file
 import * as ExcelJS from "exceljs";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"; // Import the ArrowBack icon
 
 const Datatable = () => {
   const [data, setData] = useState([]);
@@ -106,7 +107,7 @@ const Datatable = () => {
     <div className="datatable">
       <div className="back">
         <span>
-          <a href="/home">Volver</a>
+          <a href="/home"><ArrowBackIcon /></a>
         </span>
       </div>
       <div className="datatableTitle">
