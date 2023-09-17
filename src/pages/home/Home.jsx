@@ -15,8 +15,9 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Dropbox from "../../pages/dropbox/Dropbox";
 
-const Home = (selectedMachineData) => {
+const Home = ({ selectedMachineData }) => {
   const [isMobile, setIsMobile] = useState(false);
+  const [avatarImage, setAvatarImage] = useState(""); // Estado para almacenar la imagen del avatar
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,6 +26,33 @@ const Home = (selectedMachineData) => {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const fetchAvatarImage = async () => {
+      try {
+        const token = localStorage.getItem("jwtToken");
+        const response = await fetch(
+          "https://iotcoremt-production.up.railway.app/user/userLogin",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+  
+        if (response.ok) {
+          const imageData = await response.json();
+          setAvatarImage(imageData.image); // Actualiza el estado con la imagen obtenida
+        } else {
+          console.error("Error fetching avatar image:", response.status);
+        }
+      } catch (error) {
+        console.error("Error fetching avatar image:", error);
+      }
+    };
+  
+    fetchAvatarImage();
   }, []);
 
   return (
@@ -37,7 +65,7 @@ const Home = (selectedMachineData) => {
               <Link to="/perfil" style={{ textDecoration: "none" }}>
                 <Avatar
                   alt="Travis Howard"
-                  src="https://cdn.discordapp.com/attachments/1061404202498277458/1105998913749667880/image.png"
+                  src={avatarImage} // Utiliza la URL de la imagen del estado
                   style={{ width: "80px", height: "80px" }}
                 />
               </Link>

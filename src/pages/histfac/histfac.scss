@@ -65,8 +65,25 @@
       }
     }
   }
-  
 
+  .exportButton {
+    display: inline-block;
+    position: relative;
+    background: rgba(0, 128, 0, 255);
+    color: white;
+    padding: 7px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  @media (max-width: 768px) { // Ajusta este valor según tus necesidades
+    .boton23 {
+      position: fixed;
+      bottom: 10px; // Ajusta la distancia desde la parte inferior según tus necesidades
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
 
   @media (max-width: 480px) {
     h1{

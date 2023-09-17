@@ -73,17 +73,19 @@ const Datatable = () => {
       <div className="datatableTitle">
         <h1>Historial de Facturacion</h1>
       </div>
-
       <div className="searchBarWrapper">
-        <input
+      <input
           type="text"
           placeholder="Buscar..."
           value={searchTerm}
           onChange={handleSearch}
         />
+
+        <div className="boton23">
                 <a
           href="#"
           onClick={exportToExcel}
+          className="exportButton" // Agrega la clase CSS aquí
           style={{
             display: "inline-block",
             position: "relative",
@@ -98,7 +100,9 @@ const Datatable = () => {
         >
           Exportar a Excel
         </a>
+        </div>
       </div>
+      
 
       <div className="tableWrapper">
         <DataGrid
@@ -113,6 +117,7 @@ const Datatable = () => {
         />
 
       </div>
+      
 
     </div>
   );
