@@ -51,6 +51,27 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
     setIsBlocked4(!isBlocked4);
   };
 
+  const handleRetInformation = () => {
+    const payload = {
+      idMachine: clientId,
+    };
+    const data = {
+      comand: `dispensador/ret_informacion/${clientId}`,
+      payload: payload,
+    };
+
+    axios
+      .post("https://iotcoremt-production.up.railway.app/mqtt/publish", data)
+      .then((response) => {
+        console.log("Data sent successfully:", response.data);
+        onClose();
+      })
+      .catch((error) => {
+        console.error("Error sending data:", error);
+        onClose();
+      });
+  };
+
   const handleBlockedAccept = () => {
     const status = isBlocked ? "blocked" : "unblocked";
     const payload = {
@@ -165,49 +186,72 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
         <div className="popup-content">
           <div className="blocked">
             <div className="titulo1">
-            <h3>BLOQUEO</h3>
+              <h3>REFRESCAR</h3>
             </div>
             <div className="maquinoide">
-            <label htmlFor="clientId3">ID de Maquina:</label>
+              <label htmlFor="clientId3">ID de Maquina:</label>
             </div>
-              <input
-                type="text"
-                id="clientId3"
-                value={clientId}
-                className="input-field" // Agrega la clase CSS aquí
-                onChange={handleClientIdChange}
-              />
-
-
+            <input
+              type="text"
+              id="clientId3"
+              value={clientId}
+              className="input-field"
+              onChange={handleClientIdChange}
+            />
+            <div className="deslock">
+              <button
+                className="jul"
+                onClick={handleRetInformation}
+                style={{ backgroundColor: "rgba(0, 128, 0, 1)", color: "white" }}
+              >
+                Refrascar
+              </button>
+            </div>
+          </div>
+  
+          <div className="blocked">
+            <div className="titulo1">
+              <h3>BLOQUEO</h3>
+            </div>
+            <div className="maquinoide">
+              <label htmlFor="clientId3">ID de Maquina:</label>
+            </div>
+            <input
+              type="text"
+              id="clientId3"
+              value={clientId}
+              className="input-field"
+              onChange={handleClientIdChange}
+            />
+  
             <div className="estado">
               <label htmlFor="switch">Estado:</label>
               <Switch
                 id="switch"
                 checked={isBlocked}
                 onChange={handleSwitchChange}
-                onColor="#FF0000" // Red color when blocked
-                offColor="#42a342" // Adjusted green color when unblocked
+                onColor="#FF0000"
+                offColor="#42a342"
               />
               <span className="switch-label">
                 {isBlocked ? "Bloqueado" : "Desbloqueado"}
               </span>
-
             </div>
             <div className="deslock">
-            <button
-              className="jul"
-              onClick={handleBlockedAccept}
-              style={{ backgroundColor: "rgba(0, 128, 0, 1)", color: "white" }}
-            >
-              Bloquear/Desbloquear
-            </button>
+              <button
+                className="jul"
+                onClick={handleBlockedAccept}
+                style={{ backgroundColor: "rgba(0, 128, 0, 1)", color: "white" }}
+              >
+                Bloquear/Desbloquear
+              </button>
             </div>
           </div>
-
+  
           <div className="column">
             <div className="config">
               <div className="titulo3">
-              <h3>CONFIGURACION</h3>
+                <h3>CONFIGURACION</h3>
               </div>
               <label htmlFor="clientId2" className="pap">
                 ID de Maquina:
@@ -216,126 +260,124 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
                 type="text"
                 id="clientId2"
                 value={clientId}
-                className="input-field2" // Agrega la clase CSS aquí
+                className="input-field2"
                 onChange={handleClientIdChange}
               />
-              
-              <label>
-                Moneda:
-              </label>
+              <label>Moneda:</label>
               <input
                 type="text"
                 id="cop"
-                className="input-field2" // Agrega la clase CSS aquí
+                className="input-field2"
                 value={cop}
                 onChange={handleCopChange}
                 style={{ paddingLeft: "44px" }}
               />
-
-              <label
-                htmlFor="price"
-                className="pap"
-              >
+              <label htmlFor="price" className="pap">
                 Precio:{" "}
               </label>
               <input
                 type="text"
                 id="price"
                 value={price}
-                className="input-field2" // Agrega la clase CSS aquí
+                className="input-field2"
                 onChange={handlePriceChange}
                 style={{ paddingLeft: "55px" }}
               />
-             <div className="vai">
-              <button
-                className="jul"
-                onClick={handleConfigAccept}
-                style={{
-                  backgroundColor: "rgba(0, 128, 0, 1)",
-                  color: "white",
-                }}
-              >
-                
-                Aceptar Configuracion
-              </button>
+              <div className="vai">
+                <button
+                  className="jul"
+                  onClick={handleConfigAccept}
+                  style={{
+                    backgroundColor: "rgba(0, 128, 0, 1)",
+                    color: "white",
+                  }}
+                >
+                  Aceptar Configuracion
+                </button>
               </div>
             </div>
-          </div>
-
-          <div className="column">
+  
             <div className="control">
               <div className="titulo1">
-              <h3>CONTROL</h3>
+                <h3>CONTROL</h3>
               </div>
-              <label htmlFor="clientId3" className="titulo">ID de Maquina:</label>
+              <label htmlFor="clientId3" className="titulo">
+                ID de Maquina:
+              </label>
               <input
                 type="text"
                 id="clientId3"
                 value={clientId}
-                className="input-field" // Agrega la clase CSS aquí
+                className="input-field"
                 onChange={handleClientIdChange}
               />
-
-
+  
               <div className="switches">
-                <label htmlFor="switch1" className="texto">Bomba de Agua</label>
+                <label htmlFor="switch1" className="texto">
+                  Bomba de Agua
+                </label>
                 <div className="switch-papu">
-                <Switch
-                  id="switch1"
-                  checked={isBlocked1}
-                  onChange={handleSwitchChange1}
-                  onColor="#FF0000"
-                  offColor="#42a342"
-                />
-                <span className={`status ${isBlocked1 ? "off" : "on"}`}>
-                  {isBlocked1 ? "OFF" : "ON"}
-                </span>
+                  <Switch
+                    id="switch1"
+                    checked={isBlocked1}
+                    onChange={handleSwitchChange1}
+                    onColor="#FF0000"
+                    offColor="#42a342"
+                  />
+                  <span className={`status ${isBlocked1 ? "off" : "on"}`}>
+                    {isBlocked1 ? "OFF" : "ON"}
+                  </span>
                 </div>
-
+  
                 <div className="luz">
-                <label htmlFor="switch2" className="texto">Luz</label>
+                  <label htmlFor="switch2" className="texto">
+                    Luz
+                  </label>
                 </div>
                 <div className="switch-papu">
-                <Switch
-                  id="switch2"
-                  checked={isBlocked2}
-                  onChange={handleSwitchChange2}
-                  onColor="#FF0000"
-                  offColor="#42a342"
-                />
-                <span className={`status ${isBlocked2 ? "off" : "on"}`}>
-                  {isBlocked2 ? "OFF" : "ON"}
-                </span>
+                  <Switch
+                    id="switch2"
+                    checked={isBlocked2}
+                    onChange={handleSwitchChange2}
+                    onColor="#FF0000"
+                    offColor="#42a342"
+                  />
+                  <span className={`status ${isBlocked2 ? "off" : "on"}`}>
+                    {isBlocked2 ? "OFF" : "ON"}
+                  </span>
                 </div>
-
-                <label htmlFor="switch3" className="texto">Valvula de Lavado</label>
+  
+                <label htmlFor="switch3" className="texto">
+                  Valvula de Lavado
+                </label>
                 <div className="switch-papu">
-                <Switch
-                  id="switch3"
-                  checked={isBlocked3}
-                  onChange={handleSwitchChange3}
-                  onColor="#FF0000"
-                  offColor="#42a342"
-                />
-                <span className={`status ${isBlocked3 ? "off" : "on"}`}>
-                  {isBlocked3 ? "OFF" : "ON"}
-                </span>
+                  <Switch
+                    id="switch3"
+                    checked={isBlocked3}
+                    onChange={handleSwitchChange3}
+                    onColor="#FF0000"
+                    offColor="#42a342"
+                  />
+                  <span className={`status ${isBlocked3 ? "off" : "on"}`}>
+                    {isBlocked3 ? "OFF" : "ON"}
+                  </span>
                 </div>
-
-                <label htmlFor="switch4" className="texto">Valvula de Llenado</label>
+  
+                <label htmlFor="switch4" className="texto">
+                  Valvula de Llenado
+                </label>
                 <div className="switch-papu">
-                <Switch
-                  id="switch4"
-                  checked={isBlocked4}
-                  onChange={handleSwitchChange4}
-                  onColor="#FF0000"
-                  offColor="#42a342"
-                />
-                <span className={`status ${isBlocked4 ? "off" : "on"}`}>
-                  {isBlocked4 ? "OFF" : "ON"}
-                </span>
+                  <Switch
+                    id="switch4"
+                    checked={isBlocked4}
+                    onChange={handleSwitchChange4}
+                    onColor="#FF0000"
+                    offColor="#42a342"
+                  />
+                  <span className={`status ${isBlocked4 ? "off" : "on"}`}>
+                    {isBlocked4 ? "OFF" : "ON"}
+                  </span>
                 </div>
-
               </div>
               <button
                 className="jul"
