@@ -184,7 +184,7 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
           X
         </button>
         <div className="popup-content">
-          <div className="blocked">
+          <div className="bloqued">
             <div className="titulo1">
               <h3>REFRESCAR</h3>
             </div>
@@ -204,7 +204,7 @@ const Popup = ({ isOpen, onClose, data, sendComand }) => {
                 onClick={handleRetInformation}
                 style={{ backgroundColor: "rgba(0, 128, 0, 1)", color: "white" }}
               >
-                Refrascar
+                Refrescar
               </button>
             </div>
           </div>
